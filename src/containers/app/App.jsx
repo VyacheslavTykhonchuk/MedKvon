@@ -3,12 +3,12 @@ import { Route } from "react-router-dom";
 import "./../../assets/styles/style.css";
 
 import Home from "../home/Home";
-import About from "../about/About";
+import Main from "../main/Main";
 
 const App = props => (
   <main>
     <Route exact path="/" component={Home} />
-    <Route exact path="/about-us" component={About} />
+    <Route exact path="/Main" component={Main} />
   </main>
 );
 // <Link to="/">Home</Link>

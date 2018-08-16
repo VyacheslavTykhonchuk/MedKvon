@@ -7,12 +7,12 @@ const Home = props => (
   <div className="home-page">
     <img className="home-page__img" src={doctorImg} alt="img" />
     <Btn
-      linkTo={"/about-us"}
+      linkTo={"/main"}
       text={"Create account"}
       appearing={"btn_big btn_blue home-page__btn"}
     />
     <Btn
-      linkTo={"/about-us"}
+      linkTo={"/main"}
       text={"Sign in"}
       appearing={"btn_big btn_white home-page__btn"}
     />
