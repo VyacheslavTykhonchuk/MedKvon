@@ -1,18 +1,17 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import Home from "../home";
-import About from "../about";
+import { Route } from "react-router-dom";
+import "./../../assets/styles/style.css";
 
-const App = () => (
-  <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header>
+import Home from "../home/Home";
+import About from "../about/About";
 
-    <main>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about-us" component={About} />
-    </main>
-  </div>
+const App = props => (
+  <main>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/about-us" component={About} />
+  </main>
 );
+// <Link to="/">Home</Link>
+// <Link to="/about-us">About</Link>
+
+export default App;

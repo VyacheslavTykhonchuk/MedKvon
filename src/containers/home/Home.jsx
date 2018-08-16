@@ -2,17 +2,15 @@ import React from "react";
 import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import doctorImg from "./../../assets/img/doctor.svg";
+import logo from "./../../assets/img/logo.png";
 
 const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Welcome home!</p>
-    <button onClick={() => props.changePage()}>
-      Go to about page via redux
-    </button>
+  <div className="home-page">
+    <img src={doctorImg} alt="Logo" />
+    <img src={logo} alt="Logo" />
   </div>
 );
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
