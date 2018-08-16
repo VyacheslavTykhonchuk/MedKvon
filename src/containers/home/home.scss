@@ -1,0 +1,23 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15vh;
+
+    &__img {
+        & + * {
+            margin-top: 10vh;
+        }
+    }
+
+    &__btn {
+        & + * {
+            margin-top: 3vh;
+        }
+    }
+
+    &__logo {
+        margin-top: 4vh;
+    }
+}

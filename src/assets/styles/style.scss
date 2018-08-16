@@ -1,7 +1,10 @@
 @import "variables.scss";
 @import "mixins.scss";
+@import "fonts.scss";
 
 //
 @import "./../../containers/app/main.scss";
 @import "./../../containers/home/home.scss";
 @import "./../../containers/about/about.scss";
+@import "./../../containers/buttons/btns.scss";
+@import "./../../containers/navigation/navigation.scss";

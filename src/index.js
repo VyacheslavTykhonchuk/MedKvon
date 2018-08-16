@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./store";
 import App from "./containers/app/App";
-import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 
 const target = document.querySelector("#root");

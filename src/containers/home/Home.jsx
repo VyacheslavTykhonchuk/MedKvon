@@ -1,25 +1,23 @@
 import React from "react";
-import { push } from "connected-react-router";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import doctorImg from "./../../assets/img/doctor.svg";
 import logo from "./../../assets/img/logo.png";
+import Btn from "../buttons/Btn";
 
 const Home = props => (
   <div className="home-page">
-    <img src={doctorImg} alt="Logo" />
-    <img src={logo} alt="Logo" />
+    <img className="home-page__img" src={doctorImg} alt="img" />
+    <Btn
+      linkTo={"/about-us"}
+      text={"Create account"}
+      appearing={"btn_big btn_blue home-page__btn"}
+    />
+    <Btn
+      linkTo={"/about-us"}
+      text={"Sign in"}
+      appearing={"btn_big btn_white home-page__btn"}
+    />
+    <img className="home-page__logo" src={logo} alt="logo" />
   </div>
 );
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      changePage: () => push("/about-us")
-    },
-    dispatch
-  );
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Home);
+export default Home;

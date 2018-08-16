@@ -1,0 +1,35 @@
+$bold: 700;
+$demi: 600;
+$medium: 400;
+$book: 300;
+$light: 100;
+
+@font-face {
+    font-family: FuturaPT;
+    src: url("../fonts/FuturaPTBold.otf");
+    font-weight: $bold;
+}
+
+@font-face {
+    font-family: FuturaPT;
+    src: url("../fonts/FuturaPTDemi.otf");
+    font-weight: $demi;
+}
+
+@font-face {
+    font-family: FuturaPT;
+    src: url("../fonts/FuturaPTMedium.otf");
+    font-weight: $medium;
+}
+
+@font-face {
+    font-family: FuturaPT;
+    src: url("../fonts/FuturaPTBook.otf");
+    font-weight: $book;
+}
+
+@font-face {
+    font-family: FuturaPT;
+    src: url("../fonts/FuturaPTLight.otf");
+    font-weight: $light;
+}
