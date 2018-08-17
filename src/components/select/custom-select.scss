@@ -1,0 +1,24 @@
+
+.custom-select {
+    & + * {
+        margin-top: 1.3em;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+
+    &__arrow {
+        display: flex;
+        align-items: center;
+    }
+
+    &__selected {
+        color: rgba($color: #000000, $alpha: 0.33);
+
+        & + * {
+            margin-left: 1em;
+        }
+    }
+}

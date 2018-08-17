@@ -1,9 +1,11 @@
 .main-nav {
     display: flex;
     align-items: center;
-&+*{
-    margin-top: 50px;
-}
+
+    & + * {
+        margin-top: 50px;
+    }
+
     &__item {
         color: #2E3C54;
         font-size: 18px;
@@ -22,14 +24,14 @@
             width: 100%;
             height: 2px;
             left: 0;
-            bottom: -6px;
+            bottom: -8px;
             opacity: 0;
             transition: all 0.3s ease-in-out;
         }
 
         &_active {
             &::before {
-               opacity: 1;
+                opacity: 1;
             }
         }
     }

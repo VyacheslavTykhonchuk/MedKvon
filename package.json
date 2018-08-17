@@ -2,8 +2,8 @@
   "name": "medokvono",
   "version": "0.1.0",
   "private": true,
-  "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-  "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+  "build-css": "node-sass-chokidar --include-path ./src/assets/styles --include-path ./node_modules src//assets/styles -o src/",
+  "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/assets/styles --include-path ./node_modules src/assets/styles -o src/assets/styles --watch --recursive",
   "dependencies": {
     "connected-react-router": "^4.4.1",
     "history": "^4.7.2",
@@ -25,7 +25,7 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
+    "build-css": "node-sass-chokidar src/assets/styles -o src/assets/styles",
+    "watch-css": "npm run build-css && node-sass-chokidar src/assets/styles -o src/assets/styles --watch --recursive"
   }
 }
