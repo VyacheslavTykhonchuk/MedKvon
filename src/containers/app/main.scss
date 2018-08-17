@@ -1,4 +1,12 @@
 body {
     font-family: 'FuturaPT';
-    font-weight: $medium;
+    background: #FAFAFA;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
 }

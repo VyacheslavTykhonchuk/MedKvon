@@ -8,7 +8,7 @@ import Main from "../main/Main";
 const App = props => (
   <main>
     <Route exact path="/" component={Home} />
-    <Route exact path="/Main" component={Main} />
+    <Route path="/main" component={Main} />
   </main>
 );
 // <Link to="/">Home</Link>

@@ -11,6 +11,7 @@ const Btn = props => (
     <span> {props.text}</span>
   </div>
 );
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {

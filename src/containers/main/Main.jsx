@@ -1,21 +1,33 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Dashboard from "./dashboard/Dashboard";
 import ActiveTickets from "./active-tickets/ActiveTickets";
 import HistoryTab from "./history/History";
-
+import MainNav from "../navigation/MainNav";
+let links = [
+  {
+    name: "Dashboard",
+    link: "/main/dashboard"
+  },
+  {
+    name: "Active tickets",
+    link: "/main/active-tickets"
+  },
+  {
+    name: "History",
+    link: "/main/history"
+  }
+];
 const Main = props => (
   <div className="main-page">
-    <header>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/active-tickets">Active tickets</Link>
-      <Link to="/history">History</Link>
-    </header>
-    <section>
-      <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/active-tickets" component={ActiveTickets} />
-      <Route exact path="/history" component={HistoryTab} />
+    <MainNav links={links} />
+    <section className="main-page__section">
+      <Switch>
+        <Route path="/main/dashboard" component={Dashboard} />
+        <Route path="/main/active-tickets" component={ActiveTickets} />
+        <Route path="/main/history" component={HistoryTab} />
+      </Switch>
     </section>
   </div>
 );
