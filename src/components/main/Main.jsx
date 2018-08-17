@@ -5,6 +5,8 @@ import Dashboard from "./dashboard/Dashboard";
 import ActiveTickets from "./active-tickets/ActiveTickets";
 import HistoryTab from "./history/History";
 import MainNav from "../navigation/MainNav";
+import FooterNav from "../footer-nav/FooterNav";
+
 let links = [
   {
     name: "Dashboard",
@@ -29,6 +31,7 @@ const Main = props => (
         <Route path="/main/history" component={HistoryTab} />
       </Switch>
     </section>
+    <FooterNav />
   </div>
 );
 

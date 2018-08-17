@@ -4,11 +4,12 @@
 @import "fonts.scss";
 
 //
-@import "./../../containers/app/main.scss";
-@import "./../../containers/main/main-page.scss";
-@import "./../../containers/home/home.scss";
-@import "./../../containers/about/about.scss";
-@import "./../../containers/buttons/btns.scss";
-@import "./../../containers/navigation/navigation.scss";
-@import "./../../containers/card/card.scss";
-@import "./../../containers/select/custom-select.scss";
+@import "./../../components/app/main.scss";
+@import "./../../components/main/main-page.scss";
+@import "./../../components/footer-nav/footer-nav.scss";
+@import "./../../components/home/home.scss";
+@import "./../../components/about/about.scss";
+@import "./../../components/buttons/btns.scss";
+@import "./../../components/navigation/navigation.scss";
+@import "./../../components/card/card.scss";
+@import "./../../components/select/custom-select.scss";

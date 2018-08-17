@@ -15,6 +15,8 @@ const Dashboard = props => (
     <div className="cards-list">
       <Card options={selectOptions} />
       <Card options={selectOptions} />
+      <Card options={selectOptions} />
+      <Card options={selectOptions} />
     </div>
   </div>
 );
