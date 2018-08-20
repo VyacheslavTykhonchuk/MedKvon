@@ -4,11 +4,13 @@ import "./../../assets/styles/style.css";
 
 import Home from "../home/Home";
 import Main from "../main/Main";
+import Account from "../account/Account";
 
 const App = props => (
   <main>
     <Route exact path="/" component={Home} />
     <Route path="/main" component={Main} />
+    <Route path="/account" component={Account} />
   </main>
 );
 // <Link to="/">Home</Link>

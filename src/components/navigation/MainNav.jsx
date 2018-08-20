@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+
 const MainNav = props => (
+
   <nav className="main-nav">
+  
     {props.links.map(function(item, index) {
       return (
         <NavLink

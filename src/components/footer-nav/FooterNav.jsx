@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 const FooterNav = props => (
   <footer className="footer-nav">
     <NavLink
-      activeClassName="footer-nav__item"
-      to="/main"
-      className="main-nav__item"
+      activeClassName="footer-nav__item_active"
+      to="/account"
+      className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
         <svg
@@ -33,9 +33,9 @@ const FooterNav = props => (
       </div>
     </NavLink>
     <NavLink
-      activeClassName="footer-nav__item"
-      to="/main"
-      className="main-nav__item"
+      activeClassName="footer-nav__item_active"
+      to="/create-ticket"
+      className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
         <svg
@@ -75,9 +75,9 @@ const FooterNav = props => (
       </div>
     </NavLink>
     <NavLink
-      activeClassName="footer-nav__item"
+      activeClassName="footer-nav__item_active"
       to="/main"
-      className="main-nav__item"
+      className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
         <svg
@@ -115,9 +115,9 @@ const FooterNav = props => (
       </div>
     </NavLink>
     <NavLink
-      activeClassName="footer-nav__item"
-      to="/main"
-      className="main-nav__item"
+      activeClassName="footer-nav__item_active"
+      to="/about-us"
+      className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
         <svg
@@ -162,9 +162,9 @@ const FooterNav = props => (
       </div>
     </NavLink>
     <NavLink
-      activeClassName="footer-nav__item"
-      to="/main"
-      className="main-nav__item"
+      activeClassName="footer-nav__item_active"
+      to="/wallet"
+      className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
         <svg

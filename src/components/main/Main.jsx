@@ -34,5 +34,4 @@ const Main = props => (
     <FooterNav />
   </div>
 );
-
 export default Main;

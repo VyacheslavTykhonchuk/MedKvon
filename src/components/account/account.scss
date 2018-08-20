@@ -1,0 +1,55 @@
+.account-card {
+    flex-direction: column;
+
+    &__personal-info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        & + * {
+            margin-top: 1rem;
+        }
+
+        > * {
+            width: 100%;
+
+            > * + * {
+                margin-top: 8px;
+            }
+        }
+    }
+
+    &__inputs-wrap {
+        display: flex;
+        flex-direction: column;
+
+        &_horizontal {
+            display: flex;
+            margin-top: 1rem;
+            justify-content: space-between;
+            flex-direction: row;
+
+            > .input-block {
+                width: calc(50% - 8px);
+            }
+        }
+    }
+
+    &__avatar {
+        width: 95px;
+        height: 95px;
+        object-fit: cover;
+        background: #D8D8D8;
+        border-radius: 8px;
+
+        & + * {
+            margin-left: 1em;
+        }
+    }
+
+    .btn {
+        margin-top: 1rem;
+        width: 50%;
+        align-self: center;
+    }
+}

@@ -1,0 +1,46 @@
+.input-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__heading {
+        font-size: 10px;
+        color: #cecece;
+        letter-spacing: 0;
+        line-height: 10px;
+        margin: 0;
+
+        & + * {
+            margin-top: 6px;
+        }
+    }
+
+    &__input {
+        outline: none;
+        -webkit-appearance: none;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        font-size: 10px;
+        color: #4a4a4a;
+        letter-spacing: 0;
+        padding: 7px 14px;
+        width: 100%;
+    }
+
+    &__dashed-border {
+        margin-top: 1rem;
+
+        .input-block__input {
+            padding-left: 0;
+            font-size: 12px;
+            color: #4A4A4A;
+            border: {
+                top: none;
+                left: none;
+                right: none;
+                bottom: 1px dashed #9b9b9b;
+                radius: 0;
+            };
+        }
+    }
+}
