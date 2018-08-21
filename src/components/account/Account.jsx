@@ -13,10 +13,10 @@ let links = [
     link: "/account"
   }
 ];
+
 const Account = props => (
   <div className="account-page main-page">
     <MainNav links={links} />
-
     <section className="account-card card">
       <div className="account-card__personal-info">
         <img src={doctorImg} alt="" className="account-card__avatar" />

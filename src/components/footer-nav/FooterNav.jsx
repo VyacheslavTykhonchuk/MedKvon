@@ -116,7 +116,7 @@ const FooterNav = props => (
     </NavLink>
     <NavLink
       activeClassName="footer-nav__item_active"
-      to="/about-us"
+      to="/info-pages"
       className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">

@@ -11,7 +11,7 @@ const InputBlock = props => (
       className="input-block__input"
       type={props.type}
       placeholder={props.placeholder}
-      value={props.value}
+      defaultValue={props.value}
     />
   </div>
 );
