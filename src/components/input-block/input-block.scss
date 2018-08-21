@@ -11,6 +11,7 @@
                 letter-spacing: 0;
                 line-height: 10px;
                 font-weight: $medium;
+
                 & + * {
                     margin-top: .75rem;
                 }
@@ -30,6 +31,7 @@
         letter-spacing: 0;
         line-height: 10px;
         margin: 0;
+        font-weight: 400;
 
         & + * {
             margin-top: 6px;
