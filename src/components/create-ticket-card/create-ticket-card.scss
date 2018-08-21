@@ -1,0 +1,56 @@
+.ticket-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    justify-content: space-between;
+    position: relative;
+
+    &_short {
+        flex-direction: row;
+        min-height: initial;
+        align-items: center;
+        padding: 1rem;
+        padding-top: 24px;
+
+        .btn {
+            font-weight: $medium;
+            font-size: 10px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 8px;
+            width: 39%;
+        }
+
+        .ticket-card {
+            &__subtitle {
+                position: absolute;
+                top: 14px;
+            }
+
+            &__title {
+                font-weight: $medium;
+                font-size: 12px;
+                color: #4A4A4A;
+                letter-spacing: 0;
+            }
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+        color: #2E3C54;
+        line-height: 16px;
+        font-weight: $demi;
+        margin: 0;
+    }
+
+    &__subtitle {
+        font-weight: $medium;
+        font-size: 10px;
+        color: #C0C0C0;
+    }
+
+    .btn {
+        height: 25px;
+    }
+}

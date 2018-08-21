@@ -6,6 +6,7 @@ import Home from "../home/Home";
 import Main from "../main/Main";
 import Account from "../account/Account";
 import InfoPages from "../info-pages/InfoPages";
+import CreateTicket from "../create-ticket/CreateTicket";
 
 const App = props => (
   <main>
@@ -13,6 +14,7 @@ const App = props => (
     <Route path="/main" component={Main} />
     <Route path="/account" component={Account} />
     <Route path="/info-pages" component={InfoPages} />
+    <Route path="/create-ticket" component={CreateTicket} />
   </main>
 );
 

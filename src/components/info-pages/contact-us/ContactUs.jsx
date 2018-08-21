@@ -24,7 +24,11 @@ const ContactUs = props => (
   <div className="main-page__section main-page__section_contact-us ContactUs">
     <div className="contact-us__contacts">
       {contacts.map(item => (
-        <ContactsBlock heading={item.heading} content={item.content} />
+        <ContactsBlock
+          key={item.heading}
+          heading={item.heading}
+          content={item.content}
+        />
       ))}
     </div>
     <CustomSelect selected="Technical support" appereance="custom-select_big" />

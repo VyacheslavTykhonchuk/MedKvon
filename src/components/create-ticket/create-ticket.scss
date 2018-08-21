@@ -1,0 +1,27 @@
+.create-ticket {
+    &__step-one {
+        display: flex;
+        flex-direction: column;
+
+        .ticket-card {
+            width: calc(50% - 8px);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    &__step-two {
+        .ticket-card {
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+    }
+}

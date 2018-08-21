@@ -9,7 +9,11 @@ const articles = [
 const AboutUs = props => (
   <div className="main-page__section main-page__section_about-us AboutUs">
     {articles.map(item => (
-      <Article heading={item.heading} content={item.content} />
+      <Article
+        key={item.heading}
+        heading={item.heading}
+        content={item.content}
+      />
     ))}
   </div>
 );

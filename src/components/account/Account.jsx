@@ -89,6 +89,7 @@ const Account = props => (
       </div>
       <Btn text={"СОХРАНИТЬ"} appearing={"btn_small btn_blue"} />
     </section>
+    <div className="hint">Изменить пароль</div>
     <section className="account-card card">
       <div className="account-card__inputs-wrap">
         <InputBlock
