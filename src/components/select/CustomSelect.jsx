@@ -1,9 +1,15 @@
 import React from "react";
 
 const CustomSelect = props => (
-  <div className="custom-select">
+  <div
+    className={
+      props.appereance ? "custom-select " + props.appereance : "custom-select"
+    }
+  >
     <header className="custom-select__header">
-      <div className="custom-select__selected">This month</div>
+      <div className="custom-select__selected">
+        {props.selected ? props.selected : `This month`}
+      </div>
       <div className="custom-select__arrow">
         <svg
           width="10"

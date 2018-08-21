@@ -3,6 +3,27 @@
     display: flex;
     flex-direction: column;
 
+    &_gray-bg {
+        .input-block {
+            &__heading {
+                font-size: 10px;
+                color: #9B9B9B;
+                letter-spacing: 0;
+                line-height: 10px;
+                font-weight: $medium;
+                & + * {
+                    margin-top: .75rem;
+                }
+            }
+
+            &__input {
+                background: #ECECEC;
+                border: none;
+                padding: 14px;
+            }
+        }
+    }
+
     &__heading {
         font-size: 10px;
         color: #cecece;

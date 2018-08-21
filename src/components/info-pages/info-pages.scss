@@ -3,3 +3,35 @@
         margin-top: 72px;
     }
 }
+
+.ContactUs {
+    display: flex;
+    flex-direction: column;
+
+    .contact-us__contacts {
+        .contacts-block {
+            width: 50%;
+
+            &:nth-child(2), &:nth-child(3) {
+                float: left;
+                margin-top: 2rem;
+            }
+        }
+
+        & + * {
+            margin-top: 2.625rem;
+        }
+    }
+
+    .custom-select {
+        & + * {
+            margin-top: 2.625rem;
+        }
+    }
+
+    .input-block {
+        & + * {
+            margin-top: 1.5625rem;
+        }
+    }
+}

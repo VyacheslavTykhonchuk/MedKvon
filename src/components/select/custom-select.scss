@@ -1,4 +1,3 @@
-
 .custom-select {
     & + * {
         margin-top: 1.3em;
@@ -19,6 +18,30 @@
 
         & + * {
             margin-left: 1em;
+        }
+    }
+
+    &_big {
+        padding-bottom: 5px;
+        width: max-content;
+        border-bottom: 2px solid #2E3C54;
+
+        .custom-select {
+            &__selected {
+                font-size: 28px;
+                color: #2E3C54;
+                letter-spacing: 0;
+                font-weight: $medium;
+
+                & + * {
+                    margin-left: 2em;
+
+                    * {
+                        opacity: 1;
+                        fill: #2E3C54;
+                    }
+                }
+            }
         }
     }
 }
