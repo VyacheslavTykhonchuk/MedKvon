@@ -21,6 +21,8 @@
         -webkit-appearance: none;
         display: flex;
         padding: 24px;
+        align-items: center;
+        justify-content: center;
 
         span {
             font-weight: $book;
@@ -30,12 +32,60 @@
             letter-spacing: 0;
         }
 
-        div {
+        > div {
             display: flex;
+            align-items: center;
+        }
+
+        &-icon {
+            opacity: 0.5;
+
+            & + * {
+                margin-left: 1rem;
+            }
         }
 
         & + * {
             margin-top: 1rem;
+        }
+    }
+}
+
+.wallet-table {
+    &__title {
+        font-weight: $medium;
+        font-size: 20px;
+        color: #2E3C54;
+        letter-spacing: 0;
+        line-height: 20px;
+        width: 55%;
+    }
+}
+
+.grid-table {
+    &__row {
+        display: grid;
+        grid-template-columns: 2fr repeat(3, 1fr);
+        grid-gap: 1rem;
+        border-bottom: 1px dashed #9B9B9B;
+        padding-bottom: 8px;
+        padding-top: 14px;
+
+        &_head {
+            border-bottom: none;
+            padding: 0;
+            margin-bottom: -8px;
+        }
+    }
+
+    &__cell {
+        font-weight: $medium;
+        font-size: 12px;
+        color: #2E3C54;
+        letter-spacing: 0;
+
+        &_head {
+            font-size: 10px;
         }
     }
 }

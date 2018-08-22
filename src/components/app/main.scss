@@ -26,3 +26,16 @@ input, textarea, button {
 .no-events {
     pointer-events: none;
 }
+
+.half-transparent {
+    opacity: 0.5;
+}
+
+.heading {
+    font-weight: $medium;
+    font-size: 16px;
+    color: #4A4A4A;
+    letter-spacing: 0;
+    line-height: 23px;
+    margin: 1.7rem 0;
+}

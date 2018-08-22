@@ -36,6 +36,7 @@ const StepTwo = props => (
           title={item.title}
           showSubtitle="show"
           appearance="ticket-card_short"
+          link="/create-ticket/ticket"
         />
       ))}
     </div>

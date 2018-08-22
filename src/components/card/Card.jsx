@@ -35,7 +35,7 @@ const Card = props => (
         />
         <Btn
           linkTo={"/main"}
-          text={"Sign in"}
+          text={"Details"}
           appearing={"btn_small btn_transparent"}
         />
       </div>

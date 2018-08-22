@@ -25,7 +25,11 @@ const StepOne = props => (
     <CustomSelect selected="Step One" />
     <div className="create-ticket__cards">
       {createTicketCards.map(item => (
-        <CreateTicketCard key={item.title} title={item.title} />
+        <CreateTicketCard
+          key={item.title}
+          title={item.title}
+          link="/create-ticket/2"
+        />
       ))}
     </div>
     <div />

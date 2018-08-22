@@ -20,7 +20,7 @@ const CreateTicketCard = props => (
     <Btn
       text={"далее"}
       appearing={"btn_small btn_blue ticket-card__btn"}
-      linkTo={"/create-ticket/2"}
+      linkTo={props.link}
     />
   </div>
 );

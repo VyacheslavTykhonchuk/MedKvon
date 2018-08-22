@@ -6,6 +6,7 @@ import MainNav from "../navigation/MainNav";
 
 import StepOne from "./step-one/StepOne";
 import StepTwo from "./step-two/StepTwo";
+import StepTicket from "./step-ticket/StepTicket";
 
 let links = [
   {
@@ -21,6 +22,7 @@ const CreateTicket = props => (
       <Switch>
         <Route path="/create-ticket/1" component={StepOne} />
         <Route path="/create-ticket/2" component={StepTwo} />
+        <Route path="/create-ticket/ticket" component={StepTicket} />
       </Switch>
     </section>
     <FooterNav />

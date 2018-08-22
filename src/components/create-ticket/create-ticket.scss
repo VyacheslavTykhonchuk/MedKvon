@@ -24,4 +24,28 @@
             margin-bottom: 1rem;
         }
     }
+
+    &__step-ticket {
+        .heading {
+            margin-bottom: 10px !important;
+        }
+
+        .grid-table {
+            margin-top: 12px;
+        }
+
+        .switches-block {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            .switch-block {
+                width: calc((100%/3) - 14px);
+
+                &:nth-child(n+4) {
+                    margin-top: 1.5rem;
+                }
+            }
+        }
+    }
 }
