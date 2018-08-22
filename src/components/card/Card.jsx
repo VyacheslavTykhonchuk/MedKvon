@@ -34,7 +34,7 @@ const Card = props => (
           appearing={"btn_small btn_blue"}
         />
         <Btn
-          linkTo={"/main"}
+          linkTo={"/main/dashboard/conference"}
           text={"Details"}
           appearing={"btn_small btn_transparent"}
         />
