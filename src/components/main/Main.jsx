@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import Dashboard from "./dashboard/Dashboard";
 import ActiveTickets from "./active-tickets/ActiveTickets";
 import HistoryTab from "./history/History";
+import Conference from "./conference/Conference";
+
 import MainNav from "../navigation/MainNav";
 import FooterNav from "../footer-nav/FooterNav";
 
@@ -26,7 +28,8 @@ const Main = props => (
     <MainNav links={links} />
     <section className="main-page__section">
       <Switch>
-        <Route path="/main/dashboard" component={Dashboard} />
+        <Route exact path="/main/dashboard" component={Dashboard} />
+        <Route exact path="/main/dashboard/conference" component={Conference} />
         <Route path="/main/active-tickets" component={ActiveTickets} />
         <Route path="/main/history" component={HistoryTab} />
       </Switch>

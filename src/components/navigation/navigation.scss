@@ -12,6 +12,7 @@
         font-weight: $medium;
         position: relative;
         display: flex;
+        opacity: .5;
 
         & + * {
             margin-left: 1.23em;
@@ -30,6 +31,8 @@
         }
 
         &_active {
+            opacity: 1;
+
             &::before {
                 opacity: 1;
             }
