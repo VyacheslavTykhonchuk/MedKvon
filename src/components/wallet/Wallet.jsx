@@ -14,15 +14,29 @@ let links = [
 const Account = props => (
   <div className="wallet-page main-page wallet">
     <MainNav links={links} />
-    <section className="account-card card">
-      <div className="account-card__inputs-wrap">
+    <div className="hint">Balance</div>
+    <section className="account-card wallet-card card">
+      <div className="wallet-card__input-wrap">
         <InputBlock
           heading="Your Balance"
           type="text"
-          appearing=""
-          placeholder=""
+          appearing="no-events"
+          value="$ 1423423452"
         />
       </div>
+    </section>
+    <section className="wallet__btns">
+      <button className="wallet__button">
+        <div> </div>
+        <span>To replenish the balance</span>
+      </button>
+      <button className="wallet__button">
+        <div> </div>
+        <span>Создать заявку на вывод</span>
+      </button>
+    </section>
+    <section className="account-card wallet-card card">
+      <div> </div>
     </section>
     <FooterNav />
   </div>

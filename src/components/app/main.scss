@@ -12,9 +12,17 @@ a {
     text-decoration: none;
 }
 
+input, textarea, button {
+    outline: none;
+}
+
 .hint {
     font-weight: $medium;
     font-size: 12px;
     color: #4A4A4A;
     margin: 1rem 0 !important;
+}
+
+.no-events {
+    pointer-events: none;
 }

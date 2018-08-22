@@ -29,7 +29,7 @@ const Card = props => (
       </div>
       <div className="card__btns">
         <Btn
-          linkTo={"/create-ticket"}
+          linkTo={"/create-ticket/1"}
           text={"PROPOSALS OF DOCTORS"}
           appearing={"btn_small btn_blue"}
         />
