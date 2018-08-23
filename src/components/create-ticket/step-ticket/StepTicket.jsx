@@ -3,8 +3,6 @@ import React from "react";
 import InputBlock from "../../input-block/InputBlock";
 import Btn from "../../buttons/Btn";
 import Switch from "../../switch/Switch";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 const consSwitches = [
   {
@@ -199,11 +197,7 @@ const StepTicket = toggleSwitch => (
       <div className="heading">Цель консультации</div>
       <div className="switches-block">
         {consSwitches.map((item, index) => (
-          <Switch
-            key={index}
-            {...item}
-            //    onClick={() => toggleSwitch(index)}
-          />
+          <Switch key={index} {...item} />
         ))}
       </div>
       <div className="heading">Аллергические реакции</div>
@@ -321,24 +315,4 @@ const StepTicket = toggleSwitch => (
   </div>
 );
 
-const toggleSwitch = id => ({
-  type: "TOGGLE_SWITCH",
-  id
-});
-
-StepTicket.propTypes = {
-  toggleSwitch: PropTypes.func.isRequired
-};
-
-const mapDispatchToProps = dispatch => ({
-  toggleSwitch: id => dispatch(toggleSwitch(id))
-});
-
-const mapStateToProps = state => ({
-  switches: state.switches
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StepTicket);
+export default StepTicket;

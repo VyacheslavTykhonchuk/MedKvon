@@ -2,6 +2,7 @@ import React from "react";
 import ContactsBlock from "../../contacts-block/ContactsBlock";
 import CustomSelect from "../../select/CustomSelect";
 import InputBlock from "../../input-block/InputBlock";
+import Btn from "../../buttons/Btn";
 
 const contacts = [
   {
@@ -51,6 +52,7 @@ const ContactUs = props => (
         appearing="input-block_gray-bg"
         placeholder=""
       />
+      <Btn text={"Отправить"} appearing={"btn_small btn_blue"} />
     </form>
   </div>
 );

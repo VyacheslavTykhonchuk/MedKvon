@@ -100,7 +100,7 @@ const Account = props => (
         />
       </div>
     </section>
-    <section className="account-card card">
+    <section className="account-card card flex-row">
       <div className="account-card__inputs-wrap">
         <InputBlock
           heading="Новый пароль"
@@ -109,6 +109,7 @@ const Account = props => (
           placeholder=""
         />
       </div>
+      <Btn text={"Изменить"} appearing={"btn_small btn_blue"} />
     </section>
     <FooterNav />
   </div>
