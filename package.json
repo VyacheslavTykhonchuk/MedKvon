@@ -4,8 +4,10 @@
   "private": true,
   "build-css": "node-sass-chokidar --include-path ./src/assets/styles --include-path ./node_modules src//assets/styles -o src/",
   "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/assets/styles --include-path ./node_modules src/assets/styles -o src/assets/styles --watch --recursive",
+  "homepage": "https://vyacheslavtykhonchuk.github.io/MedKvon",
   "dependencies": {
     "connected-react-router": "^4.4.1",
+    "gh-pages": "^1.2.0",
     "history": "^4.7.2",
     "node-sass-chokidar": "^1.3.3",
     "normalize.css": "^8.0.0",
@@ -19,6 +21,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
