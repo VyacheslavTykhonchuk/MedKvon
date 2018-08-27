@@ -14,5 +14,34 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
+
+        .icon_active {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        &_active {
+            &::before {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                height: 4px;
+                width: 4px;
+                background: #026FFF;
+                top: -18px;
+                transition: all 0.4s;
+            }
+
+            .icon_unactive {
+                display: none;
+            }
+
+            .icon_active {
+                width: initial;
+                height: initial;
+            }
+        }
     }
 }
