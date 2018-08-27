@@ -22,7 +22,7 @@ const createTicketCards = [
     title: `Laboratory medicine`
   },
   {
-    title: `Obstetrics and gynecology`
+    title: `Obstetrics and gynecologys`
   }
 ];
 

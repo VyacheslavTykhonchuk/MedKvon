@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const Btn = props => (
   <div
-    onClick={() => props.changePage(props.linkTo)}
+    onClick={props.linkTo ? () => props.changePage(props.linkTo) : props.action}
     className={props.appearing ? "btn " + props.appearing : "btn"}
   >
     <span> {props.text}</span>

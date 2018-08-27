@@ -1,94 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import InputBlock from "../../input-block/InputBlock";
 import Btn from "../../buttons/Btn";
 import Switch from "../../switch/Switch";
-
-const consSwitches = [
-  {
-    text: "Диагностика",
-    isActive: false
-  },
-  {
-    text: "Рекомендации",
-    isActive: false
-  },
-  {
-    text: "Второе мнение",
-    isActive: false
-  }
-];
-const illSwitches = [
-  {
-    text: `Заболевания 
-    сердца и сосудов`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    легких`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    почек`,
-    isActive: false
-  },
-  {
-    text: `Диабет`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    крови`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    глаз`,
-    isActive: false
-  },
-  {
-    text: `Венерические`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    жкт`,
-    isActive: false
-  },
-  {
-    text: `Неврологические заболевания`,
-    isActive: false
-  },
-  {
-    text: `Заболевания 
-    суставов`,
-    isActive: false
-  },
-  {
-    text: `Заболевания щитовидной железы`,
-    isActive: false
-  },
-  {
-    text: `Другие заболевания`,
-    isActive: false
-  }
-];
-const sportSwitches = [
-  {
-    text: `Низкие`,
-    isActive: false
-  },
-  {
-    text: `Средние`,
-    isActive: false
-  },
-  {
-    text: `Высокие`,
-    isActive: false
-  }
-];
 
 const tableContent = [
   {
@@ -122,7 +38,13 @@ const tableContent = [
     price: "690$"
   }
 ];
-const StepTicket = toggleSwitch => (
+
+const StepTicket = ({
+  consSwitches,
+  illSwitches,
+  sportSwitches,
+  onSwitchClick
+}) => (
   <div className="create-ticket__step-ticket ticket-form">
     <div className="hint">Анкета пациента</div>
     <section className="account-card card">
@@ -197,12 +119,16 @@ const StepTicket = toggleSwitch => (
       <div className="heading">Цель консультации</div>
       <div className="switches-block">
         {consSwitches.map((item, index) => (
-          <Switch key={index} {...item} />
+          <Switch
+            key={index}
+            onClick={() => onSwitchClick(index, "consSwitches")}
+            {...item}
+          />
         ))}
       </div>
       <div className="heading">Аллергические реакции</div>
       <div className="switches-block">
-        <Switch isActive={false} />
+        <Switch isActive={false} onClick={() => onSwitchClick("allergy")} />
       </div>
       <div className="account-card__inputs-wrap">
         <InputBlock
@@ -221,7 +147,7 @@ const StepTicket = toggleSwitch => (
           <Switch
             key={index}
             {...item}
-            //    onClick={() => toggleSwitch(index)}
+            onClick={() => onSwitchClick(index, "illSwitches")}
           />
         ))}
       </div>
@@ -259,7 +185,7 @@ const StepTicket = toggleSwitch => (
           <Switch
             key={index}
             {...item}
-            //    onClick={() => toggleSwitch(index)}
+            onClick={() => onSwitchClick(index, "sportSwitches")}
           />
         ))}
       </div>
@@ -292,7 +218,7 @@ const StepTicket = toggleSwitch => (
         </div>
         {tableContent.map(item => {
           return (
-            <div className="grid-table__row">
+            <div key={item.date} className="grid-table__row">
               <div className="grid-table__cell">{item.date}</div>
               <div className="grid-table__cell">{item.service}</div>
               <div className="grid-table__cell">{item.status}</div>
@@ -315,4 +241,53 @@ const StepTicket = toggleSwitch => (
   </div>
 );
 
-export default StepTicket;
+StepTicket.propTypes = {
+  consSwitches: PropTypes.arrayOf(
+    PropTypes.shape({
+      completed: PropTypes.bool,
+      text: PropTypes.string
+    })
+  ),
+  illSwitches: PropTypes.arrayOf(
+    PropTypes.shape({
+      completed: PropTypes.bool,
+      text: PropTypes.string
+    })
+  ),
+  sportSwitches: PropTypes.arrayOf(
+    PropTypes.shape({
+      completed: PropTypes.bool,
+      text: PropTypes.string
+    })
+  ),
+  onSwitchClick: PropTypes.func
+};
+
+function toggleSwitch(id, arrType) {
+  return {
+    type: "TOGGLE_SWITCH",
+    id,
+    arrType
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSwitchClick: (id, arrType) => {
+      dispatch(toggleSwitch(id, arrType));
+    }
+  };
+};
+
+const mapStateToProps = state => ({
+  consSwitches: state.switches.consSwitches,
+  illSwitches: state.switches.illSwitches,
+  sportSwitches: state.switches.sportSwitches
+});
+
+const StepTickets = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StepTicket);
+
+export default StepTickets;

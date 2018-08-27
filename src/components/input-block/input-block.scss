@@ -3,6 +3,18 @@
     display: flex;
     flex-direction: column;
 
+    &_centered-transparent {
+        .input-block__input {
+            background: transparent;
+            font-size: 12px;
+            font-weight: $medium;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #4A4A4A;
+            text-align: center;
+        }
+    }
+
     &_gray-bg {
         .input-block {
             &__heading {
