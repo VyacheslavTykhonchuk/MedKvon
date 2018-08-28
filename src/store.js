@@ -4,7 +4,9 @@ import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
 import rootReducer from "./modules";
 
-export const history = createHistory();
+const URL = process.env.PUBLIC_URL || "/";
+
+export const history = createHistory({ basename: URL });
 
 const initialState = {};
 const enhancers = [];
