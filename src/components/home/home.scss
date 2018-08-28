@@ -5,6 +5,8 @@
     justify-content: flex-start;
     padding-top: 10vh;
     min-height: 100vh;
+    padding-bottom: 120px;
+    position: relative;
 
     @media (max-width: 330px) {
         padding-top: 5vh;
@@ -87,7 +89,7 @@
 
     &_login {
         background: #FFFFFF;
-        top: 35%;
+        top: 33%;
     }
 
     &_reg {
