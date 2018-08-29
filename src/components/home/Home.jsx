@@ -77,9 +77,8 @@ class Home extends React.Component {
           text={"Create account"}
           appearing={"btn_big btn_blue home-page__btn"}
           action={this.showRegPopup}
-          linkTo={this.state.regPopup ? "/main/dashboard" : false}
+          linkTo={this.state.regPopup ? "/main" : false}
         />
-
         <Btn
           action={this.showLogPopup}
           text={"Sign in"}
@@ -177,7 +176,7 @@ class Home extends React.Component {
             </div>
           </div>
           <Btn
-            linkTo={"/main/dashboard"}
+            linkTo={"/main"}
             text={"login"}
             appearing={"btn_small btn_blue"}
           />
