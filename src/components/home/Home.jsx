@@ -41,20 +41,29 @@ class Home extends React.Component {
   </svg>`
     };
   }
-  showRegPopup = () => {
+  showRegPopup = e => {
+    e.stopPropagation();
     this.setState({
       regPopup: !this.state.regPopup
     });
   };
-  showLogPopup = () => {
+  showLogPopup = e => {
+    e.stopPropagation();
+
     this.setState({
       logPopup: !this.state.logPopup
     });
   };
-
+  hidePopups = () => {
+    this.setState({
+      logPopup: false,
+      regPopup: false
+    });
+  };
   render() {
     return (
       <div
+        onClick={this.hidePopups}
         className={
           this.state.regPopup
             ? "home-page popup-opened popup-opened_reg"
@@ -76,7 +85,10 @@ class Home extends React.Component {
           text={"Sign in"}
           appearing={"btn_big btn_white home-page__btn"}
         />
-        <form className="form-popup form-popup_reg">
+        <form
+          className="form-popup form-popup_reg"
+          onClick={e => e.stopPropagation()}
+        >
           <h3 className="form-popup__title">Create account</h3>
 
           <InputBlock
@@ -120,7 +132,10 @@ class Home extends React.Component {
             placeholder="Email"
           />
         </form>
-        <form className="form-popup form-popup_login">
+        <form
+          className="form-popup form-popup_login"
+          onClick={e => e.stopPropagation()}
+        >
           <h3 className="form-popup__title">Sign in</h3>
           <InputBlock
             type="email"
