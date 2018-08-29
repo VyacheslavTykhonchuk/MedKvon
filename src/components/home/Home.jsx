@@ -90,7 +90,6 @@ class Home extends React.Component {
           onClick={e => e.stopPropagation()}
         >
           <h3 className="form-popup__title">Create account</h3>
-
           <InputBlock
             type="text"
             appearing="input-block_centered-transparent"

@@ -67,7 +67,7 @@ const FooterNav = props => (
     </NavLink>
     <NavLink
       activeClassName="footer-nav__item_active"
-      to="/create-ticket/1"
+      to="/create-ticket"
       className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">
@@ -161,7 +161,7 @@ const FooterNav = props => (
     </NavLink>
     <NavLink
       activeClassName="footer-nav__item_active"
-      to="/main/dashboard"
+      to="/main"
       className="footer-nav__item"
     >
       <div className="footer-nav__icon-wrap">

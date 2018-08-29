@@ -20,7 +20,7 @@ const CreateTicket = props => (
     <MainNav links={links} />
     <section className="main-page__section info-page__section">
       <Switch>
-        <Route path="/create-ticket/1" component={StepOne} />
+        <Route exact path="/create-ticket" component={StepOne} />
         <Route path="/create-ticket/2" component={StepTwo} />
         <Route path="/create-ticket/ticket" component={StepTicket} />
       </Switch>

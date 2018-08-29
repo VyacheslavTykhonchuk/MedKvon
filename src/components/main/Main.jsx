@@ -12,7 +12,7 @@ import FooterNav from "../footer-nav/FooterNav";
 let links = [
   {
     name: "Dashboard",
-    link: "/main/dashboard"
+    link: "/main"
   },
   {
     name: "Active tickets",
@@ -28,8 +28,8 @@ const Main = props => (
     <MainNav links={links} />
     <section className="main-page__section">
       <Switch>
-        <Route exact path="/main/dashboard" component={Dashboard} />
-        <Route exact path="/main/dashboard/conference" component={Conference} />
+        <Route exact path="/main" component={Dashboard} />
+        <Route exact path="/main/active-tickets/conference" component={Conference} />
         <Route path="/main/active-tickets" component={ActiveTickets} />
         <Route path="/main/history" component={HistoryTab} />
       </Switch>

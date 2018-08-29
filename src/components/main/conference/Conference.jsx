@@ -5,7 +5,7 @@ import MainNav from "../../navigation/MainNav";
 let links = [
   {
     name: "Conference",
-    link: "/main/dashboard/conference/"
+    link: "/main/active-tickets/conference/"
   }
 ];
 const Conference = props => (
