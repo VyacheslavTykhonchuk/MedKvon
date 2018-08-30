@@ -7,6 +7,7 @@ import MainNav from "../navigation/MainNav";
 import StepOne from "./step-one/StepOne";
 import StepTwo from "./step-two/StepTwo";
 import StepTicket from "./step-ticket/StepTicket";
+import StepDoctors from "./step-doctors/StepDoctors";
 
 let links = [
   {
@@ -21,7 +22,8 @@ const CreateTicket = props => (
     <section className="main-page__section info-page__section">
       <Switch>
         <Route exact path="/create-ticket" component={StepOne} />
-        <Route path="/create-ticket/2" component={StepTwo} />
+        <Route path="/create-ticket/specialization" component={StepTwo} />
+        <Route path="/create-ticket/doctors" component={StepDoctors} />
         <Route path="/create-ticket/ticket" component={StepTicket} />
       </Switch>
     </section>

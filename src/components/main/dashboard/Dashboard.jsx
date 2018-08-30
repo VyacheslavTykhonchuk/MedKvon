@@ -3,14 +3,46 @@ import CustomSelect from "../../select/CustomSelect";
 import Card from "../../card/Card";
 
 // decoys
-let selectOptions = [
+
+const selectOptions = [
   {
-    name: "decoy"
+    val: "This month"
+  },
+  {
+    val: "Today"
+  },
+  {
+    val: "This week"
+  },
+  {
+    val: "This year"
   }
 ];
-let cardContent = [
+const cardContent = [
   {
-    name: "decoy"
+    doctor: "Obstetrician",
+    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.  Nesciunt delectus accusantium eos enim itaque quis atque neque nemo ut.`,
+    cost: 50
+  },
+  {
+    doctor: "Optometrist",
+    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+    cost: 75
+  },
+  {
+    doctor: "Dermatologist",
+    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
+    cost: 35
+  },
+  {
+    doctor: "Cardiologist",
+    desc: `Assumenda veniam necessitatibus cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
+    cost: 125
+  },
+  {
+    doctor: "Gynecologist",
+    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
+    cost: 96
   }
 ];
 //
@@ -18,10 +50,14 @@ const Dashboard = props => (
   <div className="main-page__section main-page__section_dashboard Dashboard">
     <CustomSelect options={selectOptions} />
     <div className="cards-list">
-      <Card content={cardContent} />
-      <Card content={cardContent} />
-      <Card content={cardContent} />
-      <Card content={cardContent} />
+      {cardContent.map((item, index) => (
+        <Card
+          key={index}
+          doctor={item.doctor}
+          desc={item.desc}
+          cost={item.cost}
+        />
+      ))}
     </div>
   </div>
 );

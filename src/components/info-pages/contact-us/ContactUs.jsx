@@ -20,7 +20,20 @@ const contacts = [
     content: `+39 909 998 99`
   }
 ];
-
+const selectOptions = [
+  { 
+    val: "Technical support" 
+  },
+  {
+    val: "Financial support"
+  },
+  {
+    val: "Moral support"
+  },
+  {
+    val: "Other questions"
+  }
+];
 const ContactUs = props => (
   <div className="main-page__section main-page__section_contact-us ContactUs">
     <div className="contact-us__contacts">
@@ -32,7 +45,11 @@ const ContactUs = props => (
         />
       ))}
     </div>
-    <CustomSelect selected="Technical support" appereance="custom-select_big" />
+    <CustomSelect
+      selected="Technical support"
+      appereance="custom-select_big"
+      options={selectOptions}
+    />
     <form action="" className="tech-support">
       <InputBlock
         heading="* Email"

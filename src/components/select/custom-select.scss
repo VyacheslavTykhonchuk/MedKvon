@@ -1,4 +1,8 @@
 .custom-select {
+    position: relative;
+    width: max-content;
+    min-width: 35vw;
+    z-index: 10;
     & + * {
         margin-top: 1.3em;
     }
@@ -43,5 +47,44 @@
                 }
             }
         }
+    }
+
+    &__options {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        transform: translate(0, calc(105% + 1em));
+        opacity: 0;
+        padding: .8rem 0 .4rem 0;
+        background: hsl(0, 0%, 98%);
+        transition: all 0.4s;
+        border-radius: 4px;
+        visibility: hidden;
+
+        // border-bottom: 5px solid hsl(0, 0%, 95%);
+        box-shadow: 1px 5px 10px lightgray;
+
+        &_opened {
+            transform: translate(0, 105%);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__option {
+        padding: 0.8rem 0;
+        padding-left: 1em;
+
+        &_disabled {
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        &:nth-child(odd) {
+            background: hsl(0, 0%, 95%);
+        }
+
+        & + * {}
     }
 }
