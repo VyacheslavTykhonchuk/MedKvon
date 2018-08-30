@@ -4,8 +4,9 @@ import FooterNav from "../footer-nav/FooterNav";
 import MainNav from "../navigation/MainNav";
 import InputBlock from "../input-block/InputBlock";
 import Btn from "../buttons/Btn";
+import UploadPhoto from "../upload-photo/UploadPhoto";
 
-import doctorImg from "./../../assets/img/doctor.svg";
+import user from "./../../assets/img/user.svg";
 
 let links = [
   {
@@ -19,7 +20,7 @@ const Account = props => (
     <MainNav links={links} />
     <section className="account-card card">
       <div className="account-card__personal-info">
-        <img src={doctorImg} alt="" className="account-card__avatar" />
+        <UploadPhoto userAvatar={user} />
         <div className="account-card__inputs-wrap">
           <InputBlock
             heading="Имя"

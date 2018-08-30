@@ -3,7 +3,7 @@ import React from "react";
 class InputBlock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = { value: this.props.value };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -25,7 +25,6 @@ class InputBlock extends React.Component {
           className="input-block__input"
           type={this.props.type}
           placeholder={this.props.placeholder}
-          defaultValue={this.props.value}
           value={this.state.value}
           onChange={this.handleChange}
         />

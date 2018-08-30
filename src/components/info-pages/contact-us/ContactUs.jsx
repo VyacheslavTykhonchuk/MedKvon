@@ -25,13 +25,13 @@ const selectOptions = [
     val: "Technical support" 
   },
   {
-    val: "Financial support"
+    val: "Customer support"
   },
   {
-    val: "Moral support"
+    val: "Doctor support"
   },
   {
-    val: "Other questions"
+    val: "Translator questions"
   }
 ];
 const ContactUs = props => (
