@@ -4,6 +4,10 @@ import CustomSelect from "../../select/CustomSelect";
 import InputBlock from "../../input-block/InputBlock";
 import Btn from "../../buttons/Btn";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { showNotification } from "../../../actions/notificationActions";
+
 const contacts = [
   {
     heading: `Address`,
@@ -70,16 +74,18 @@ class ContactUs extends React.Component {
 
     for (const key in feedback) {
       if (feedback[key] === "") {
+        this.props.actions.showNotification("Fill all fields!", "error");
+
         return false;
       }
     }
- 
+
     // post data to API
     const feedbackSubmitedState = JSON.stringify(this.state);
 
     console.log(feedbackSubmitedState);
     // show alert
-    alert("Sent!");
+    this.props.actions.showNotification("Sent!", "success");
   };
 
   render() {
@@ -136,4 +142,18 @@ class ContactUs extends React.Component {
   }
 }
 
-export default ContactUs;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        showNotification
+      },
+      dispatch
+    )
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ContactUs);

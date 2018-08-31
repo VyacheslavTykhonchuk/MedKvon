@@ -18,7 +18,7 @@ class Notifications extends React.Component {
       this.setState({
         isVisible: false
       });
-    }, 1000);
+    }, 1700);
   }
   render() {
     return (
@@ -32,7 +32,7 @@ class Notifications extends React.Component {
         <div
           className={
             this.props.notification.style
-              ? "notification " + this.props.notification.style
+              ? "notification notification_" + this.props.notification.style
               : "notification"
           }
         >

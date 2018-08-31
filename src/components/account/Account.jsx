@@ -37,7 +37,7 @@ class Account extends React.Component {
     const userSubmitedState = JSON.stringify(this.state.user);
     localStorage.setItem("userSavedState", userSubmitedState);
     // show alert
-    this.props.actions.showNotification("asdsad", "success");
+    this.props.actions.showNotification("Saved!", "success");
   };
 
   componentWillMount() {

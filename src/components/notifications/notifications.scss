@@ -1,0 +1,46 @@
+.notification-container {
+    position: fixed;
+    top: 0vw;
+    width: 50vw;
+    left: 50%;
+    transition: all .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+
+    &_visible {
+        visibility: visible;
+        transform: translate(-50%, 5vw);
+    }
+
+    &_hidden {
+        visibility: hidden;
+        transform: translate(-50%, -105%);
+    }
+}
+
+.notification {
+    width: 100%;
+    background-color: hsl(0, 0%, 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .6rem;
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+    &_success {
+        background-color: hsl(208, 100%, 50%);
+        color: white;
+    }
+
+    &_error {
+        background-color: hsl(0, 100%, 65%);
+        color: white;
+    }
+
+    &__text {
+        font-size: 0.8rem;
+    }
+}
