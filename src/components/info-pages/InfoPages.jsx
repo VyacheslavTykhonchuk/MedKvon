@@ -10,7 +10,7 @@ import ContactUs from "./contact-us/ContactUs";
 let links = [
   {
     name: "About us",
-    link: "/info-pages/about-us"
+    link: "/info-pages"
   },
   {
     name: "Contact us",
@@ -23,7 +23,7 @@ const InfoPage = props => (
     <MainNav links={links} />
     <section className="main-page__section info-page__section">
       <Switch>
-        <Route path="/info-pages/about-us" component={AboutUs} />
+        <Route exact path="/info-pages" component={AboutUs} />
         <Route path="/info-pages/contact-us" component={ContactUs} />
       </Switch>
     </section>

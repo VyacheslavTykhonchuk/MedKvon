@@ -43,7 +43,6 @@ class Account extends React.Component {
   componentWillMount() {
     // get data from API
     const savedState = JSON.parse(localStorage.getItem("userSavedState"));
-
     // set data to local state
     const user = {}; // default data
     savedState ? this.setState({ user: savedState }) : this.setState({ user });
