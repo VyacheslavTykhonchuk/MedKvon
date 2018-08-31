@@ -22,6 +22,9 @@ class CustomSelect extends React.Component {
       isOpened: !this.state.isOpened,
       selected: selectedOption
     });
+    if (this.props.passVal) {
+      this.props.passVal(selectedOption);
+    }
   }
 
   render() {

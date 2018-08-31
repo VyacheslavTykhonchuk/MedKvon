@@ -21,8 +21,8 @@ const contacts = [
   }
 ];
 const selectOptions = [
-  { 
-    val: "Technical support" 
+  {
+    val: "Technical support"
   },
   {
     val: "Customer support"
@@ -34,44 +34,101 @@ const selectOptions = [
     val: "Translator questions"
   }
 ];
-const ContactUs = props => (
-  <div className="main-page__section main-page__section_contact-us ContactUs">
-    <div className="contact-us__contacts">
-      {contacts.map(item => (
-        <ContactsBlock
-          key={item.heading}
-          heading={item.heading}
-          content={item.content}
+
+class ContactUs extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      feedbackType: "Technical support",
+      feedback: {
+        name: "",
+        email: "",
+        msg: ""
+      }
+    };
+  }
+
+  handleInputChange = (val, name) => {
+    //  copy state
+    const updatedFeedback = { ...this.state.feedback };
+    //  modify copied state
+    updatedFeedback[name] = val;
+    // set modified state
+    this.setState({
+      feedback: updatedFeedback
+    });
+  };
+
+  handleSelectChange = val => {
+    this.setState({
+      feedbackType: val
+    });
+  };
+
+  handleSubmit = () => {
+    // post data to API
+    const feedbackSubmitedState = JSON.stringify(this.state);
+    console.log(feedbackSubmitedState);
+    // show alert
+    alert("Sent!");
+  };
+
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
+  render() {
+    return (
+      <div className="main-page__section main-page__section_contact-us ContactUs">
+        <div className="contact-us__contacts">
+          {contacts.map(item => (
+            <ContactsBlock
+              key={item.heading}
+              heading={item.heading}
+              content={item.content}
+            />
+          ))}
+        </div>
+        <CustomSelect
+          selected="Technical support"
+          appereance="custom-select_big"
+          options={selectOptions}
+          passVal={this.handleSelectChange}
         />
-      ))}
-    </div>
-    <CustomSelect
-      selected="Technical support"
-      appereance="custom-select_big"
-      options={selectOptions}
-    />
-    <form action="" className="tech-support">
-      <InputBlock
-        heading="* Email"
-        type="email"
-        appearing="input-block_gray-bg"
-        placeholder=""
-      />
-      <InputBlock
-        heading="* Name"
-        type="text"
-        appearing="input-block_gray-bg"
-        placeholder=""
-      />
-      <InputBlock
-        heading="* Message"
-        type="text"
-        appearing="input-block_gray-bg"
-        placeholder=""
-      />
-      <Btn text={"Отправить"} appearing={"btn_small btn_blue"} />
-    </form>
-  </div>
-);
+        <form action="" className="tech-support">
+          <InputBlock
+            heading="* Email"
+            type="email"
+            name="email"
+            appearing="input-block_gray-bg"
+            placeholder=""
+            onChange={this.handleInputChange}
+          />
+          <InputBlock
+            heading="* Name"
+            name="name"
+            type="text"
+            appearing="input-block_gray-bg"
+            placeholder=""
+            onChange={this.handleInputChange}
+          />
+          <InputBlock
+            heading="* Message"
+            name="msg"
+            type="text"
+            appearing="input-block_gray-bg"
+            placeholder=""
+            onChange={this.handleInputChange}
+          />
+          <Btn
+            text={"Отправить"}
+            appearing={"btn_small btn_blue"}
+            action={this.handleSubmit}
+          />
+        </form>
+      </div>
+    );
+  }
+}
 
 export default ContactUs;
