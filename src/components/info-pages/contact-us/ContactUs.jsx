@@ -66,16 +66,21 @@ class ContactUs extends React.Component {
   };
 
   handleSubmit = () => {
+    const feedback = this.state.feedback;
+
+    for (const key in feedback) {
+      if (feedback[key] === "") {
+        return false;
+      }
+    }
+ 
     // post data to API
     const feedbackSubmitedState = JSON.stringify(this.state);
+
     console.log(feedbackSubmitedState);
     // show alert
     alert("Sent!");
   };
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
 
   render() {
     return (

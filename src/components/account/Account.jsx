@@ -5,6 +5,9 @@ import MainNav from "../navigation/MainNav";
 import InputBlock from "../input-block/InputBlock";
 import Btn from "../buttons/Btn";
 import UploadPhoto from "../upload-photo/UploadPhoto";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { showNotification } from "../../actions/notificationActions";
 
 let links = [
   {
@@ -29,12 +32,12 @@ class Account extends React.Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = dispatch => {
     // post data to API
     const userSubmitedState = JSON.stringify(this.state.user);
     localStorage.setItem("userSavedState", userSubmitedState);
     // show alert
-    alert("Saved!");
+    this.props.actions.showNotification("asdsad", "success");
   };
 
   componentWillMount() {
@@ -186,4 +189,18 @@ class Account extends React.Component {
   }
 }
 
-export default Account;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        showNotification
+      },
+      dispatch
+    )
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Account);
