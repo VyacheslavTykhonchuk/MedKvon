@@ -9,6 +9,10 @@ class InputBlock extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
+
+    if (this.props.onChange) {
+      this.props.onChange(event.target.value, this.props.name);
+    }
   }
 
   render() {
@@ -22,10 +26,11 @@ class InputBlock extends React.Component {
       >
         <h5 className="input-block__heading">{this.props.heading}</h5>
         <input
+          name={this.props.name}
           className="input-block__input"
           type={this.props.type}
           placeholder={this.props.placeholder}
-          value={this.state.value}
+          value={this.state.value || ""}
           onChange={this.handleChange}
         />
       </div>

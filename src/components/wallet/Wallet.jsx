@@ -119,7 +119,7 @@ const Account = props => (
         </div>
         {tableContent.map(item => {
           return (
-            <div className="grid-table__row">
+            <div key={item.date + `-` + item.price} className="grid-table__row">
               <div className="grid-table__cell">{item.date}</div>
               <div className="grid-table__cell">{item.service}</div>
               <div className="grid-table__cell">{item.status}</div>

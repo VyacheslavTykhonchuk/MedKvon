@@ -6,114 +6,184 @@ import InputBlock from "../input-block/InputBlock";
 import Btn from "../buttons/Btn";
 import UploadPhoto from "../upload-photo/UploadPhoto";
 
-import user from "./../../assets/img/user.svg";
-
 let links = [
   {
     name: "Account",
     link: "/account"
   }
 ];
+class Account extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: {} };
+  }
 
-const Account = props => (
-  <div className="account-page main-page">
-    <MainNav links={links} />
-    <section className="account-card card">
-      <div className="account-card__personal-info">
-        <UploadPhoto userAvatar={user} />
-        <div className="account-card__inputs-wrap">
-          <InputBlock
-            heading="Имя"
-            value="Артем"
-            type="text"
-            appearing=""
-            placeholder=""
+  handleInputChange = (val, name) => {
+    //  copy state
+    const updatedUser = { ...this.state.user };
+    //  modify copied state
+    updatedUser[name] = val;
+    // set modified state
+    this.setState({
+      user: updatedUser
+    });
+  };
+
+  handleSubmit = () => {
+    // post data to API
+    const userSubmitedState = JSON.stringify(this.state.user);
+    localStorage.setItem("userSavedState", userSubmitedState);
+    // show alert
+    alert("Saved!");
+  };
+
+  componentWillMount() {
+    // get data from API
+    const savedState = JSON.parse(localStorage.getItem("userSavedState"));
+
+    // set data to local state
+    const user = {}; // default data
+    savedState ? this.setState({ user: savedState }) : this.setState({ user });
+  }
+
+  render() {
+    let user = this.state.user;
+    return (
+      <div className="account-page main-page">
+        <MainNav links={links} />
+        <form action="">
+          <section className="account-card card">
+            <div className="account-card__personal-info">
+              <UploadPhoto
+                userAvatar={user.userAvatar}
+                name="userAvatar"
+                onChange={this.handleInputChange}
+              />
+              <div className="account-card__inputs-wrap">
+                <InputBlock
+                  heading="Имя"
+                  value={user.firstName}
+                  type="text"
+                  appearing=""
+                  placeholder=""
+                  name="firstName"
+                  onChange={this.handleInputChange}
+                />
+                <InputBlock
+                  heading="Фамилия"
+                  value={user.lastName}
+                  type="text"
+                  appearing=""
+                  placeholder=""
+                  name="lastName"
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="account-card__inputs-wrap">
+              <InputBlock
+                heading="Почта"
+                value={user.email}
+                type="email"
+                appearing=""
+                placeholder=""
+                name="email"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
+              <InputBlock
+                heading="Телефон"
+                value={user.phone}
+                type="tel"
+                appearing=""
+                placeholder=""
+                name="phone"
+                onChange={this.handleInputChange}
+              />
+              <InputBlock
+                heading="Дата"
+                value={user.birthDate}
+                type="text"
+                appearing=""
+                placeholder=""
+                name="birthDate"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
+              <InputBlock
+                heading="Страна"
+                value={user.country}
+                type="text"
+                appearing=""
+                placeholder=""
+                name="country"
+                onChange={this.handleInputChange}
+              />
+              <InputBlock
+                heading="Язык"
+                value={user.lang}
+                type="text"
+                appearing=""
+                placeholder=""
+                name="lang"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="account-card__inputs-wrap">
+              <InputBlock
+                heading="О себе"
+                value={user.userInfo}
+                type="text"
+                appearing="input-block__dashed-border"
+                placeholder=""
+                name="userInfo"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <Btn
+              text={"СОХРАНИТЬ"}
+              appearing={"btn_small btn_blue"}
+              action={this.handleSubmit}
+            />
+          </section>
+        </form>
+
+        <div className="hint">Изменить пароль</div>
+        <section className="account-card card">
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              heading="Старый пароль"
+              type="password"
+              appearing="input-block__pass"
+              placeholder=""
+              name="oldPass"
+              onChange={this.handleChangePass}
+            />
+          </div>
+        </section>
+        <section className="account-card card flex-row">
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              heading="Новый пароль"
+              type="password"
+              appearing="input-block__pass"
+              placeholder=""
+              name="newPass"
+              onChange={this.handleChangePass}
+            />
+          </div>
+          <Btn
+            text={"Изменить"}
+            appearing={"btn_small btn_blue"}
+            action={this.handleChangePassSubmit}
           />
-          <InputBlock
-            heading="Фамилия"
-            value="Петровский"
-            type="text"
-            appearing=""
-            placeholder=""
-          />
-        </div>
+        </section>
+        <FooterNav />
       </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Почта"
-          value="test@gmail.com"
-          type="email"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-        <InputBlock
-          heading="Телефон"
-          value="+39 099 99 9 9 99"
-          type="tel"
-          appearing=""
-          placeholder=""
-        />
-        <InputBlock
-          heading="Дата"
-          value="26. 12. 1992"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-        <InputBlock
-          heading="Страна"
-          value="Украина"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-        <InputBlock
-          heading="Язык"
-          value="Украинский"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="О себе"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="email"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-      <Btn text={"СОХРАНИТЬ"} appearing={"btn_small btn_blue"} />
-    </section>
-    <div className="hint">Изменить пароль</div>
-    <section className="account-card card">
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Старый пароль"
-          type="password"
-          appearing="input-block__pass"
-          placeholder=""
-        />
-      </div>
-    </section>
-    <section className="account-card card flex-row">
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Новый пароль"
-          type="password"
-          appearing="input-block__pass"
-          placeholder=""
-        />
-      </div>
-      <Btn text={"Изменить"} appearing={"btn_small btn_blue"} />
-    </section>
-    <FooterNav />
-  </div>
-);
+    );
+  }
+}
 
 export default Account;
