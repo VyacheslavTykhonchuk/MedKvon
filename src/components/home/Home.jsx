@@ -3,13 +3,24 @@ import doctorImg from "./../../assets/img/doctor.svg";
 import logo from "./../../assets/img/logo.png";
 import Btn from "../buttons/Btn";
 import InputBlock from "../input-block/InputBlock";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { showNotification } from "../../actions/notificationActions";
+import { setUserToken } from "../../actions/userActions";
+import { push } from "connected-react-router";
+import axios from "axios";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       logPopup: false,
-      regPopup: false
+      regPopup: false,
+      login: {
+        email: "",
+        password: ""
+      },
+      reg: {}
     };
     this.icons = {
       facebook: `<svg xmlns='http://www.w3.org/2000/svg' id='Capa_1' width='60.734' height='60.733'
@@ -41,25 +52,104 @@ class Home extends React.Component {
   </svg>`
     };
   }
+  
   showRegPopup = e => {
     e.stopPropagation();
     this.setState({
-      regPopup: !this.state.regPopup
+      regPopup: true
     });
   };
+
   showLogPopup = e => {
     e.stopPropagation();
-
     this.setState({
-      logPopup: !this.state.logPopup
+      logPopup: true
     });
   };
+
   hidePopups = () => {
     this.setState({
       logPopup: false,
       regPopup: false
     });
   };
+
+  handleLoginInputChange = (val, name) => {
+    //  copy state
+    const loginForm = { ...this.state.login };
+    //  modify copied state
+    loginForm[name] = val;
+    // set modified state
+    this.setState({
+      login: loginForm
+    });
+  };
+
+  handleRegInputChange = (val, name) => {
+    //  copy state
+    const regForm = { ...this.state.reg };
+    //  modify copied state
+    regForm[name] = val;
+    // set modified state
+    this.setState({
+      reg: regForm
+    });
+  };
+
+  proceedLogin = () => {
+    // post data to API
+    const login = this.state.login;
+    axios
+      .post(`https://videodoctor.pp.ua/api_v1/login`, { login })
+      .then(res => {
+        const data = res.data;
+        if (data.error) {
+          // show alert
+          let obj = data.validation;
+          this.props.actions.showNotification(
+            obj[Object.keys(obj)[0]],
+            "error"
+          );
+        } else {
+          const userToken = data["user-token"];
+          axios.defaults.headers.common["user-token"] = userToken;
+          this.props.actions.setUserToken(userToken);
+
+          // LStorage
+          localStorage.setItem("user-token", userToken);
+
+          // show alert
+          this.props.actions.showNotification("Welcome!", "success");
+          this.props.actions.changePage("/main");
+        }
+      });
+  };
+  proceedReg = e => {
+    e.stopPropagation();
+    // post data to API
+    const reg = this.state.reg;
+
+    axios.post(`https://videodoctor.pp.ua/api_v1/signup`, { reg }).then(res => {
+      const data = res.data;
+      if (data.error) {
+        // show alert
+        let obj = data.validation;
+        this.props.actions.showNotification(obj[Object.keys(obj)[0]], "error");
+      } else {
+        const userToken = data["user-token"];
+        axios.defaults.headers.common["user-token"] = userToken;
+        this.props.actions.setUserToken(userToken);
+
+        // LStorage
+        localStorage.setItem("user-token", userToken);
+
+        // show alert
+        this.props.actions.showNotification("Welcome!", "success");
+        this.props.actions.changePage("/main");
+      }
+    });
+  };
+
   render() {
     return (
       <div
@@ -76,8 +166,7 @@ class Home extends React.Component {
         <Btn
           text={"Create account"}
           appearing={"btn_big btn_blue home-page__btn"}
-          action={this.showRegPopup}
-          linkTo={this.state.regPopup ? "/main" : false}
+          action={this.state.regPopup ? this.proceedReg : this.showRegPopup}
         />
         <Btn
           action={this.showLogPopup}
@@ -93,41 +182,57 @@ class Home extends React.Component {
             type="text"
             appearing="input-block_centered-transparent"
             placeholder="Name"
+            onChange={this.handleRegInputChange}
+            name="username"
           />
           <InputBlock
             type="text"
             appearing="input-block_centered-transparent"
             placeholder="Last Name"
+            onChange={this.handleRegInputChange}
+            name="lastname"
           />
           <InputBlock
             type="tel"
             appearing="input-block_centered-transparent"
             placeholder="Phone"
+            onChange={this.handleRegInputChange}
+            name="phone"
           />
           <InputBlock
             type="text"
             appearing="input-block_centered-transparent"
             placeholder="Date"
+            onChange={this.handleRegInputChange}
+            name="birthday"
           />
           <InputBlock
             type="text"
             appearing="input-block_centered-transparent"
             placeholder="Country"
+            onChange={this.handleRegInputChange}
+            name="country"
           />
           <InputBlock
             type="password"
             appearing="input-block_centered-transparent"
             placeholder="Password"
+            onChange={this.handleRegInputChange}
+            name="password"
           />
           <InputBlock
             type="password"
             appearing="input-block_centered-transparent"
             placeholder="Repeat password"
+            onChange={this.handleRegInputChange}
+            name="passwordrepeat"
           />
           <InputBlock
             type="email"
             appearing="input-block_centered-transparent"
             placeholder="Email"
+            name="email"
+            onChange={this.handleRegInputChange}
           />
         </form>
         <form
@@ -135,15 +240,20 @@ class Home extends React.Component {
           onClick={e => e.stopPropagation()}
         >
           <h3 className="form-popup__title">Sign in</h3>
+
           <InputBlock
             type="email"
             appearing="input-block_centered-transparent"
             placeholder="Email"
+            name="email"
+            onChange={this.handleLoginInputChange}
           />
           <InputBlock
             type="password"
             appearing="input-block_centered-transparent"
             placeholder="Password"
+            name="password"
+            onChange={this.handleLoginInputChange}
           />
           <div className="social-login">
             <header className="social-login__heading">Sign in with:</header>
@@ -176,9 +286,9 @@ class Home extends React.Component {
             </div>
           </div>
           <Btn
-            linkTo={"/main"}
             text={"login"}
             appearing={"btn_small btn_blue"}
+            action={this.proceedLogin}
           />
         </form>
         <img className="home-page__logo" src={logo} alt="logo" />
@@ -186,4 +296,21 @@ class Home extends React.Component {
     );
   }
 }
-export default Home;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        showNotification,
+        setUserToken,
+        changePage: page => push(page)
+      },
+      dispatch
+    )
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);

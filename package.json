@@ -6,6 +6,7 @@
   "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/assets/styles --include-path ./node_modules src/assets/styles -o src/assets/styles --watch --recursive",
   "homepage": "https://vyacheslavtykhonchuk.github.io/MedKvon",
   "dependencies": {
+    "axios": "^0.18.0",
     "connected-react-router": "^4.4.1",
     "gh-pages": "^1.2.0",
     "history": "^4.7.2",

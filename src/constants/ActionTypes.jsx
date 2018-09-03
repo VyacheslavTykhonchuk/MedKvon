@@ -1,1 +1,2 @@
 export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION";
+export const SET_USER_TOKEN = "SET_USER_TOKEN";

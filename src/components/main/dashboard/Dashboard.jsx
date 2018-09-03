@@ -1,8 +1,8 @@
 import React from "react";
+import axios from "axios";
+
 import CustomSelect from "../../select/CustomSelect";
 import Card from "../../card/Card";
-
-// decoys
 
 const selectOptions = [
   {
@@ -18,48 +18,37 @@ const selectOptions = [
     val: "This year"
   }
 ];
-const cardContent = [
-  {
-    doctor: "Obstetrician",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.  Nesciunt delectus accusantium eos enim itaque quis atque neque nemo ut.`,
-    cost: 50
-  },
-  {
-    doctor: "Optometrist",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
-    cost: 75
-  },
-  {
-    doctor: "Dermatologist",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
-    cost: 35
-  },
-  {
-    doctor: "Cardiologist",
-    desc: `Assumenda veniam necessitatibus cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
-    cost: 125
-  },
-  {
-    doctor: "Gynecologist",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
-    cost: 96
+
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { dashboardCards: [] };
   }
-];
-//
-const Dashboard = props => (
-  <div className="main-page__section main-page__section_dashboard Dashboard">
-    <CustomSelect options={selectOptions} />
-    <div className="cards-list">
-      {cardContent.map((item, index) => (
-        <Card
-          key={index}
-          doctor={item.doctor}
-          desc={item.desc}
-          cost={item.cost}
-        />
-      ))}
-    </div>
-  </div>
-);
+  componentWillMount() {
+    axios.get(`https://videodoctor.pp.ua/api_v1/dashboard`).then(res => {
+      const dashboardCards = res.data;
+      this.setState({ dashboardCards: dashboardCards.data });
+      console.log(dashboardCards.data);
+    });
+  }
+  render() {
+    return (
+      <div className="main-page__section main-page__section_dashboard Dashboard">
+        <CustomSelect options={selectOptions} />
+        <div className="cards-list">
+          {this.state.dashboardCards.map((item, index) => (
+            <Card
+              key={index}
+              doctor={item.doctor}
+              desc={item.desc}
+              cost={item.price}
+              requestCount={item.request_count}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Dashboard;

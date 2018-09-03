@@ -23,18 +23,28 @@ let links = [
     link: "/main/history"
   }
 ];
-const Main = props => (
-  <div className="main-page">
-    <MainNav links={links} />
-    <section className="main-page__section">
-      <Switch>
-        <Route exact path="/main" component={Dashboard} />
-        <Route exact path="/main/active-tickets/conference" component={Conference} />
-        <Route path="/main/active-tickets" component={ActiveTickets} />
-        <Route path="/main/history" component={HistoryTab} />
-      </Switch>
-    </section>
-    <FooterNav />
-  </div>
-);
+class Main extends React.Component {
+  
+  render() {
+    return (
+      <div className="main-page">
+        <MainNav links={links} />
+        <section className="main-page__section">
+          <Switch>
+            <Route exact path="/main" component={Dashboard}  />
+            <Route
+              exact
+              path="/main/active-tickets/conference"
+              component={Conference}
+            />
+            <Route path="/main/active-tickets" component={ActiveTickets} />
+            <Route path="/main/history" component={HistoryTab} />
+          </Switch>
+        </section>
+        <FooterNav />
+      </div>
+    );
+  }
+}
+
 export default Main;

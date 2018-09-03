@@ -5,7 +5,7 @@ import Btn from "../buttons/Btn";
 
 import doctorImg from "./../../assets/img/doctor.svg";
 
-const Card = ({ doctor, desc, avatar, cost }) => (
+const Card = ({ doctor, desc, avatar, cost, requestCount }) => (
   <div className="card">
     <div className="card__left">
       <div className="card__avatar-holder">
@@ -20,12 +20,21 @@ const Card = ({ doctor, desc, avatar, cost }) => (
           <div className="info__heading"> Врач</div>
           <div className="info__content">{doctor}</div>
         </div>
-        <div className="info">
-          <div className="info__heading"> Сумма</div>
-          <div className="info__content"> $ {cost}</div>
-        </div>
+        {cost ? (
+          <div className="info">
+            <div className="info__heading"> Сумма</div>
+            <div className="info__content"> $ {cost}</div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="card__btns">
+        {requestCount ? (
+          <div className="request-count">{requestCount}</div>
+        ) : (
+          ""
+        )}
         <Btn
           linkTo={"/main/active-tickets/conference"}
           text={"PROPOSALS OF DOCTORS"}
@@ -45,7 +54,8 @@ Card.propTypes = {
   doctor: PropTypes.string,
   desc: PropTypes.string,
   cost: PropTypes.number,
-  avatar: PropTypes.any
+  avatar: PropTypes.any,
+  requestCount: PropTypes.number
 };
 Card.defaultProps = {
   avatar: doctorImg

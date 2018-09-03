@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import notification from './notificationsReducer';
-import switches from './switchesReducer';
+import notification from "./notificationsReducer";
+import switches from "./switchesReducer";
+import user from "./userReducer";
 
-
-export default combineReducers({ switches,notification });
+export default combineReducers({ switches, notification, user });

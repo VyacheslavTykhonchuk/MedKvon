@@ -18,7 +18,13 @@ let links = [
 class Account extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user: {} };
+    this.state = {
+      user: {},
+      passwords: {
+        oldPass: "",
+        newPass: ""
+      }
+    };
   }
 
   handleInputChange = (val, name) => {
@@ -32,12 +38,45 @@ class Account extends React.Component {
     });
   };
 
+  handleChangePass = (val, name) => {
+    //  copy state
+    const passwords = { ...this.state.passwords };
+    //  modify copied state
+    passwords[name] = val;
+    // set modified state
+    this.setState({
+      passwords: passwords
+    });
+  };
+
   handleSubmit = dispatch => {
     // post data to API
     const userSubmitedState = JSON.stringify(this.state.user);
     localStorage.setItem("userSavedState", userSubmitedState);
     // show alert
     this.props.actions.showNotification("Saved!", "success");
+  };
+
+  handleChangePassSubmit = () => {
+    const userSubmitedPasswords = JSON.stringify(this.state.passwords);
+    if (this.state.passwords.oldPass === this.state.passwords.newPass) {
+      // show alert
+      this.props.actions.showNotification("Passwords are identical!", "error");
+      return false;
+    } else if (
+      this.state.passwords.oldPass.length < 8 ||
+      this.state.passwords.newPass.length < 8
+    ) {
+      this.props.actions.showNotification(
+        "Passwords must be at least 8 characters in length.",
+        "error"
+      );
+      return false;
+    } else {
+      console.log(userSubmitedPasswords);
+      // show alert
+      this.props.actions.showNotification("Changed!", "success");
+    }
   };
 
   componentWillMount() {
