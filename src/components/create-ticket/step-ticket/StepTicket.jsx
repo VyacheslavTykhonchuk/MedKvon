@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import InputBlock from "../../input-block/InputBlock";
 import Btn from "../../buttons/Btn";
@@ -65,6 +66,38 @@ class StepTicket extends React.Component {
   componentDidUpdate() {
     console.log(this.state.ticketForm);
   }
+  handleSubmit = e => {
+    // post data to API
+    const reg = this.state.ticketForm;
+
+    axios
+      .post(`https://videodoctor.pp.ua/api_v1/signup`, { reg })
+      .then(res => {
+        const data = res.data;
+        if (data.error) {
+          // show alert
+          let obj = data.validation;
+          this.props.actions.showNotification(
+            obj[Object.keys(obj)[0]],
+            "error"
+          );
+        } else {
+          const userToken = data["user-token"];
+          axios.defaults.headers.common["user-token"] = userToken;
+          this.props.actions.setUserToken(userToken);
+
+          // LStorage
+          localStorage.setItem("user-token", userToken);
+
+          // show alert
+          this.props.actions.showNotification("Welcome!", "success");
+          this.props.actions.changePage("/main");
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
   render() {
     return (
       <div className="create-ticket__step-ticket ticket-form">
@@ -284,7 +317,12 @@ class StepTicket extends React.Component {
             />
           </div>
 
-          <Btn text={"отправить"} appearing={"btn_small btn_blue"} />
+          <Btn
+            text={"отправить"}
+            onClick={() => this.handleSubmit}
+            action={this.handleSubmit}
+            appearing={"btn_small btn_blue"}
+          />
           {/* <div className="wallet-table__content grid-table">
             <div className="grid-table__row grid-table__row_head">
               <div className="grid-table__cell grid-table__cell_head">Date</div>
