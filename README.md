@@ -4,13 +4,13 @@ Create-react-app with Cordova
 
 ### Setup
 
-Install the Create React App CLI.
+Install packages.
 
-```npm install -g create-react-app```
+```npm install```
 
-Install the Cordova CLI.
+Start the App.
 
-```npm install -g cordova```
+```npm start```
 
 ### Based
 
