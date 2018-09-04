@@ -29,7 +29,11 @@ const Card = ({ doctor, desc, avatar, cost, requestCount }) => (
           ""
         )}
       </div>
-      <div className="card__btns">
+      <div
+        className={
+          requestCount <= 0 ? "card__btns card__btns_disabled" : "card__btns"
+        }
+      >
         {requestCount ? (
           <div className="request-count">{requestCount}</div>
         ) : (
@@ -40,6 +44,7 @@ const Card = ({ doctor, desc, avatar, cost, requestCount }) => (
           text={"PROPOSALS OF DOCTORS"}
           appearing={"btn_small btn_blue"}
         />
+
         <Btn
           linkTo={"/main/active-tickets/conference"}
           text={"Details"}
