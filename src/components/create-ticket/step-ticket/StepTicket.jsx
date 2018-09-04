@@ -6,240 +6,322 @@ import InputBlock from "../../input-block/InputBlock";
 import Btn from "../../buttons/Btn";
 import Switch from "../../switch/Switch";
 
-const tableContent = [
-  {
-    date: "09/09/2017",
-    service: "Advice",
-    status: "Made",
-    price: "100$"
-  },
-  {
-    date: "10/12/2009",
-    service: "Advice",
-    status: "Made",
-    price: "1000$"
-  },
-  {
-    date: "30/02/2018",
-    service: "Advice",
-    status: "Pending",
-    price: "990$"
-  },
-  {
-    date: "26/06/2001",
-    service: "Advice",
-    status: "Made",
-    price: "860$"
-  },
-  {
-    date: "02/08/2014",
-    service: "Advice",
-    status: "Made",
-    price: "690$"
+// const tableContent = [
+//   {
+//     date: "09/09/2017",
+//     service: "Advice",
+//     status: "Made",
+//     price: "100$"
+//   },
+//   {
+//     date: "10/12/2009",
+//     service: "Advice",
+//     status: "Made",
+//     price: "1000$"
+//   },
+//   {
+//     date: "30/02/2018",
+//     service: "Advice",
+//     status: "Pending",
+//     price: "990$"
+//   },
+//   {
+//     date: "26/06/2001",
+//     service: "Advice",
+//     status: "Made",
+//     price: "860$"
+//   },
+//   {
+//     date: "02/08/2014",
+//     service: "Advice",
+//     status: "Made",
+//     price: "690$"
+//   }
+// ];
+
+class StepTicket extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ticketForm: {}
+    };
   }
-];
 
-const StepTicket = ({
-  consSwitches,
-  illSwitches,
-  sportSwitches,
-  onSwitchClick
-}) => (
-  <div className="create-ticket__step-ticket ticket-form">
-    <div className="hint">Анкета пациента</div>
-    <section className="account-card card">
-      <div className="account-card__personal-info">
-        <div className="account-card__inputs-wrap">
-          <InputBlock
-            heading="Имя"
-            value="Артем"
-            type="text"
-            appearing=""
-            placeholder=""
-          />
-          <InputBlock
-            heading="Фамилия"
-            value="Петровский"
-            type="text"
-            appearing=""
-            placeholder=""
-          />
-        </div>
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Почта"
-          value="test@gmail.com"
-          type="email"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-        <InputBlock
-          heading="Телефон"
-          value="+39 099 99 9 9 99"
-          type="tel"
-          appearing=""
-          placeholder=""
-        />
-        <InputBlock
-          heading="Дата"
-          value="26. 12. 1992"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-        <InputBlock
-          heading="Страна"
-          value="Украина"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-        <InputBlock
-          heading="Язык"
-          value="Украинский"
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="О себе"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="text"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-      <div className="heading">Цель консультации</div>
-      <div className="switches-block">
-        {consSwitches.map((item, index) => (
-          <Switch
-            key={index}
-            onClick={() => onSwitchClick(index, "consSwitches")}
-            {...item}
-          />
-        ))}
-      </div>
-      <div className="heading">Аллергические реакции</div>
-      <div className="switches-block">
-        <Switch isActive={false} onClick={() => onSwitchClick("allergy")} />
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Укажите на что…"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="text"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-      <div className="heading">
-        Ранее перенесеннные заболевания или актуальные заболевания:
-      </div>
-      <div className="switches-block">
-        {illSwitches.map((item, index) => (
-          <Switch
-            key={index}
-            {...item}
-            onClick={() => onSwitchClick(index, "illSwitches")}
-          />
-        ))}
-      </div>
-      <div className="heading">Курение</div>
-      <div className="switches-block">
-        <Switch isActive={false} />
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Укажите на что…"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="text"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-
-      <div className="heading">Aлкоголь</div>
-      <div className="switches-block">
-        <Switch isActive={false} />
-      </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Укажите на что…"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="text"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-
-      <div className="heading">Физические упражнения</div>
-      <div className="switches-block">
-        {sportSwitches.map((item, index) => (
-          <Switch
-            key={index}
-            {...item}
-            onClick={() => onSwitchClick(index, "sportSwitches")}
-          />
-        ))}
-      </div>
-      <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-        <InputBlock
-          heading="Укажите ваш вес"
-          value=""
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-        <InputBlock
-          heading="Укажите ваш рост"
-          value=""
-          type="text"
-          appearing=""
-          placeholder=""
-        />
-      </div>
-      <div className="heading">
-        Ранее перенесенные операции или заболевания требующие госпитализации
-      </div>
-
-      <div className="wallet-table__content grid-table">
-        <div className="grid-table__row grid-table__row_head">
-          <div className="grid-table__cell grid-table__cell_head">Date</div>
-          <div className="grid-table__cell grid-table__cell_head">Service</div>
-          <div className="grid-table__cell grid-table__cell_head">Status</div>
-          <div className="grid-table__cell grid-table__cell_head">Price</div>
-        </div>
-        {tableContent.map(item => {
-          return (
-            <div key={item.date} className="grid-table__row">
-              <div className="grid-table__cell">{item.date}</div>
-              <div className="grid-table__cell">{item.service}</div>
-              <div className="grid-table__cell">{item.status}</div>
-              <div className="grid-table__cell">{item.price}</div>
+  handleInputChange = (val, name) => {
+    //  copy state
+    const ticketForm = { ...this.state.ticketForm };
+    //  modify copied state
+    ticketForm[name] = val;
+    // set modified state
+    this.setState({
+      ticketForm: ticketForm
+    });
+  };
+  onSwitchClick = name => {
+    this.state.ticketForm[name]
+      ? this.handleInputChange(false, name)
+      : this.handleInputChange(true, name);
+  };
+  componentDidUpdate() {
+    console.log(this.state.ticketForm);
+  }
+  render() {
+    return (
+      <div className="create-ticket__step-ticket ticket-form">
+        <div className="hint">Анкета пациента</div>
+        <section className="account-card card">
+          <div className="account-card__personal-info">
+            <div className="account-card__inputs-wrap">
+              <InputBlock
+                heading="Short description"
+                type="text"
+                onChange={this.handleInputChange}
+                name="shortDescription"
+              />
+              <InputBlock
+                heading="Price of consultation"
+                type="num"
+                onChange={this.handleInputChange}
+                name="priceOfConsultation"
+              />
+              <InputBlock
+                heading="Date of creation"
+                type="text"
+                onChange={this.handleInputChange}
+                name="dateOfCreation"
+              />
+              <Switch isActive={false} text="Written opinion:" />
+              <InputBlock
+                heading="First Name"
+                type="text"
+                onChange={this.handleInputChange}
+                name="firstName"
+              />
+              <InputBlock
+                heading="Last Name"
+                type="text"
+                onChange={this.handleInputChange}
+                name="lastName"
+              />
+              <InputBlock
+                heading="Patronymic"
+                type="text"
+                onChange={this.handleInputChange}
+                name="patronymic"
+              />
+              <InputBlock
+                heading="Kind of activity"
+                type="text"
+                onChange={this.handleInputChange}
+                name="kindOfActivity"
+              />
+              <InputBlock
+                heading="Phone"
+                type="text"
+                onChange={this.handleInputChange}
+                name="phone"
+              />
+              <InputBlock
+                heading="Email"
+                type="text"
+                onChange={this.handleInputChange}
+                name="email"
+              />
             </div>
-          );
-        })}
+          </div>
+          <div className="heading">Convenient time for consultation</div>
+          <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
+            <InputBlock
+              heading="From"
+              type="num"
+              onChange={this.handleInputChange}
+              name="timeFrom"
+            />
+            <InputBlock
+              heading="To"
+              type="num"
+              onChange={this.handleInputChange}
+              name="timeTo"
+            />
+          </div>
+          <InputBlock
+            heading="Select your timezone"
+            type="num"
+            onChange={this.handleInputChange}
+            name="timezone"
+          />
+          <div className="heading"> Purpose of the consultation:</div>
+          <div className="switches-block">
+            {this.props.consSwitches.map((item, index) => (
+              <Switch
+                key={index}
+                onClick={() => this.onSwitchClick(item.text)}
+                {...item}
+              />
+            ))}
+          </div>
+
+          <div className="heading">Аллергические реакции</div>
+          <div className="switches-block">
+            <Switch
+              isActive={false}
+              name="alergy"
+              onClick={() => this.onSwitchClick("alergy")}
+            />
+          </div>
+          {/*  */}
+
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              type="text"
+              appearing="input-block__dashed-border"
+              placeholder=""
+              heading="Укажите на что…"
+              onChange={this.handleInputChange}
+              name="alergyDetails"
+            />
+          </div>
+          <div className="heading">
+            Ранее перенесеннные заболевания или актуальные заболевания:
+          </div>
+          <div className="switches-block">
+            {this.props.illSwitches.map((item, index) => (
+              <Switch
+                key={index}
+                onClick={() => this.onSwitchClick(item.text)}
+                {...item}
+              />
+            ))}
+          </div>
+          <div className="heading">Курение</div>
+          <div className="switches-block">
+            <Switch
+              isActive={false}
+              name="smoking"
+              onClick={() => this.onSwitchClick("smoking")}
+            />
+          </div>
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              type="text"
+              appearing="input-block__dashed-border"
+              placeholder=""
+              heading="Укажите на что…"
+              onChange={this.handleInputChange}
+              name="smokingDetails"
+            />
+          </div>
+          <div className="heading">Aлкоголь</div>
+          <div className="switches-block">
+            <Switch
+              isActive={false}
+              name="alcohol"
+              onClick={() => this.onSwitchClick("alcohol")}
+            />
+          </div>
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              type="text"
+              appearing="input-block__dashed-border"
+              placeholder=""
+              heading="Укажите на что…"
+              onChange={this.handleInputChange}
+              name="alcoholDetails"
+            />
+          </div>
+          <div className="heading">Физические упражнения</div>
+          <div className="switches-block">
+            {this.props.sportSwitches.map((item, index) => (
+              <Switch
+                key={index}
+                onClick={() => this.onSwitchClick(item.text)}
+                {...item}
+              />
+            ))}
+          </div>
+          <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
+            <InputBlock
+              heading="Укажите ваш вес"
+              value=""
+              type="text"
+              appearing=""
+              placeholder=""
+              onChange={this.handleInputChange}
+              name="weight"
+            />
+            <InputBlock
+              heading="Укажите ваш рост"
+              value=""
+              type="text"
+              appearing=""
+              placeholder=""
+              onChange={this.handleInputChange}
+              name="height"
+            />
+          </div>
+          <div className="heading">
+            Previous surgery or illness requiring hospitalization
+          </div>
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              type="text"
+              appearing="input-block__dashed-border"
+              placeholder=""
+              heading="Укажите на что…"
+              onChange={this.handleInputChange}
+              name="surgerys"
+            />
+          </div>
+          <div className="heading">List of used medicaments</div>
+          <div className="account-card__inputs-wrap">
+            <InputBlock
+              type="text"
+              appearing="input-block__dashed-border"
+              placeholder=""
+              heading="Укажите на что…"
+              onChange={this.handleInputChange}
+              name="medicaments"
+            />
+          </div>
+
+          <Btn text={"отправить"} appearing={"btn_small btn_blue"} />
+          {/* <div className="wallet-table__content grid-table">
+            <div className="grid-table__row grid-table__row_head">
+              <div className="grid-table__cell grid-table__cell_head">Date</div>
+              <div className="grid-table__cell grid-table__cell_head">
+                Service
+              </div>
+              <div className="grid-table__cell grid-table__cell_head">
+                Status
+              </div>
+              <div className="grid-table__cell grid-table__cell_head">
+                Price
+              </div>
+            </div>
+            {tableContent.map(item => {
+              return (
+                <div key={item.date} className="grid-table__row">
+                  <div className="grid-table__cell">{item.date}</div>
+                  <div className="grid-table__cell">{item.service}</div>
+                  <div className="grid-table__cell">{item.status}</div>
+                  <div className="grid-table__cell">{item.price}</div>
+                </div>
+              );
+            })}
+          </div> */}
+        </section>
       </div>
-      <div className="account-card__inputs-wrap">
-        <InputBlock
-          heading="Укажите на что…"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          type="text"
-          appearing="input-block__dashed-border"
-          placeholder=""
-        />
-      </div>
-      <Btn text={"отправить"} appearing={"btn_small btn_blue"} />
-    </section>
-  </div>
-);
+    );
+  }
+}
+// const StepTicket = ({
+//   consSwitches,
+//   illSwitches,
+//   sportSwitches,
+//   onSwitchClick
+// }) => (
+
+// );
 
 StepTicket.propTypes = {
   consSwitches: PropTypes.arrayOf(

@@ -59,8 +59,9 @@ Card.propTypes = {
   doctor: PropTypes.string,
   desc: PropTypes.string,
   cost: PropTypes.number,
-  avatar: PropTypes.any,
-  requestCount: PropTypes.number
+  avatar: PropTypes.string,
+  requestCount: PropTypes.number,
+  id: PropTypes.number
 };
 Card.defaultProps = {
   avatar: doctorImg

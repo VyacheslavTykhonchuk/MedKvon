@@ -43,6 +43,8 @@ class Dashboard extends React.Component {
               desc={item.desc}
               cost={item.price}
               requestCount={item.request_count}
+              id={item.id}
+              avatar={item.avatar}
             />
           ))}
         </div>
