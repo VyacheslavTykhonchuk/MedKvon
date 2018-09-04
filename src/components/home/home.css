@@ -1,0 +1,12 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15vh; }
+  .home-page__img + * {
+    margin-top: 10vh; }
+  .home-page__btn + * {
+    margin-top: 3vh; }
+  .home-page__logo {
+    margin-top: 4vh; }
