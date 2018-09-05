@@ -924,6 +924,8 @@ main {
       margin-top: 1rem;
       justify-content: space-between;
       flex-direction: row; }
+      .account-card__inputs-wrap_horizontal + .input-block {
+        margin-top: 8px; }
       .account-card__inputs-wrap_horizontal > .input-block {
         width: calc(50% - 8px); }
   .account-card__avatar {

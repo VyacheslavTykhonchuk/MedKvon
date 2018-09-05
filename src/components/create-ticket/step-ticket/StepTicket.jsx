@@ -68,10 +68,11 @@ class StepTicket extends React.Component {
   }
   handleSubmit = e => {
     // post data to API
-    const reg = this.state.ticketForm;
+    const formData = this.state.ticketForm,
+      api = `https://videodoctor.pp.ua/api_v1/signup`;
 
     axios
-      .post(`https://videodoctor.pp.ua/api_v1/signup`, { reg })
+      .post(api, { formData })
       .then(res => {
         const data = res.data;
         if (data.error) {
@@ -123,7 +124,11 @@ class StepTicket extends React.Component {
                 onChange={this.handleInputChange}
                 name="dateOfCreation"
               />
-              <Switch isActive={false} text="Written opinion:" />
+              <Switch
+                isActive={false}
+                text="Written opinion:"
+                onClick={() => this.onSwitchClick("Written opinion:")}
+              />
               <InputBlock
                 heading="First Name"
                 type="text"
