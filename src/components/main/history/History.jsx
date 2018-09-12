@@ -1,55 +1,54 @@
-import React from "react";
-import CustomSelect from "../../select/CustomSelect";
-import HistoryCard from "../../history-card/HistoryCard";
+import React from 'react';
+import axios from 'axios';
 
-// decoys
+// import CustomSelect from '../../select/CustomSelect';
+import HistoryCard from '../../history-card/HistoryCard';
 
-const selectOptions = [
-  {
-    val: "This month"
-  },
-  {
-    val: "Today"
-  },
-  {
-    val: "This week"
-  },
-  {
-    val: "This year"
+// const selectOptions = [
+//   {
+//     val: 'This month',
+//   },
+//   {
+//     val: 'Today',
+//   },
+//   {
+//     val: 'This week',
+//   },
+//   {
+//     val: 'This year',
+//   },
+// ];
+
+class HistoryTab extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { historyCards: [] };
+
+    axios.get(`https://videodoctor.pp.ua/api_v1/history`).then((res) => {
+      const historyCards = res.data;
+      this.setState({ historyCards: historyCards.data });
+      console.log(historyCards.data);
+    });
   }
-];
-const historyCards = [
-  {
-    doctor: "Optometrist",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
-    cost: 75
-  },
-  {
-    doctor: "Dermatologist",
-    desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
-    cost: 35
-  },
-  {
-    doctor: "Cardiologist",
-    desc: `Assumenda veniam necessitatibus cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam necessitatibus cupiditate.`,
-    cost: 125
+
+  render() {
+    return (
+      <div className="main-page__section main-page__section_dashboard Dashboard">
+        {/* <CustomSelect options={selectOptions} /> */}
+        <div className="cards-list">
+          {this.state.historyCards.map((item, index) => (
+            <HistoryCard
+              key={item.id}
+              doctor={item.doctor}
+              desc={item.desc}
+              cost={item.price}
+              requestCount={item.request_count}
+            />
+          ))}
+        </div>
+      </div>
+    );
   }
-];
-//
-const HistoryTab = props => (
-  <div className="main-page__section main-page__section_dashboard Dashboard">
-    <CustomSelect options={selectOptions} />
-    <div className="cards-list">
-      {historyCards.map((item, index) => (
-        <HistoryCard
-          key={index}
-          doctor={item.doctor}
-          desc={item.desc}
-          cost={item.cost}
-        />
-      ))}
-    </div>
-  </div>
-);
+}
 
 export default HistoryTab;

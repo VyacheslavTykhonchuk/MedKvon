@@ -1,14 +1,14 @@
-import React from "react";
-import doctorImg from "./../../assets/img/doctor.svg";
-import logo from "./../../assets/img/logo.png";
-import Btn from "../buttons/Btn";
-import InputBlock from "../input-block/InputBlock";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { showNotification } from "../../actions/notificationActions";
-import { setUserToken } from "../../actions/userActions";
-import { push } from "connected-react-router";
-import axios from "axios";
+import React from 'react';
+import doctorImg from './../../assets/img/doctor.svg';
+import logo from './../../assets/img/logo.png';
+import Btn from '../buttons/Btn';
+import InputBlock from '../input-block/InputBlock';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { showNotification } from '../../actions/notificationActions';
+import { setUserToken } from '../../actions/userActions';
+import { push } from 'connected-react-router';
+import axios from 'axios';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,10 +17,10 @@ class Home extends React.Component {
       logPopup: false,
       regPopup: false,
       login: {
-        email: "",
-        password: ""
+        email: '',
+        password: '',
       },
-      reg: {}
+      reg: {},
     };
     this.icons = {
       facebook: `<svg xmlns='http://www.w3.org/2000/svg' id='Capa_1' width='60.734' height='60.733'
@@ -49,28 +49,30 @@ class Home extends React.Component {
       vk: `<svg xmlns='http://www.w3.org/2000/svg' id='Capa_1' viewBox='0 0 14.171 14.171'>
       <path d='M13.268,0H0.905C0.405,0,0,0.405,0,0.904v12.363c0,0.499,0.405,0.904,0.905,0.904h12.362 c0.499,0,0.904-0.405,0.904-0.904V0.904C14.172,0.404,13.767,0,13.268,0z M11.755,8.635c0.259,0.264,0.821,0.707,0.719,1.158 c-0.094,0.414-0.712,0.263-1.312,0.287c-0.685,0.029-1.091,0.044-1.503-0.287C9.465,9.636,9.351,9.45,9.165,9.242 C8.996,9.054,8.783,8.717,8.493,8.73C7.972,8.756,8.135,9.482,7.95,9.977c-2.896,0.456-4.059-1.333-5.085-3.069 C2.368,6.067,1.65,4.261,1.65,4.261l2.048-0.007c0,0,0.657,1.195,0.831,1.503c0.148,0.262,0.311,0.47,0.479,0.704 c0.141,0.194,0.364,0.574,0.608,0.543c0.397-0.051,0.469-1.591,0.223-2.107C5.741,4.688,5.506,4.615,5.263,4.544 C5.345,4.026,7.56,3.918,7.918,4.32c0.52,0.584-0.36,2.21,0.352,2.684c1-0.524,1.854-2.718,1.854-2.718l2.398,0.015 c0,0-0.375,1.186-0.768,1.712c-0.229,0.308-0.989,0.994-0.959,1.503C10.819,7.919,11.437,8.311,11.755,8.635z'
       fill='#030104' />
-  </svg>`
+  </svg>`,
     };
   }
-  
-  showRegPopup = e => {
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+  showRegPopup = (e) => {
     e.stopPropagation();
     this.setState({
-      regPopup: true
+      regPopup: true,
     });
   };
 
-  showLogPopup = e => {
+  showLogPopup = (e) => {
     e.stopPropagation();
     this.setState({
-      logPopup: true
+      logPopup: true,
     });
   };
 
   hidePopups = () => {
     this.setState({
       logPopup: false,
-      regPopup: false
+      regPopup: false,
     });
   };
 
@@ -81,7 +83,7 @@ class Home extends React.Component {
     loginForm[name] = val;
     // set modified state
     this.setState({
-      login: loginForm
+      login: loginForm,
     });
   };
 
@@ -92,7 +94,7 @@ class Home extends React.Component {
     regForm[name] = val;
     // set modified state
     this.setState({
-      reg: regForm
+      reg: regForm,
     });
   };
 
@@ -101,53 +103,58 @@ class Home extends React.Component {
     const login = this.state.login;
     axios
       .post(`https://videodoctor.pp.ua/api_v1/login`, { login })
-      .then(res => {
+      .then((res) => {
         const data = res.data;
         if (data.error) {
           // show alert
           let obj = data.validation;
           this.props.actions.showNotification(
             obj[Object.keys(obj)[0]],
-            "error"
+            'error'
           );
         } else {
-          const userToken = data["user-token"];
-          axios.defaults.headers.common["user-token"] = userToken;
+          const userToken = data['user-token'];
+          axios.defaults.headers.common['user-token'] = userToken;
           this.props.actions.setUserToken(userToken);
 
           // LStorage
-          localStorage.setItem("user-token", userToken);
+          localStorage.setItem('user-token', userToken);
 
           // show alert
-          this.props.actions.showNotification("Welcome!", "success");
-          this.props.actions.changePage("/main");
+          this.props.actions.showNotification('Welcome!', 'success');
+          this.props.actions.changePage('/main');
         }
       });
   };
-  proceedReg = e => {
+  proceedReg = (e) => {
     e.stopPropagation();
     // post data to API
     const reg = this.state.reg;
 
-    axios.post(`https://videodoctor.pp.ua/api_v1/signup`, { reg }).then(res => {
-      const data = res.data;
-      if (data.error) {
-        // show alert
-        let obj = data.validation;
-        this.props.actions.showNotification(obj[Object.keys(obj)[0]], "error");
-      } else {
-        const userToken = data["user-token"];
-        axios.defaults.headers.common["user-token"] = userToken;
-        this.props.actions.setUserToken(userToken);
+    axios
+      .post(`https://videodoctor.pp.ua/api_v1/signup`, { reg })
+      .then((res) => {
+        const data = res.data;
+        if (data.error) {
+          // show alert
+          let obj = data.validation;
+          this.props.actions.showNotification(
+            obj[Object.keys(obj)[0]],
+            'error'
+          );
+        } else {
+          const userToken = data['user-token'];
+          axios.defaults.headers.common['user-token'] = userToken;
+          this.props.actions.setUserToken(userToken);
 
-        // LStorage
-        localStorage.setItem("user-token", userToken);
+          // LStorage
+          localStorage.setItem('user-token', userToken);
 
-        // show alert
-        this.props.actions.showNotification("Welcome!", "success");
-        this.props.actions.changePage("/main");
-      }
-    });
+          // show alert
+          this.props.actions.showNotification('Welcome!', 'success');
+          this.props.actions.changePage('/main');
+        }
+      });
   };
 
   render() {
@@ -156,26 +163,26 @@ class Home extends React.Component {
         onClick={this.hidePopups}
         className={
           this.state.regPopup
-            ? "home-page popup-opened popup-opened_reg"
+            ? 'home-page popup-opened popup-opened_reg'
             : this.state.logPopup
-              ? "home-page popup-opened popup-opened_log"
-              : "home-page"
+              ? 'home-page popup-opened popup-opened_log'
+              : 'home-page'
         }
       >
         <img className="home-page__img" src={doctorImg} alt="img" />
         <Btn
-          text={"Create account"}
-          appearing={"btn_big btn_blue home-page__btn"}
+          text={'Create account'}
+          appearing={'btn_big btn_blue home-page__btn'}
           action={this.state.regPopup ? this.proceedReg : this.showRegPopup}
         />
         <Btn
           action={this.showLogPopup}
-          text={"Sign in"}
-          appearing={"btn_big btn_white home-page__btn"}
+          text={'Sign in'}
+          appearing={'btn_big btn_white home-page__btn'}
         />
         <form
           className="form-popup form-popup_reg"
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <h3 className="form-popup__title">Create account</h3>
           <InputBlock
@@ -237,7 +244,7 @@ class Home extends React.Component {
         </form>
         <form
           className="form-popup form-popup_login"
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <h3 className="form-popup__title">Sign in</h3>
 
@@ -286,8 +293,8 @@ class Home extends React.Component {
             </div>
           </div>
           <Btn
-            text={"login"}
-            appearing={"btn_small btn_blue"}
+            text={'login'}
+            appearing={'btn_small btn_blue'}
             action={this.proceedLogin}
           />
         </form>
@@ -303,10 +310,10 @@ function mapDispatchToProps(dispatch) {
       {
         showNotification,
         setUserToken,
-        changePage: page => push(page)
+        changePage: (page) => push(page),
       },
       dispatch
-    )
+    ),
   };
 }
 

@@ -30,7 +30,7 @@ const Card = ({
           <div className="info__heading"> Врач</div>
           <div className="info__content">{doctor}</div>
         </div>
-        {cost !== undefined && cost !== null ? (
+        {cost ? (
           <div className="info">
             <div className="info__heading"> Сумма</div>
             <div className="info__content"> $ {cost}</div>
