@@ -5,24 +5,8 @@ import { connect } from 'react-redux';
 import { showProposals } from '../../../actions/userActions';
 import { push } from 'connected-react-router';
 
+import Preloader from '../../preloader/Preloader';
 import Card from '../../card/Card';
-
-// import CustomSelect from '../../select/CustomSelect';
-
-// const selectOptions = [
-//   {
-//     val: 'This month',
-//   },
-//   {
-//     val: 'Today',
-//   },
-//   {
-//     val: 'This week',
-//   },
-//   {
-//     val: 'This year',
-//   },
-// ];
 
 const mapDispatchToProps = {
   showProposals,
@@ -32,11 +16,14 @@ const mapDispatchToProps = {
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dashboardCards: [] };
+    this.state = {
+      dashboardCards: [],
+      loading: true,
+    };
 
     axios.get(`https://videodoctor.pp.ua/api_v1/dashboard`).then((res) => {
       const dashboardCards = res.data;
-      this.setState({ dashboardCards: dashboardCards.data });
+      this.setState({ dashboardCards: dashboardCards.data, loading: false });
     });
   }
 
@@ -64,22 +51,25 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="main-page__section main-page__section_dashboard Dashboard">
-        {/* <CustomSelect options={selectOptions} /> */}
-        <div className="cards-list">
-          {this.state.dashboardCards.map((item, index) => (
-            <Card
-              key={item.id}
-              doctor={item.doctor}
-              desc={item.desc}
-              cost={item.price}
-              requestCount={item.request_count}
-              leftBtnText="PROPOSALS OF DOCTORS"
-              leftBtnAction={() => this.leftBtnAction(item.id)}
-              rightBtnText="Delete"
-              rightBtnAction={() => this.rightBtnAction(item.id)}
-            />
-          ))}
-        </div>
+        {this.state.loading ? (
+          <Preloader />
+        ) : (
+          <div className="cards-list">
+            {this.state.dashboardCards.map((item, index) => (
+              <Card
+                key={item.id}
+                doctor={item.doctor}
+                desc={item.desc}
+                cost={item.price}
+                requestCount={item.request_count}
+                leftBtnText="PROPOSALS OF DOCTORS"
+                leftBtnAction={() => this.leftBtnAction(item.id)}
+                rightBtnText="Delete"
+                rightBtnAction={() => this.rightBtnAction(item.id)}
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   }

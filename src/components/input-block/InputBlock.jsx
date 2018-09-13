@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class InputBlock extends React.Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class InputBlock extends React.Component {
       <div
         className={
           this.props.appearing
-            ? "input-block " + this.props.appearing
-            : "input-block"
+            ? 'input-block ' + this.props.appearing
+            : 'input-block'
         }
       >
         <h5 className="input-block__heading">{this.props.heading}</h5>
@@ -30,7 +30,7 @@ class InputBlock extends React.Component {
           className="input-block__input"
           type={this.props.type}
           placeholder={this.props.placeholder}
-          value={this.state.value || ""}
+          value={this.state.value || ''}
           onChange={this.handleChange}
         />
       </div>
