@@ -8,14 +8,22 @@ import registerServiceWorker from "./registerServiceWorker";
 
 const target = document.querySelector("#root");
 
-render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
-    </ConnectedRouter>
-  </Provider>,
-  target
-);
-registerServiceWorker();
+const startApp = () => {
+  render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <div>
+          <App />
+        </div>
+      </ConnectedRouter>
+    </Provider>,
+    target
+  );
+  registerServiceWorker();
+};
+
+if (window.cordova) {
+  document.addEventListener("deviceready", startApp, false);
+} else {
+  startApp();
+}

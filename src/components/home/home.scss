@@ -40,7 +40,7 @@
                 }
 
                 &.btn_blue {
-                    transform: translate3d(0, 31vw, 0);
+                    transform: translate3d(0, 25vw, 0);
                     background: hsl(0, 0%, 100%);
                     color: hsl(0, 0%, 80%);
                     box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.2);
@@ -104,6 +104,7 @@
             &__input {
                 color: white;
                 border-color: white !important;
+                margin-top: 0;
 
                 @media (max-width: 330px) {
                     font-size: 10px !important;
@@ -185,6 +186,46 @@
         svg {
             width: 15px;
             height: 15px;
+        }
+    }
+}
+
+.radio-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    .radio-block {
+        font-weight: $book;
+        font-size: 9px;
+        color: #FFFFFF;
+        letter-spacing: 0.3px;
+        text-align: center;
+        position: relative;
+        padding-left: 20px;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            left: 3px;
+        }
+
+        &::before {
+            border: 1px solid white;
+        }
+
+        &_active {
+            &::after {
+                background: hsl(0, 0%, 100%);
+                top: 0px;
+                left: 3px;
+                width: 10px !important;
+                height: 10px !important;
+            }
         }
     }
 }

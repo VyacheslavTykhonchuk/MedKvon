@@ -51,6 +51,9 @@ class Home extends React.Component {
       fill='#030104' />
   </svg>`,
     };
+    this.doctor = React.createRef();
+    this.patient = React.createRef();
+    this.translator = React.createRef();
   }
   componentDidUpdate() {
     console.log(this.state);
@@ -156,6 +159,40 @@ class Home extends React.Component {
         }
       });
   };
+  radioBtns = type => {
+    //  copy state
+    const regForm = { ...this.state.reg };
+    //  modify copied state
+    regForm["type"] = type;
+    // set modified state
+    this.setState({
+      reg: regForm
+    });
+
+    switch (type) {
+      case 10:
+        this.doctor.current.classList.remove("radio-block_active");
+        this.patient.current.classList.remove("radio-block_active");
+        this.translator.current.classList.remove("radio-block_active");
+        this.patient.current.classList.add("radio-block_active");
+        break;
+      case 20:
+        this.doctor.current.classList.remove("radio-block_active");
+        this.patient.current.classList.remove("radio-block_active");
+        this.translator.current.classList.remove("radio-block_active");
+        this.doctor.current.classList.add("radio-block_active");
+        break;
+      case 30:
+        this.doctor.current.classList.remove("radio-block_active");
+        this.patient.current.classList.remove("radio-block_active");
+        this.translator.current.classList.remove("radio-block_active");
+        this.translator.current.classList.add("radio-block_active");
+        break;
+      default:
+        break;
+    }
+ 
+  };
 
   render() {
     return (
@@ -241,6 +278,29 @@ class Home extends React.Component {
             name="email"
             onChange={this.handleRegInputChange}
           />
+          <div className="radio-wrap">
+            <div
+              className="radio-block"
+              onClick={() => this.radioBtns(20)}
+              ref={this.doctor}
+            >
+              doctor
+            </div>
+            <div
+              className="radio-block"
+              onClick={() => this.radioBtns(10)}
+              ref={this.patient}
+            >
+              patient
+            </div>
+            <div
+              className="radio-block"
+              onClick={() => this.radioBtns(30)}
+              ref={this.translator}
+            >
+              translator
+            </div>
+          </div>
         </form>
         <form
           className="form-popup form-popup_login"
