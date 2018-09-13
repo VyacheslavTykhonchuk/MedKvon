@@ -16,7 +16,46 @@ class StepTicket extends React.Component {
       price: null,
       category: this.props.category || 18,
       doctors_ids_str: this.props.doctorsIDs || '41',
-      formdata: {},
+      formdata: {
+        written_opinion: '',
+        firstname: '',
+        lastname: '',
+        patronymic: '',
+        birthday: '',
+        activity: '',
+        phone: '',
+        email: '',
+        timefrom: '',
+        timeto: '',
+        timezone: '',
+        diagnostics: '',
+        recommendations: '',
+        second_opinion: '',
+        allergic_reactions: '',
+        allergic_comment: '',
+        heart_diseases: '',
+        stomach_diseases: '',
+        lung_diseases: '',
+        neurological_diseases: '',
+        kidney_diseases: '',
+        joints_diseases: '',
+        diabetes_diseases: '',
+        thyroid_diseases: '',
+        blood_diseases: '',
+        eye_diseases: '',
+        other_diseases: '',
+        other_diseases_comment: '',
+        smoking: '',
+        smoking_comment: '',
+        alcohol: '',
+        alcohol_comment: '',
+        physical_exercises: '',
+        height: '',
+        weight: '',
+        bmi: '',
+        hospitalization_hospital_1: '',
+        medicaments_name_1: '',
+      },
     };
   }
 
@@ -41,8 +80,8 @@ class StepTicket extends React.Component {
   onSwitchClick = (name) => {
     // toggle switches
     this.state.formdata[name]
-      ? this.handleInputChange(0, name)
-      : this.handleInputChange(1, name);
+      ? this.handleInputChange('', name)
+      : this.handleInputChange('on', name);
   };
   handleSubmit = (e) => {
     if (this.state.title === null || this.state.price === null) {
@@ -53,7 +92,6 @@ class StepTicket extends React.Component {
     // post data to API
     const formData = this.state,
       api = `https://videodoctor.pp.ua/api_v1/order/createorder`;
-
     axios
       .post(api, formData)
       .then((res) => {
@@ -69,6 +107,9 @@ class StepTicket extends React.Component {
         console.log(e);
       });
   };
+  componentDidUpdate() {
+    console.log(this.state);
+  }
   render() {
     return (
       <div className="create-ticket__step-ticket ticket-form">
@@ -158,7 +199,7 @@ class StepTicket extends React.Component {
             {this.props.consSwitches.map((item, index) => (
               <Switch
                 key={index}
-                onClick={() => this.onSwitchClick(item.text)}
+                onClick={() => this.onSwitchClick(item.name)}
                 {...item}
               />
             ))}
@@ -190,7 +231,7 @@ class StepTicket extends React.Component {
             {this.props.illSwitches.map((item, index) => (
               <Switch
                 key={index}
-                onClick={() => this.onSwitchClick(item.text)}
+                onClick={() => this.onSwitchClick(item.name)}
                 {...item}
               />
             ))}
@@ -236,7 +277,7 @@ class StepTicket extends React.Component {
             {this.props.sportSwitches.map((item, index) => (
               <Switch
                 key={index}
-                onClick={() => this.onSwitchClick(item.text)}
+                onClick={() => this.onSwitchClick(item.name)}
                 {...item}
               />
             ))}
@@ -344,6 +385,7 @@ const mapStateToProps = (state) => ({
   illSwitches: state.switches.illSwitches,
   sportSwitches: state.switches.sportSwitches,
   category: state.formData.docSpecId,
+  doctors_ids_str: state.formData.doctorsIdsStr,
 });
 
 const StepTickets = connect(

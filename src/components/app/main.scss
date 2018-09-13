@@ -54,3 +54,14 @@ main {
     transform: translate(-50%, -50%);
     z-index: 999;
 }
+
+.create-ticket__step-doctors {
+    .btn_small {
+        width: 100% !important;
+    }
+}
+
+.disabled {
+    opacity: .5;
+    pointer-events: none;
+}
