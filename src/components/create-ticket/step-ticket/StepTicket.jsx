@@ -2,21 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
+
 import InputBlock from '../../input-block/InputBlock';
 import Btn from '../../buttons/Btn';
 import Switch from '../../switch/Switch';
+import { showNotification } from '../../../actions/notificationActions';
 
 class StepTicket extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: null,
+      price: null,
+      category: this.props.category || 18,
+      doctors_ids_str: this.props.doctorsIDs || '41',
       formdata: {},
-      category: this.props.category || 9,
-      doctors_ids_str: this.props.selectedDocs || '41',
     };
   }
 
   handleInputChange = (val, name) => {
+    // check req.
     if (name === 'title' || name === 'price') {
       this.setState({
         [name]: val,
@@ -24,40 +29,46 @@ class StepTicket extends React.Component {
       return;
     }
     //  copy state
-    const filledForm = { ...this.state.formdata };
+    const ticketForm = { ...this.state.formdata };
     //  modify copied state
-    filledForm[name] = val;
+    ticketForm[name] = val;
     // set modified state
     this.setState({
-      formdata: filledForm,
+      formdata: ticketForm,
     });
   };
-  handleSubmit = () => {
-    const API_URL = 'https://videodoctor.pp.ua/api_v1/order/createorder';
-    const FORM_DATA = this.state;
-    console.log(FORM_DATA);
+
+  onSwitchClick = (name) => {
+    // toggle switches
+    this.state.formdata[name]
+      ? this.handleInputChange(0, name)
+      : this.handleInputChange(1, name);
+  };
+  handleSubmit = (e) => {
+    if (this.state.title === null || this.state.price === null) {
+      this.props.showNotification('Please, fill all required fields', 'error');
+      console.log('erer');
+      return;
+    }
+    // post data to API
+    const formData = this.state,
+      api = `https://videodoctor.pp.ua/api_v1/order/createorder`;
 
     axios
-      .post(API_URL, FORM_DATA)
+      .post(api, formData)
       .then((res) => {
         const data = res.data;
-        console.log('__res_____');
-        console.log(res);
-        console.log('____data___');
-        console.log(data);
         if (data.error) {
-          console.log('____data.error___');
-
-          console.log(data.error);
+          this.props.showNotification('Error!', 'error');
+        } else {
+          // show alert
+          this.props.showNotification('Success!', 'success');
         }
       })
       .catch((e) => {
         console.log(e);
       });
   };
-  componentDidUpdate() {
-    console.log(this.state);
-  }
   render() {
     return (
       <div className="create-ticket__step-ticket ticket-form">
@@ -66,135 +77,110 @@ class StepTicket extends React.Component {
           <div className="account-card__personal-info">
             <div className="account-card__inputs-wrap">
               <InputBlock
-                heading="Short description"
-                value=""
+                heading="*Short description"
                 type="text"
-                appearing=""
-                placeholder=""
                 onChange={this.handleInputChange}
                 name="title"
               />
               <InputBlock
-                heading="Price of consultation"
-                value=""
+                heading="*Price of consultation"
                 type="number"
-                appearing=""
-                placeholder=""
                 onChange={this.handleInputChange}
                 name="price"
               />
-            </div>
-          </div>
-          <div className="account-card__personal-info">
-            <div className="account-card__inputs-wrap">
-              <InputBlock
-                heading="Имя"
-                value="Артем"
-                type="text"
-                appearing=""
-                placeholder=""
-                onChange={this.handleInputChange}
-                name="firstName"
+              <Switch
+                isActive={false}
+                text="Written opinion:"
+                onClick={() => this.onSwitchClick('written_opinion')}
               />
               <InputBlock
-                heading="Фамилия"
-                value="Петровский"
+                heading="First Name"
                 type="text"
-                appearing=""
-                placeholder=""
                 onChange={this.handleInputChange}
-                name="lastName"
+                name="firstname"
+              />
+              <InputBlock
+                heading="Last Name"
+                type="text"
+                onChange={this.handleInputChange}
+                name="lastname"
+              />
+              <InputBlock
+                heading="Patronymic"
+                type="text"
+                onChange={this.handleInputChange}
+                name="patronymic"
+              />
+              <InputBlock
+                heading="Birthday Date"
+                type="date"
+                onChange={this.handleInputChange}
+                name="birthday"
+              />
+              <InputBlock
+                heading="Kind of activity"
+                type="text"
+                onChange={this.handleInputChange}
+                name="activity"
+              />
+
+              <InputBlock
+                heading="Phone"
+                type="text"
+                onChange={this.handleInputChange}
+                name="phone"
+              />
+              <InputBlock
+                heading="Email"
+                type="text"
+                onChange={this.handleInputChange}
+                name="email"
               />
             </div>
           </div>
-          <div className="account-card__inputs-wrap">
-            <InputBlock
-              heading="Почта"
-              value="test@gmail.com"
-              type="email"
-              appearing=""
-              placeholder=""
-              onChange={this.handleInputChange}
-              name="email"
-            />
-          </div>
+          <div className="heading">Convenient time for consultation</div>
           <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
             <InputBlock
-              heading="Телефон"
-              value="+39 099 99 9 9 99"
-              type="tel"
-              appearing=""
-              placeholder=""
+              heading="From"
+              type="num"
               onChange={this.handleInputChange}
-              name="phone"
+              name="timefrom"
             />
             <InputBlock
-              heading="Дата"
-              value="26. 12. 1992"
-              type="text"
-              appearing=""
-              placeholder=""
+              heading="To"
+              type="num"
               onChange={this.handleInputChange}
-              name="birthday"
+              name="timeto"
             />
           </div>
-          <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
-            <InputBlock
-              heading="Страна"
-              value="Украина"
-              type="text"
-              appearing=""
-              placeholder=""
-              onChange={this.handleInputChange}
-              name="country"
-            />
-            <InputBlock
-              heading="Язык"
-              value="Украинский"
-              type="text"
-              appearing=""
-              placeholder=""
-              onChange={this.handleInputChange}
-              name="language"
-            />
-          </div>
-          <div className="account-card__inputs-wrap">
-            <InputBlock
-              heading="О себе"
-              value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-              type="text"
-              appearing="input-block__dashed-border"
-              placeholder=""
-              onChange={this.handleInputChange}
-              name="user_desc"
-            />
-          </div>
-          <div className="heading">Цель консультации</div>
+          <div className="heading"> Purpose of the consultation:</div>
           <div className="switches-block">
             {this.props.consSwitches.map((item, index) => (
               <Switch
                 key={index}
-                onClick={() => this.props.onSwitchClick(index, 'consSwitches')}
+                onClick={() => this.onSwitchClick(item.text)}
                 {...item}
               />
             ))}
           </div>
+
           <div className="heading">Аллергические реакции</div>
           <div className="switches-block">
             <Switch
               isActive={false}
-              onClick={() => this.props.onSwitchClick('allergy')}
+              name="alergy"
+              onClick={() => this.onSwitchClick('allergic_reactions')}
             />
           </div>
+
           <div className="account-card__inputs-wrap">
             <InputBlock
-              heading="Укажите на что…"
-              value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
+              heading="Укажите на что…"
               onChange={this.handleInputChange}
-              name="allergy_desc"
+              name="allergic_comment"
             />
           </div>
           <div className="heading">
@@ -204,50 +190,54 @@ class StepTicket extends React.Component {
             {this.props.illSwitches.map((item, index) => (
               <Switch
                 key={index}
+                onClick={() => this.onSwitchClick(item.text)}
                 {...item}
-                onClick={() => this.props.onSwitchClick(index, 'illSwitches')}
               />
             ))}
           </div>
           <div className="heading">Курение</div>
           <div className="switches-block">
-            <Switch isActive={false} />
+            <Switch
+              isActive={false}
+              name="smoking"
+              onClick={() => this.onSwitchClick('smoking')}
+            />
           </div>
           <div className="account-card__inputs-wrap">
             <InputBlock
-              heading="Укажите на что…"
-              value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
+              heading="How many times a day?"
               onChange={this.handleInputChange}
-              name="smoking_desc"
+              name="smoking_comment"
             />
           </div>
-
           <div className="heading">Aлкоголь</div>
           <div className="switches-block">
-            <Switch isActive={false} />
+            <Switch
+              isActive={false}
+              name="alcohol"
+              onClick={() => this.onSwitchClick('alcohol')}
+            />
           </div>
           <div className="account-card__inputs-wrap">
             <InputBlock
-              heading="Укажите на что…"
-              value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
+              heading="How many times a month?"
               onChange={this.handleInputChange}
-              name="alcohol_desc"
+              name="alcohol_comment"
             />
           </div>
-
           <div className="heading">Физические упражнения</div>
           <div className="switches-block">
             {this.props.sportSwitches.map((item, index) => (
               <Switch
                 key={index}
+                onClick={() => this.onSwitchClick(item.text)}
                 {...item}
-                onClick={() => this.props.onSwitchClick(index, 'sportSwitches')}
               />
             ))}
           </div>
@@ -255,48 +245,52 @@ class StepTicket extends React.Component {
             <InputBlock
               heading="Укажите ваш вес"
               value=""
+              type="text"
               appearing=""
               placeholder=""
-              type="number"
               onChange={this.handleInputChange}
               name="weight"
             />
             <InputBlock
               heading="Укажите ваш рост"
               value=""
+              type="text"
               appearing=""
               placeholder=""
-              type="number"
               onChange={this.handleInputChange}
               name="height"
             />
+          </div>
+          <div className="heading">
+            Previous surgery or illness requiring hospitalization
           </div>
           <div className="account-card__inputs-wrap">
             <InputBlock
-              heading="Ранее перенесенные операции или заболевания требующие госпитализации"
-              value=""
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
+              heading="Укажите на что…"
               onChange={this.handleInputChange}
-              name="height"
+              name="hospitalization_hospital_1"
             />
           </div>
+          <div className="heading">List of used medicaments</div>
           <div className="account-card__inputs-wrap">
             <InputBlock
-              heading="Ранее перенесенные операции или заболевания требующие госпитализации"
-              value=""
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
+              heading="Укажите на что…"
               onChange={this.handleInputChange}
-              name="height"
+              name="medicaments_name_1"
             />
           </div>
+
           <Btn
             text={'отправить'}
-            appearing={'btn_small btn_blue'}
+            onClick={() => this.handleSubmit}
             action={this.handleSubmit}
+            appearing={'btn_small btn_blue'}
           />
         </section>
       </div>
@@ -336,6 +330,9 @@ function toggleSwitch(id, arrType) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    showNotification: (msg, style) => {
+      dispatch(showNotification(msg, style));
+    },
     onSwitchClick: (id, arrType) => {
       dispatch(toggleSwitch(id, arrType));
     },

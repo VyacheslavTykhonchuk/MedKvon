@@ -1,107 +1,116 @@
 const consSwitches = [
   {
-    text: "Диагностика",
-    isActive: false
+    text: 'Диагностика',
+    isActive: false,
+    name: 'diagnostics',
   },
   {
-    text: "Рекомендации",
-    isActive: false
+    text: 'Рекомендации',
+    isActive: false,
+    name: 'recommendations',
   },
   {
-    text: "Второе мнение",
-    isActive: false
-  }
+    text: 'Второе мнение',
+    isActive: false,
+    name: 'second_opinion',
+  },
 ];
 const illSwitches = [
   {
-    text: `Заболевания 
-      сердца и сосудов`,
-    isActive: false
+    text: `Diseases of the heart and blood vessels`,
+    isActive: false,
+    name: 'heart_diseases',
   },
   {
-    text: `Заболевания 
-      легких`,
-    isActive: false
+    text: `Diseases of the digestive tract`,
+    isActive: false,
+    name: 'stomach_diseases',
   },
   {
-    text: `Заболевания 
-      почек`,
-    isActive: false
+    text: `Lung disease`,
+    isActive: false,
+    name: 'lung_diseases',
   },
   {
-    text: `Диабет`,
-    isActive: false
+    text: `Neurological diseases`,
+    isActive: false,
+    name: 'neurological_diseases',
   },
   {
-    text: `Заболевания 
-      крови`,
-    isActive: false
+    text: `Kidney diseases`,
+    isActive: false,
+    name: 'kidney_diseases',
   },
   {
-    text: `Заболевания 
-      глаз`,
-    isActive: false
+    text: `Diseases of the joints`,
+    isActive: false,
+    name: 'joints_diseases',
   },
   {
-    text: `Венерические`,
-    isActive: false
+    text: `Diabetes`,
+    isActive: false,
+    name: 'diabetes_diseases',
   },
   {
-    text: `Заболевания 
-      жкт`,
-    isActive: false
+    text: `Thyroid gland diseases`,
+    isActive: false,
+    name: 'thyroid_diseases',
   },
   {
-    text: `Неврологические заболевания`,
-    isActive: false
+    text: `Diseases of the blood`,
+    isActive: false,
+    name: 'blood_diseases',
   },
   {
-    text: `Заболевания 
-      суставов`,
-    isActive: false
+    text: `Eye diseases`,
+    isActive: false,
+    name: 'eye_diseases',
   },
   {
-    text: `Заболевания щитовидной железы`,
-    isActive: false
+    text: `Other diseases`,
+    isActive: false,
+    name: 'other_diseases',
   },
-  {
-    text: `Другие заболевания`,
-    isActive: false
-  }
 ];
 const sportSwitches = [
   {
     text: `Низкие`,
-    isActive: false
+    isActive: false,
+    name: 'physical_exercises',
+    val: 'low',
   },
   {
     text: `Средние`,
-    isActive: false
+    isActive: false,
+    name: 'physical_exercises',
+    val: 'medium',
   },
   {
     text: `Высокие`,
-    isActive: false
-  }
+    isActive: false,
+    name: 'physical_exercises',
+    val: 'high',
+  },
 ];
 
 const switchesInitialState = {
   consSwitches,
   illSwitches,
-  sportSwitches
+  sportSwitches,
 };
 
 export default function switches(state = switchesInitialState, action) {
   switch (action.type) {
-    case "TOGGLE_SWITCH":
+    case 'TOGGLE_SWITCH':
       return Object.assign({}, state, {
         [action.arrType]: state[action.arrType].map((item, index) => {
           if (index === action.id) {
             return Object.assign({}, item, {
-              isActive: !item.isActive
+              isActive: !item.isActive,
             });
           }
           return item;
-        })
+        }),
       });
     default:
       return state;
