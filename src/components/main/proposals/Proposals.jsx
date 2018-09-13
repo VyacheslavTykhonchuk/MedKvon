@@ -1,13 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { showNotification } from '../../../actions/notificationActions';
 
 import ProposalCard from '../../proposal-card/ProposalCard';
 
 const mapStateToProps = (state) => ({
   proposalsID: state.user.proposalsID,
 });
-
+const mapDispatchToProps = {
+  push,
+  showNotification,
+};
 class Proposals extends React.Component {
   constructor(props) {
     super(props);
@@ -22,10 +27,10 @@ class Proposals extends React.Component {
       .then((res) => {
         const proposalCards = res.data;
         this.setState({ proposalCards: proposalCards.data });
-        console.log(proposalCards.data);
       })
       .catch((e) => {
         console.log(e);
+        this.props.showNotification('Error', 'error');
       });
   }
   rightBtnFunc = () => {
@@ -43,7 +48,12 @@ class Proposals extends React.Component {
         }
       )
       .then((res) => {
-        console.log(res);
+        this.props.push('/main/active-tickets');
+        this.props.showNotification('Success', 'success');
+      })
+      .catch((e) => {
+        console.log(e);
+        this.props.showNotification('Error', 'error');
       });
   };
   render() {
@@ -70,5 +80,5 @@ class Proposals extends React.Component {
 }
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Proposals);

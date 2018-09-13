@@ -1,61 +1,60 @@
-import React from "react";
-import CreateTicketCard from "../../create-ticket-card/CreateTicketCard";
-import CustomSelect from "../../select/CustomSelect";
+import React from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import CreateTicketCard from '../../create-ticket-card/CreateTicketCard';
+import CustomSelect from '../../select/CustomSelect';
+import { fetchPosts, setSpecialization } from '../../../modules/formModule';
 
-const createTicketCards = [
-  {
-    title: `Obstetrics and gynecology`
-  },
-  {
-    title: `General Practice SUBMIT`
-  },
-  {
-    title: `Immunology`
-  },
-  {
-    title: `Internal medicine`
-  },
-  {
-    title: `Microbiology`
-  },
-  {
-    title: `Laboratory medicine`
-  },
-  {
-    title: `Obstetrics and gynecologys`
-  }
-];
+const mapStateToProps = (state) => ({
+  items: state.formData.ticket[state.formData.bodyPart],
+});
+const mapDispatchToProps = {
+  fetchPosts,
+  push,
+  setSpecialization,
+};
 
 const selectOptions = [
   {
-    val: "Step One"
+    val: 'Step One',
   },
   {
-    val: "Step Two"
+    val: 'Step Two',
   },
   {
-    val: "Step Three",
+    val: 'Step Three',
     disabled: true,
-
   },
 ];
 
-const StepTwo = props => (
-  <div className="create-ticket__step-two">
-    <CustomSelect selected="Step Two" options={selectOptions}/>
-    <div className="create-ticket__cards">
-      {createTicketCards.map(item => (
-        <CreateTicketCard
-          key={item.title}
-          title={item.title}
-          showSubtitle="show"
-          appearance="ticket-card_short"
-          link="/create-ticket/doctors"
-        />
-      ))}
+const StepTwo = (props) => {
+  return (
+    <div className="create-ticket__step-two">
+      <CustomSelect selected="Step Two" options={selectOptions} />
+      <div className="create-ticket__cards">
+        {Object.values(props.items).map((item) => {
+          return (
+            <CreateTicketCard
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              showSubtitle="show"
+              appearance="ticket-card_short"
+              action={() => {
+                props.fetchPosts(item.id);
+                props.setSpecialization(item.id);
+                props.push('/create-ticket/doctors');
+              }}
+            />
+          );
+        })}
+      </div>
+      <div />
     </div>
-    <div />
-  </div>
-);
+  );
+};
 
-export default StepTwo;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StepTwo);

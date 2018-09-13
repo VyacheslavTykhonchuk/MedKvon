@@ -37,12 +37,29 @@ class Dashboard extends React.Component {
     axios.get(`https://videodoctor.pp.ua/api_v1/dashboard`).then((res) => {
       const dashboardCards = res.data;
       this.setState({ dashboardCards: dashboardCards.data });
-      console.log(dashboardCards.data);
     });
   }
+
   leftBtnAction = (id) => {
     this.props.showProposals(id);
     this.props.push('/main/proposals');
+  };
+
+  rightBtnAction = (id) => {
+    axios
+      .get(`https://videodoctor.pp.ua/api_v1/order/deleteorder/${id}`)
+      .then((res) => {
+        const newCards = this.state.dashboardCards.filter(
+          (item) => item.id !== id
+        );
+        console.log(newCards);
+        this.setState({
+          dashboardCards: newCards,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   render() {
     return (
@@ -59,7 +76,7 @@ class Dashboard extends React.Component {
               leftBtnText="PROPOSALS OF DOCTORS"
               leftBtnAction={() => this.leftBtnAction(item.id)}
               rightBtnText="Delete"
-              rightBtnAction={this.rightBtnFunc}
+              rightBtnAction={() => this.rightBtnAction(item.id)}
             />
           ))}
         </div>

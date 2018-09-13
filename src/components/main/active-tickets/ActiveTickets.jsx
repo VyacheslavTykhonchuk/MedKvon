@@ -30,7 +30,6 @@ class ActiveTickets extends React.Component {
     axios.get(`https://videodoctor.pp.ua/api_v1/activetickets`).then((res) => {
       const activeTickets = res.data;
       this.setState({ activeTickets: activeTickets.data });
-      console.log(activeTickets.data);
     });
   }
 
@@ -48,7 +47,7 @@ class ActiveTickets extends React.Component {
               requestCount={item.request_count}
               leftBtnText="Start communication"
               leftBtnAction={this.leftBtnFunc}
-              rightBtnText="Delete"
+              rightBtnText="END"
               rightBtnAction={this.rightBtnFunc}
             />
           ))}

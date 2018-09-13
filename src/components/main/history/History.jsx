@@ -27,7 +27,6 @@ class HistoryTab extends React.Component {
     axios.get(`https://videodoctor.pp.ua/api_v1/history`).then((res) => {
       const historyCards = res.data;
       this.setState({ historyCards: historyCards.data });
-      console.log(historyCards.data);
     });
   }
 
