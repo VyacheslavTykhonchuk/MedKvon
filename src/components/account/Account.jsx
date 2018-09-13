@@ -39,8 +39,8 @@ class Account extends React.Component {
       },
       loading: true,
     };
-    const API_LINK = `https://videodoctor.pp.ua/api_v1/settings`;
-    axios.get(API_LINK).then((res) => {
+    this.API_LINK = `https://videodoctor.pp.ua/api_v1/settings`;
+    axios.get(this.API_LINK).then((res) => {
       const apiData = res.data.model;
       this.setState({
         type: apiData.type,
@@ -69,7 +69,6 @@ class Account extends React.Component {
     this.setState({
       user: updatedUser,
     });
-    console.log(this.state)
   };
 
   handleChangePass = (val, name) => {
@@ -85,8 +84,16 @@ class Account extends React.Component {
 
   handleSubmit = (dispatch) => {
     // post data to API
-    const userSubmitedState = JSON.stringify(this.state.user);
-    localStorage.setItem('userSavedState', userSubmitedState);
+    const formData = this.state.user;
+
+    axios
+      .post(this.API_LINK, formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     // show alert
     this.props.actions.showNotification('Saved!', 'success');
   };
@@ -107,7 +114,6 @@ class Account extends React.Component {
       );
       return false;
     } else {
-      console.log(userSubmitedPasswords);
       // show alert
       this.props.actions.showNotification('Changed!', 'success');
     }
@@ -115,7 +121,6 @@ class Account extends React.Component {
 
   render() {
     let user = this.state.user;
-    console.log(user.userAvatar);
     return (
       <div className="account-page main-page">
         <MainNav links={links} />

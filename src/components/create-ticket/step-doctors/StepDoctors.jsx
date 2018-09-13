@@ -42,9 +42,7 @@ class StepDoctors extends React.Component {
       return null;
     }
   }
-  componentDidUpdate() {
-    console.log(this.state);
-  }
+  
   itemCheck = (id) => {
     const arr = this.state.doctorsIDs;
     if (this.isChecked(id)) {

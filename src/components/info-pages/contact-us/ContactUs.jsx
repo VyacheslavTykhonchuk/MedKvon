@@ -83,7 +83,6 @@ class ContactUs extends React.Component {
     // post data to API
     const feedbackSubmitedState = JSON.stringify(this.state);
 
-    console.log(feedbackSubmitedState);
     // show alert
     this.props.actions.showNotification("Sent!", "success");
   };

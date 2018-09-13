@@ -55,9 +55,7 @@ class Home extends React.Component {
     this.patient = React.createRef();
     this.translator = React.createRef();
   }
-  componentDidUpdate() {
-    console.log(this.state);
-  }
+  
   showRegPopup = (e) => {
     e.stopPropagation();
     this.setState({

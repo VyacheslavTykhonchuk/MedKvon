@@ -39,7 +39,6 @@ class Dashboard extends React.Component {
         const newCards = this.state.dashboardCards.filter(
           (item) => item.id !== id
         );
-        console.log(newCards);
         this.setState({
           dashboardCards: newCards,
         });

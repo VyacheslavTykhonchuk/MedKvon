@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import { push } from 'connected-react-router';
 import InputBlock from '../../input-block/InputBlock';
 import Btn from '../../buttons/Btn';
 import Switch from '../../switch/Switch';
@@ -86,7 +86,6 @@ class StepTicket extends React.Component {
   handleSubmit = (e) => {
     if (this.state.title === null || this.state.price === null) {
       this.props.showNotification('Please, fill all required fields', 'error');
-      console.log('erer');
       return;
     }
     // post data to API
@@ -101,15 +100,14 @@ class StepTicket extends React.Component {
         } else {
           // show alert
           this.props.showNotification('Success!', 'success');
+          this.props.changePage('/main');
         }
       })
       .catch((e) => {
         console.log(e);
       });
   };
-  componentDidUpdate() {
-    console.log(this.state);
-  }
+
   render() {
     return (
       <div className="create-ticket__step-ticket ticket-form">
@@ -376,6 +374,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSwitchClick: (id, arrType) => {
       dispatch(toggleSwitch(id, arrType));
+    },
+    changePage: (page) => {
+      dispatch(push(page));
     },
   };
 };
