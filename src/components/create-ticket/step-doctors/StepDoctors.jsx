@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 
 import Btn from '../../buttons/Btn';
 import DoctorNameCard from '../../doctor-name-card/DoctorNameCard';
-import CustomSelect from '../../select/CustomSelect';
+// import CustomSelect from '../../select/CustomSelect';
 import Preloader from '../../preloader/Preloader';
 
 import { setDoctorsIdsStr } from '../../../modules/formModule';
 
-const selectOptions = [
-  {
-    val: 'Step One',
-  },
-  {
-    val: 'Step Two',
-  },
-  {
-    val: 'Step Three',
-  },
-];
+// const selectOptions = [
+//   {
+//     val: 'Step One',
+//   },
+//   {
+//     val: 'Step Two',
+//   },
+//   {
+//     val: 'Step Three',
+//   },
+// ];
 const mapStateToProps = (state) => ({
   docs: state.formData.doctorNames,
 });
@@ -42,7 +42,7 @@ class StepDoctors extends React.Component {
       return null;
     }
   }
-  
+
   itemCheck = (id) => {
     const arr = this.state.doctorsIDs;
     if (this.isChecked(id)) {
@@ -70,7 +70,7 @@ class StepDoctors extends React.Component {
   render() {
     return (
       <div className="create-ticket__step-two create-ticket__step-doctors">
-        <CustomSelect selected="Step Three" options={selectOptions} />
+        {/* <CustomSelect selected="Step Three" options={selectOptions} /> */}
         {this.state.items === undefined ? (
           <Preloader />
         ) : (

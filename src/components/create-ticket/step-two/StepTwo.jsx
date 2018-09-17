@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import CreateTicketCard from '../../create-ticket-card/CreateTicketCard';
-import CustomSelect from '../../select/CustomSelect';
+// import CustomSelect from '../../select/CustomSelect';
 import { fetchPosts, setSpecialization } from '../../../modules/formModule';
 
 const mapStateToProps = (state) => ({
@@ -14,23 +14,23 @@ const mapDispatchToProps = {
   setSpecialization,
 };
 
-const selectOptions = [
-  {
-    val: 'Step One',
-  },
-  {
-    val: 'Step Two',
-  },
-  {
-    val: 'Step Three',
-    disabled: true,
-  },
-];
+// const selectOptions = [
+//   {
+//     val: 'Step One',
+//   },
+//   {
+//     val: 'Step Two',
+//   },
+//   {
+//     val: 'Step Three',
+//     disabled: true,
+//   },
+// ];
 
 const StepTwo = (props) => {
   return (
     <div className="create-ticket__step-two">
-      <CustomSelect selected="Step Two" options={selectOptions} />
+      {/* <CustomSelect selected="Step Two" options={selectOptions} /> */}
       <div className="create-ticket__cards">
         {Object.values(props.items).map((item) => {
           return (

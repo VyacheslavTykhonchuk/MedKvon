@@ -11,6 +11,7 @@ const target = document.querySelector('#root');
 if (!localStorage.getItem('user-token')) {
   store.dispatch(push('/'));
 }
+
 const startApp = () => {
   render(
     <Provider store={store}>
