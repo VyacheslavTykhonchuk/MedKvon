@@ -119,7 +119,13 @@ class StepTicket extends React.Component {
 
   render() {
     return (
-      <div className={this.props.formPreview ? "create-ticket__step-ticket ticket-form no-pointer-events": "create-ticket__step-ticket ticket-form"}>
+      <div
+        className={
+          this.props.formPreview
+            ? 'create-ticket__step-ticket ticket-form no-pointer-events'
+            : 'create-ticket__step-ticket ticket-form'
+        }
+      >
         <div className="hint">Анкета пациента</div>
         <section className="account-card card">
           <div className="account-card__personal-info">
@@ -223,7 +229,7 @@ class StepTicket extends React.Component {
             ))}
           </div>
 
-          <div className="heading">Аллергические реакции</div>
+          <div className="heading">Allergic reactions</div>
           <div className="switches-block">
             <Switch
               isActive={false}
@@ -237,14 +243,14 @@ class StepTicket extends React.Component {
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
-              heading="Укажите на что…"
+              heading="Specify..."
               onChange={this.handleInputChange}
               name="allergic_comment"
               value={this.state.formdata.allergic_comment}
             />
           </div>
           <div className="heading">
-            Ранее перенесеннные заболевания или актуальные заболевания:
+            Previous illness or current illness has been transmitted:
           </div>
           <div className="switches-block">
             {this.props.illSwitches.map((item, index) => (
@@ -255,7 +261,7 @@ class StepTicket extends React.Component {
               />
             ))}
           </div>
-          <div className="heading">Курение</div>
+          <div className="heading">Smoking</div>
           <div className="switches-block">
             <Switch
               isActive={false}
@@ -274,7 +280,7 @@ class StepTicket extends React.Component {
               value={this.state.formdata.smoking_comment}
             />
           </div>
-          <div className="heading">Aлкоголь</div>
+          <div className="heading">Alcohol</div>
           <div className="switches-block">
             <Switch
               isActive={false}
@@ -293,7 +299,7 @@ class StepTicket extends React.Component {
               value={this.state.formdata.alcohol_comment}
             />
           </div>
-          <div className="heading">Физические упражнения</div>
+          <div className="heading">Physical exercises</div>
           <div className="switches-block">
             {this.props.sportSwitches.map((item, index) => (
               <Switch
@@ -305,7 +311,7 @@ class StepTicket extends React.Component {
           </div>
           <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
             <InputBlock
-              heading="Укажите ваш вес"
+              heading="Weight"
               value=""
               type="text"
               appearing=""
@@ -315,7 +321,7 @@ class StepTicket extends React.Component {
               value={this.state.formdata.weight}
             />
             <InputBlock
-              heading="Укажите ваш рост"
+              heading="Height"
               value=""
               type="text"
               appearing=""
@@ -333,7 +339,7 @@ class StepTicket extends React.Component {
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
-              heading="Укажите на что…"
+              heading="Specify..."
               onChange={this.handleInputChange}
               name="hospitalization_hospital_1"
               value={this.state.formdata.hospitalization_hospital_1}
@@ -345,7 +351,7 @@ class StepTicket extends React.Component {
               type="text"
               appearing="input-block__dashed-border"
               placeholder=""
-              heading="Укажите на что…"
+              heading="Specify..."
               onChange={this.handleInputChange}
               name="medicaments_name_1"
               value={this.state.formdata.medicaments_name_1}
@@ -353,7 +359,7 @@ class StepTicket extends React.Component {
           </div>
 
           <Btn
-            text={'отправить'}
+            text={'send'}
             onClick={() => this.handleSubmit}
             action={this.handleSubmit}
             appearing={'btn_small btn_blue'}

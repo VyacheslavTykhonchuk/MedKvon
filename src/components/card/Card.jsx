@@ -65,16 +65,16 @@ const Card = ({
       >
         Show more...
       </div>
-      <span className="card__subtitle">Описание проблемы</span>
+      <span className="card__subtitle">Description</span>
       <p className="card__text">{desc}</p>
       <div className="card__info-wrap">
         <div className="info">
-          <div className="info__heading"> Врач</div>
+          <div className="info__heading"> Doctor</div>
           <div className="info__content">{doctor}</div>
         </div>
         {cost !== undefined && cost !== null ? (
           <div className="info">
-            <div className="info__heading"> Сумма</div>
+            <div className="info__heading"> Cost</div>
             <div className="info__content"> $ {cost}</div>
           </div>
         ) : (

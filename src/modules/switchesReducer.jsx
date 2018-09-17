@@ -1,16 +1,16 @@
 const consSwitches = [
   {
-    text: 'Диагностика',
+    text: 'Diagnosis,',
     isActive: false,
     name: 'diagnostics',
   },
   {
-    text: 'Рекомендации',
+    text: 'Recommendation',
     isActive: false,
     name: 'recommendations',
   },
   {
-    text: 'Второе мнение',
+    text: 'Second opinion',
     isActive: false,
     name: 'second_opinion',
   },
@@ -74,19 +74,19 @@ const illSwitches = [
 ];
 const sportSwitches = [
   {
-    text: `Низкие`,
+    text: `Low`,
     isActive: false,
     name: 'physical_exercises',
     val: 'low',
   },
   {
-    text: `Средние`,
+    text: `Medium`,
     isActive: false,
     name: 'physical_exercises',
     val: 'medium',
   },
   {
-    text: `Высокие`,
+    text: `High`,
     isActive: false,
     name: 'physical_exercises',
     val: 'high',

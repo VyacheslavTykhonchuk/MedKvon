@@ -154,7 +154,7 @@ class ContactUs extends React.Component {
             onChange={this.handleInputChange}
           />
           <Btn
-            text={'Отправить'}
+            text={'send'}
             appearing={'btn_small btn_blue'}
             action={this.handleSubmit}
           />

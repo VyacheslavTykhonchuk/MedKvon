@@ -62,15 +62,15 @@ const HistoryCard = ({
       </div>
       <div className="history-card__info-wrap">
         <div className="info">
-          <div className="info__heading"> Врач</div>
+          <div className="info__heading"> Doctor</div>
           <div className="info__content"> {doctor}</div>
         </div>
         <div className="info">
-          <div className="info__heading"> Сумма</div>
+          <div className="info__heading"> Cost</div>
           <div className="info__content"> $ {cost}</div>
         </div>
       </div>
-      <span className="history-card__subtitle">Описание проблемы</span>
+      <span className="history-card__subtitle">Description</span>
       <p className="history-card__text">{desc}</p>
       <div className="history-card__btns">
         <Btn

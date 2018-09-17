@@ -18,7 +18,7 @@ const CreateTicketCard = (props) => (
     <h4 className="ticket-card__title">{props.title}</h4>
 
     <Btn
-      text={'далее'}
+      text={'next'}
       appearing={'btn_small btn_blue ticket-card__btn'}
       linkTo={props.link}
       action={props.action}

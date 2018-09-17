@@ -34,8 +34,8 @@ class Account extends React.Component {
         about: '',
       },
       passwords: {
-        oldPass: '',
-        newPass: '',
+        pass1: '',
+        pass2: '',
       },
       avatar: '',
       photoFile: '',
@@ -123,23 +123,40 @@ class Account extends React.Component {
   };
 
   handleChangePassSubmit = () => {
-    const userSubmitedPasswords = JSON.stringify(this.state.passwords);
-    if (this.state.passwords.oldPass === this.state.passwords.newPass) {
+    if (this.state.passwords.pass1 !== this.state.passwords.pass2) {
       // show alert
-      this.props.actions.showNotification('Passwords are identical!', 'error');
-      return false;
-    } else if (
-      this.state.passwords.oldPass.length < 8 ||
-      this.state.passwords.newPass.length < 8
-    ) {
       this.props.actions.showNotification(
-        'Passwords must be at least 8 characters in length.',
+        'Passwords are not identical!',
         'error'
       );
       return false;
-    } else {
+    }
+    // else if (
+    //   this.state.passwords.pass1.length < 8 ||
+    //   this.state.passwords.pass2.length < 8
+    // ) {
+    //   this.props.actions.showNotification(
+    //     'Passwords must be at least 8 characters in length.',
+    //     'error'
+    //   );
+    //   return false;
+    // }
+    else {
       // show alert
       this.props.actions.showNotification('Changed!', 'success');
+      const ChangepasswordForm = this.state.passwords;
+      console.log({ ChangepasswordForm });
+
+      post(this.API_LINK, { ChangepasswordForm })
+        .then((res) => {
+          console.log('_____res_________________________');
+          console.log(res);
+          this.props.actions.showNotification('Saved!', 'success');
+        })
+        .catch((e) => {
+          console.log(e);
+          this.props.actions.showNotification('Error!', 'error');
+        });
     }
   };
 
@@ -162,7 +179,7 @@ class Account extends React.Component {
                   />
                   <div className="account-card__inputs-wrap">
                     <InputBlock
-                      heading="Имя"
+                      heading="First name"
                       value={user.username}
                       type="text"
                       appearing=""
@@ -171,7 +188,7 @@ class Account extends React.Component {
                       onChange={this.handleInputChange}
                     />
                     <InputBlock
-                      heading="Фамилия"
+                      heading="Last name"
                       value={user.lastname}
                       type="text"
                       appearing=""
@@ -183,7 +200,7 @@ class Account extends React.Component {
                 </div>
                 <div className="account-card__inputs-wrap">
                   <InputBlock
-                    heading="Почта"
+                    heading="Email"
                     value={user.email}
                     type="email"
                     appearing=""
@@ -194,7 +211,7 @@ class Account extends React.Component {
                 </div>
                 <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
                   <InputBlock
-                    heading="Телефон"
+                    heading="Phone"
                     value={user.phone}
                     type="tel"
                     appearing=""
@@ -203,7 +220,7 @@ class Account extends React.Component {
                     onChange={this.handleInputChange}
                   />
                   <InputBlock
-                    heading="Дата"
+                    heading="Birthday"
                     value={user.birthday}
                     type="text"
                     appearing=""
@@ -214,7 +231,7 @@ class Account extends React.Component {
                 </div>
                 <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
                   <InputBlock
-                    heading="Страна"
+                    heading="Country"
                     value={user.country}
                     type="text"
                     appearing=""
@@ -223,7 +240,7 @@ class Account extends React.Component {
                     onChange={this.handleInputChange}
                   />
                   <InputBlock
-                    heading="Язык"
+                    heading="Language"
                     value={user.lang_id}
                     type="text"
                     appearing=""
@@ -234,7 +251,7 @@ class Account extends React.Component {
                 </div>
                 <div className="account-card__inputs-wrap">
                   <InputBlock
-                    heading="О себе"
+                    heading="About"
                     value={user.about}
                     type="text"
                     appearing="input-block__dashed-border"
@@ -244,21 +261,21 @@ class Account extends React.Component {
                   />
                 </div>
                 <Btn
-                  text={'СОХРАНИТЬ'}
+                  text={'SAVE'}
                   appearing={'btn_small btn_blue'}
                   action={this.handleSubmit}
                 />
               </section>
             </form>
-            <div className="hint">Изменить пароль</div>
+            <div className="hint">Change password</div>
             <section className="account-card card">
               <div className="account-card__inputs-wrap">
                 <InputBlock
-                  heading="Старый пароль"
+                  heading="New password"
                   type="password"
                   appearing="input-block__pass"
                   placeholder=""
-                  name="oldPass"
+                  name="pass1"
                   onChange={this.handleChangePass}
                 />
               </div>
@@ -266,16 +283,16 @@ class Account extends React.Component {
             <section className="account-card card flex-row">
               <div className="account-card__inputs-wrap">
                 <InputBlock
-                  heading="Новый пароль"
+                  heading="Repeat new password"
                   type="password"
                   appearing="input-block__pass"
                   placeholder=""
-                  name="newPass"
+                  name="pass2"
                   onChange={this.handleChangePass}
                 />
               </div>
               <Btn
-                text={'Изменить'}
+                text={'Change'}
                 appearing={'btn_small btn_blue'}
                 action={this.handleChangePassSubmit}
               />
