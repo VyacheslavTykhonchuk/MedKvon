@@ -6,7 +6,7 @@ import InputBlock from '../input-block/InputBlock';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showNotification } from '../../actions/notificationActions';
-import { setUserToken } from '../../actions/userActions';
+import { setUserToken, setUserType } from '../../actions/userActions';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 
@@ -117,11 +117,11 @@ class Home extends React.Component {
           const userToken = data['user-token'];
           const userType = data['type'];
           axios.defaults.headers.common['user-token'] = userToken;
-          this.props.actions.setUserToken(userToken);
 
           // LStorage
           localStorage.setItem('user-token', userToken);
-          localStorage.setItem('user-type', userType);
+          this.props.actions.setUserToken(userToken);
+          this.props.actions.setUserType(userType);
 
           // show alert
           this.props.actions.showNotification('Welcome!', 'success');
@@ -148,10 +148,10 @@ class Home extends React.Component {
         } else {
           const userToken = data['user-token'];
           axios.defaults.headers.common['user-token'] = userToken;
-          this.props.actions.setUserToken(userToken);
 
           // LStorage
           localStorage.setItem('user-token', userToken);
+          this.props.actions.setUserToken(userToken);
 
           // show alert
           this.props.actions.showNotification('Welcome!', 'success');
@@ -369,6 +369,8 @@ function mapDispatchToProps(dispatch) {
       {
         showNotification,
         setUserToken,
+        setUserType,
+
         changePage: (page) => push(page),
       },
       dispatch

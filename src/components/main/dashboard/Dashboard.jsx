@@ -13,6 +13,10 @@ const mapDispatchToProps = {
   push,
 };
 
+const mapStateToProps = (state) => ({
+  userType: state.user.userType,
+});
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -60,10 +64,13 @@ class Dashboard extends React.Component {
                 id={item.id}
                 avatar={item.avatar}
                 doctor={item.doctor}
+                activated={item.activated}
                 desc={item.desc}
                 cost={item.price}
                 requestCount={item.request_count}
-                leftBtnText="PROPOSALS OF DOCTORS"
+                leftBtnText={
+                  this.props.userType !== 10 ? 'ACCEPT' : 'PROPOSALS OF DOCTORS'
+                }
                 leftBtnAction={() => this.leftBtnAction(item.id)}
                 rightBtnText="Delete"
                 rightBtnAction={() => this.rightBtnAction(item.id)}
@@ -77,6 +84,6 @@ class Dashboard extends React.Component {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Dashboard);

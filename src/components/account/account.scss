@@ -28,6 +28,7 @@
             margin-top: 1rem;
             justify-content: space-between;
             flex-direction: row;
+            align-items: flex-end;
 
             & + .input-block {
                 margin-top: 8px;
@@ -74,4 +75,11 @@
             height: 27px;
         }
     }
+}
+
+.btn_logout {
+    margin-top: 2rem;
+    background-image: linear-gradient(120deg, hsl(224, 12%, 42%) 0%, hsl(208, 51%, 66%) 100%);
+    width: 60%;
+    align-self: center;
 }

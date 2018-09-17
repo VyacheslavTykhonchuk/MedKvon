@@ -312,7 +312,6 @@ class StepTicket extends React.Component {
           <div className="account-card__inputs-wrap account-card__inputs-wrap_horizontal">
             <InputBlock
               heading="Weight"
-              value=""
               type="text"
               appearing=""
               placeholder=""
@@ -322,7 +321,6 @@ class StepTicket extends React.Component {
             />
             <InputBlock
               heading="Height"
-              value=""
               type="text"
               appearing=""
               placeholder=""

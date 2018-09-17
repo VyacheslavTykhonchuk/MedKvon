@@ -704,6 +704,8 @@ main {
     font-weight: 300;
     margin: 0;
     top: 4px; }
+  .card .input-block + * {
+    margin-top: 1em; }
   .card + * {
     margin-top: 1em; }
   .card__left + * {
@@ -742,6 +744,9 @@ main {
     display: flex;
     align-items: center;
     position: relative; }
+    .card__btns_gray .btn_blue {
+      background: rgba(0, 0, 0, 0.4);
+      opacity: .5; }
     .card__btns_disabled .btn_blue {
       pointer-events: none;
       background: rgba(0, 0, 0, 0.4);
@@ -958,7 +963,8 @@ main {
       display: flex;
       margin-top: 1rem;
       justify-content: space-between;
-      flex-direction: row; }
+      flex-direction: row;
+      align-items: flex-end; }
       .account-card__inputs-wrap_horizontal + .input-block {
         margin-top: 8px; }
       .account-card__inputs-wrap_horizontal > .input-block {
@@ -987,6 +993,12 @@ main {
     .account-card.flex-row .btn {
       width: 40%;
       height: 27px; }
+
+.btn_logout {
+  margin-top: 2rem;
+  background-image: linear-gradient(120deg, #5e6578 0%, #7cabd5 100%);
+  width: 60%;
+  align-self: center; }
 
 .input-block {
   width: 100%;

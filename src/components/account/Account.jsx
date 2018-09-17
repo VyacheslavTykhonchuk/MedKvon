@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showNotification } from '../../actions/notificationActions';
 import { post, get } from 'axios';
+import { push } from 'connected-react-router';
 
 let links = [
   {
@@ -106,12 +107,9 @@ class Account extends React.Component {
 
     // console.log(photoFile);
     // formData.append('photoFile', photoFile);
-    console.log(formData);
 
     post(this.API_LINK, formData)
       .then((res) => {
-        console.log('_____res_________________________');
-        console.log(res);
         this.props.actions.showNotification('Saved!', 'success');
       })
       .catch((e) => {
@@ -121,7 +119,10 @@ class Account extends React.Component {
 
     // show alert
   };
-
+  logout = () => {
+    this.props.actions.push('/');
+    localStorage.clear();
+  };
   handleChangePassSubmit = () => {
     if (this.state.passwords.pass1 !== this.state.passwords.pass2) {
       // show alert
@@ -299,7 +300,11 @@ class Account extends React.Component {
             </section>
           </div>
         )}
-
+        <Btn
+          text={'logout'}
+          appearing={'btn_small btn_blue btn_logout'}
+          action={this.logout}
+        />
         <FooterNav />
       </div>
     );
@@ -311,6 +316,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(
       {
         showNotification,
+        push,
       },
       dispatch
     ),
