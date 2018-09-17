@@ -40,37 +40,52 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activated: this.props.activated,
+      activated: this.props.activated || null,
       new_price: null,
     };
     if (this.props.userType === 20) {
       this.API_URL = 'https://videodoctor.pp.ua/api_v1/order/acceptorder';
-      this.API_URL_DELETE = 'https://videodoctor.pp.ua/api_v1/order/cancelorder';
-    } else if (this.props.userType === 20) {
+      this.API_URL_DELETE =
+        'https://videodoctor.pp.ua/api_v1/order/cancelorder';
+    } else if (this.props.userType === 30) {
       this.API_URL = 'https://videodoctor.pp.ua/api_v1/order/accepttranslate';
-      this.API_URL_DELETE = 'https://videodoctor.pp.ua/api_v1/order/deletetranslate';
+      this.API_URL_DELETE =
+        'https://videodoctor.pp.ua/api_v1/order/deletetranslate';
     }
   }
   acceptTicket = (id) => {
     let data;
-
-    this.state.new_price
-      ? (data = {
-          new_price: this.state.new_price,
-          order_id: id,
-        })
-      : (data = {
-          order_id: id,
-        });
+    if (this.props.userType === 20) {
+      this.state.new_price
+        ? (data = {
+            new_price: this.state.new_price,
+            order_id: id,
+          })
+        : (data = {
+            order_id: id,
+          });
+    } else if (this.props.userType === 30) {
+      data = {
+        order_id: id,
+      };
+    }
 
     post(this.API_URL, data)
       .then((res) => {
+        if (res.data.error) {
+          this.props.showNotification(
+            'Error, please try again later!',
+            'error'
+          );
+          return;
+        }
         this.setState({
           activated: true,
         });
         this.props.showNotification('Accepted!', 'success');
       })
       .catch((err) => {
+        this.props.showNotification('Error!', 'error');
         console.log(err);
       });
   };
@@ -86,6 +101,7 @@ class Card extends React.Component {
         console.log(err);
       });
   };
+
   handleInputChange = (val, name) => {
     //  copy state
     const copiedState = { ...this.state };
@@ -96,15 +112,16 @@ class Card extends React.Component {
       ...copiedState,
     });
   };
+
   action = () => {
     if (this.props.userType === 20) {
-      if (this.state.accepted === null) {
+      if (this.state.activated !== null) {
         this.cancelTicket(this.props.id);
       } else {
         this.acceptTicket(this.props.id);
       }
     } else if (this.props.userType === 30) {
-      if (this.state.accepted === null) {
+      if (this.state.activated !== null) {
         this.cancelTicket(this.props.id);
       } else {
         this.acceptTicket(this.props.id);
@@ -166,14 +183,16 @@ class Card extends React.Component {
               type="number"
               placeholder=""
               name="new_price"
+              appearing={this.state.activated !== null ? 'disabled' : null}
+              value={this.props.doctorPrice}
               onChange={this.handleInputChange}
             />
           ) : null}
           <div
             className={
-              this.props.requestCount <= 0
+              this.props.requestCount <= 0 && this.props.userType === 10
                 ? 'card__btns card__btns_disabled'
-                : this.props.userType === 20 && this.state.activated !== null
+                : this.props.userType !== 10 && this.state.activated !== null
                   ? 'card__btns card__btns_gray'
                   : 'card__btns'
             }
@@ -193,7 +212,14 @@ class Card extends React.Component {
               appearing={'btn_small btn_blue'}
             />
             <Btn
-              action={this.props.rightBtnAction}
+              action={
+                this.props.userType === 30
+                  ? () => {
+                      this.cancelTicket(this.props.id);
+                      this.props.rightBtnAction();
+                    }
+                  : this.props.rightBtnAction
+              }
               text={this.props.rightBtnText}
               appearing={'btn_small btn_transparent'}
             />

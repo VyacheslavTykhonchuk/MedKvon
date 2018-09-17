@@ -321,7 +321,7 @@ class Home extends React.Component {
             name="password"
             onChange={this.handleLoginInputChange}
           />
-          <div className="social-login">
+          {/* <div className="social-login">
             <header className="social-login__heading">Sign in with:</header>
             <div className="social-login__items">
               <a
@@ -351,6 +351,7 @@ class Home extends React.Component {
               />
             </div>
           </div>
+          */}
           <Btn
             text={'login'}
             appearing={'btn_small btn_blue'}

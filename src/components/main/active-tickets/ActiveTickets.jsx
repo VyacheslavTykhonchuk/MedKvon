@@ -3,6 +3,11 @@ import axios from 'axios';
 
 import Card from '../../card/Card';
 import Preloader from '../../preloader/Preloader';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  userType: state.user.userType,
+});
 
 class ActiveTickets extends React.Component {
   constructor(props) {
@@ -33,7 +38,7 @@ class ActiveTickets extends React.Component {
                 requestCount={item.request_count}
                 leftBtnText="Start communication"
                 leftBtnAction={this.leftBtnFunc}
-                rightBtnText="END"
+                rightBtnText={this.props.userType === 10 ? 'END' : null}
                 rightBtnAction={this.rightBtnFunc}
               />
             ))}
@@ -44,4 +49,7 @@ class ActiveTickets extends React.Component {
   }
 }
 
-export default ActiveTickets;
+export default connect(
+  mapStateToProps,
+  null
+)(ActiveTickets);

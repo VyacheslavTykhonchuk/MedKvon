@@ -15,6 +15,7 @@ const Card = ({
   rightBtnAction,
   leftBtnText,
   rightBtnText,
+  doctorPrice,
 }) => (
   <div className="card">
     <div className="card__left">
@@ -23,21 +24,25 @@ const Card = ({
       </div>
     </div>
     <div className="card__right">
-      <span className="card__subtitle">Описание проблемы</span>
+      <span className="card__subtitle">Description</span>
       <p className="card__text">{desc}</p>
       <div className="card__info-wrap">
         <div className="info">
-          <div className="info__heading"> Врач</div>
+          <div className="info__heading"> Doctor</div>
           <div className="info__content">{doctor}</div>
         </div>
         {cost ? (
-          <div className="info">
-            <div className="info__heading"> Сумма</div>
+          <div className="info info_small">
+            <div className="info__heading"> Cost</div>
             <div className="info__content"> $ {cost}</div>
+            {doctorPrice ? (
+              <div className="info info_small">
+                <div className="info__heading"> Doctor price</div>
+                <div className="info__content"> $ {doctorPrice}</div>
+              </div>
+            ) : null}
           </div>
-        ) : (
-          ''
-        )}
+        ) : null}
       </div>
       <div
         className={

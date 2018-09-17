@@ -1,7 +1,12 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const FooterNav = props => (
+const mapStateToProps = (state) => ({
+  userType: state.user.userType,
+});
+
+const FooterNav = (props) => (
   <footer className="footer-nav">
     <NavLink
       activeClassName="footer-nav__item_active"
@@ -65,100 +70,102 @@ const FooterNav = props => (
         </svg>
       </div>
     </NavLink>
-    <NavLink
-      activeClassName="footer-nav__item_active"
-      to="/create-ticket"
-      className="footer-nav__item"
-    >
-      <div className="footer-nav__icon-wrap">
-        <svg
-          width="24"
-          height="20"
-          viewBox="0 0 24 20"
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon_active"
-        >
-          <defs>
-            <linearGradient
-              x1="-144.405%"
-              y1="-51.474%"
-              x2="50%"
-              y2="100%"
-              id="linearGradient-1"
-            >
-              <stop stopColor="#0244FF" offset="0%" />
-              <stop stopColor="#0188FF" offset="100%" />
-            </linearGradient>
-          </defs>
-          <g id="app" fill="none" fillRule="evenodd">
-            <g
-              id="Create-ticket-step-1"
-              transform="translate(-120 -693)"
-              fill="url(#linearGradient-1)"
-            >
-              <g id="Group-2" transform="translate(120 693)">
-                <path
-                  d="M3,0 L21,0 C22.6568542,-1.38777878e-16 24,1.34314575 24,3 L24,17 C24,18.6568542 22.6568542,20 21,20 L3,20 C1.34314575,20 2.22044605e-16,18.6568542 0,17 L0,3 C-2.22044605e-16,1.34314575 1.34314575,4.16333634e-16 3,0 Z M3,2 C2.44771525,2 2,2.44771525 2,3 L2,17 C2,17.5522847 2.44771525,18 3,18 L21,18 C21.5522847,18 22,17.5522847 22,17 L22,3 C22,2.44771525 21.5522847,2 21,2 L3,2 Z"
-                  id="Combined-Shape"
-                />
-                <rect
-                  id="Rectangle-6"
-                  x="11"
-                  y="7"
-                  width="2"
-                  height="7"
-                  rx="1"
-                />
-                <rect
-                  id="Rectangle-6"
-                  transform="rotate(90 12 10.5)"
-                  x="11"
-                  y="7"
-                  width="2"
-                  height="7"
-                  rx="1"
-                />
+    {props.userType === 10 ? (
+      <NavLink
+        activeClassName="footer-nav__item_active"
+        to="/create-ticket"
+        className="footer-nav__item"
+      >
+        <div className="footer-nav__icon-wrap">
+          <svg
+            width="24"
+            height="20"
+            viewBox="0 0 24 20"
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon_active"
+          >
+            <defs>
+              <linearGradient
+                x1="-144.405%"
+                y1="-51.474%"
+                x2="50%"
+                y2="100%"
+                id="linearGradient-1"
+              >
+                <stop stopColor="#0244FF" offset="0%" />
+                <stop stopColor="#0188FF" offset="100%" />
+              </linearGradient>
+            </defs>
+            <g id="app" fill="none" fillRule="evenodd">
+              <g
+                id="Create-ticket-step-1"
+                transform="translate(-120 -693)"
+                fill="url(#linearGradient-1)"
+              >
+                <g id="Group-2" transform="translate(120 693)">
+                  <path
+                    d="M3,0 L21,0 C22.6568542,-1.38777878e-16 24,1.34314575 24,3 L24,17 C24,18.6568542 22.6568542,20 21,20 L3,20 C1.34314575,20 2.22044605e-16,18.6568542 0,17 L0,3 C-2.22044605e-16,1.34314575 1.34314575,4.16333634e-16 3,0 Z M3,2 C2.44771525,2 2,2.44771525 2,3 L2,17 C2,17.5522847 2.44771525,18 3,18 L21,18 C21.5522847,18 22,17.5522847 22,17 L22,3 C22,2.44771525 21.5522847,2 21,2 L3,2 Z"
+                    id="Combined-Shape"
+                  />
+                  <rect
+                    id="Rectangle-6"
+                    x="11"
+                    y="7"
+                    width="2"
+                    height="7"
+                    rx="1"
+                  />
+                  <rect
+                    id="Rectangle-6"
+                    transform="rotate(90 12 10.5)"
+                    x="11"
+                    y="7"
+                    width="2"
+                    height="7"
+                    rx="1"
+                  />
+                </g>
               </g>
             </g>
-          </g>
-        </svg>
-        <svg
-          width="24"
-          height="20"
-          viewBox="0 0 24 20"
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon_unactive"
-        >
-          <g id="app" fill="none" fillRule="evenodd" opacity="0.33">
-            <g id="Dashboard" transform="translate(-120 -693)" fill="#000">
-              <g id="Group-2" transform="translate(120 693)">
-                <path
-                  d="M3,0 L21,0 C22.6568542,-1.38777878e-16 24,1.34314575 24,3 L24,17 C24,18.6568542 22.6568542,20 21,20 L3,20 C1.34314575,20 2.22044605e-16,18.6568542 0,17 L0,3 C-2.22044605e-16,1.34314575 1.34314575,4.16333634e-16 3,0 Z M3,2 C2.44771525,2 2,2.44771525 2,3 L2,17 C2,17.5522847 2.44771525,18 3,18 L21,18 C21.5522847,18 22,17.5522847 22,17 L22,3 C22,2.44771525 21.5522847,2 21,2 L3,2 Z"
-                  id="Combined-Shape"
-                />
-                <rect
-                  id="Rectangle-6"
-                  x="11"
-                  y="7"
-                  width="2"
-                  height="7"
-                  rx="1"
-                />
-                <rect
-                  id="Rectangle-6"
-                  transform="rotate(90 12 10.5)"
-                  x="11"
-                  y="7"
-                  width="2"
-                  height="7"
-                  rx="1"
-                />
+          </svg>
+          <svg
+            width="24"
+            height="20"
+            viewBox="0 0 24 20"
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon_unactive"
+          >
+            <g id="app" fill="none" fillRule="evenodd" opacity="0.33">
+              <g id="Dashboard" transform="translate(-120 -693)" fill="#000">
+                <g id="Group-2" transform="translate(120 693)">
+                  <path
+                    d="M3,0 L21,0 C22.6568542,-1.38777878e-16 24,1.34314575 24,3 L24,17 C24,18.6568542 22.6568542,20 21,20 L3,20 C1.34314575,20 2.22044605e-16,18.6568542 0,17 L0,3 C-2.22044605e-16,1.34314575 1.34314575,4.16333634e-16 3,0 Z M3,2 C2.44771525,2 2,2.44771525 2,3 L2,17 C2,17.5522847 2.44771525,18 3,18 L21,18 C21.5522847,18 22,17.5522847 22,17 L22,3 C22,2.44771525 21.5522847,2 21,2 L3,2 Z"
+                    id="Combined-Shape"
+                  />
+                  <rect
+                    id="Rectangle-6"
+                    x="11"
+                    y="7"
+                    width="2"
+                    height="7"
+                    rx="1"
+                  />
+                  <rect
+                    id="Rectangle-6"
+                    transform="rotate(90 12 10.5)"
+                    x="11"
+                    y="7"
+                    width="2"
+                    height="7"
+                    rx="1"
+                  />
+                </g>
               </g>
             </g>
-          </g>
-        </svg>
-      </div>
-    </NavLink>
+          </svg>
+        </div>
+      </NavLink>
+    ) : null}
     <NavLink
       activeClassName="footer-nav__item_active"
       to="/main"
@@ -417,4 +424,7 @@ const FooterNav = props => (
   </footer>
 );
 
-export default FooterNav;
+export default connect(
+  mapStateToProps,
+  null
+)(FooterNav);

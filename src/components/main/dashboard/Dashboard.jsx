@@ -34,6 +34,9 @@ class Dashboard extends React.Component {
   leftBtnAction = (id) => {
     this.props.showProposals(id);
     this.props.push('/main/proposals');
+    if (this.props.userType === 30) {
+      this.rightBtnAction(id);
+    }
   };
 
   rightBtnAction = (id) => {
@@ -67,6 +70,7 @@ class Dashboard extends React.Component {
                 activated={item.activated}
                 desc={item.desc}
                 cost={item.price}
+                doctorPrice={item.new_price}
                 requestCount={item.request_count}
                 leftBtnText={
                   this.props.userType !== 10 ? 'ACCEPT' : 'PROPOSALS OF DOCTORS'

@@ -66,6 +66,7 @@ class Proposals extends React.Component {
               doctor={item.doctor}
               desc={item.desc}
               cost={item.price}
+              doctorPrice={item.new_price}
               requestCount={item.request_count}
               leftBtnText="Confirm"
               leftBtnAction={() => this.leftBtnFunc(item.id, item.request_id)}

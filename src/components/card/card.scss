@@ -169,6 +169,16 @@
     display: flex;
     flex-direction: column;
 
+    &_small {
+        * {
+            width: max-content;
+        }
+
+        .info_small {
+            margin-top: 8px;
+        }
+    }
+
     & + .info {
         margin-left: 1.8em;
     }

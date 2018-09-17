@@ -798,6 +798,10 @@ main {
 .info {
   display: flex;
   flex-direction: column; }
+  .info_small * {
+    width: max-content; }
+  .info_small .info_small {
+    margin-top: 8px; }
   .info + .info {
     margin-left: 1.8em; }
   .info__heading {
