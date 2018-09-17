@@ -25,6 +25,8 @@ class ActiveTickets extends React.Component {
             {this.state.activeTickets.map((item, index) => (
               <Card
                 key={item.id}
+                id={item.id}
+                avatar={item.avatar}
                 doctor={item.doctor}
                 desc={item.desc}
                 cost={item.new_price}

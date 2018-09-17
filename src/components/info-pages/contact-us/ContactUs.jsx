@@ -1,54 +1,55 @@
-import React from "react";
-import ContactsBlock from "../../contacts-block/ContactsBlock";
-import CustomSelect from "../../select/CustomSelect";
-import InputBlock from "../../input-block/InputBlock";
-import Btn from "../../buttons/Btn";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { post } from 'axios';
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { showNotification } from "../../../actions/notificationActions";
+import ContactsBlock from '../../contacts-block/ContactsBlock';
+import CustomSelect from '../../select/CustomSelect';
+import InputBlock from '../../input-block/InputBlock';
+import Btn from '../../buttons/Btn';
+import { showNotification } from '../../../actions/notificationActions';
 
 const contacts = [
   {
     heading: `Address`,
     content: `7405 Transcanadienne, Suite 100 
         Saint-Laurent (Qc) Canada 
-        H4T 1Z2`
+        H4T 1Z2`,
   },
   {
     heading: `E-mail`,
-    content: `sts769@gmail.com`
+    content: `sts769@gmail.com`,
   },
   {
     heading: `Phone`,
-    content: `+39 909 998 99`
-  }
+    content: `+39 909 998 99`,
+  },
 ];
 const selectOptions = [
   {
-    val: "Technical support"
+    val: 'Technical support',
   },
   {
-    val: "Customer support"
+    val: 'Customer support',
   },
   {
-    val: "Doctor support"
+    val: 'Doctor support',
   },
   {
-    val: "Translator questions"
-  }
+    val: 'Translator questions',
+  },
 ];
 
 class ContactUs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feedbackType: "Technical support",
+      feedbackType: 'Technical support',
       feedback: {
-        name: "",
-        email: "",
-        msg: ""
-      }
+        name: '',
+        email: '',
+        body: '',
+      },
     };
   }
 
@@ -59,13 +60,13 @@ class ContactUs extends React.Component {
     updatedFeedback[name] = val;
     // set modified state
     this.setState({
-      feedback: updatedFeedback
+      feedback: updatedFeedback,
     });
   };
 
-  handleSelectChange = val => {
+  handleSelectChange = (val) => {
     this.setState({
-      feedbackType: val
+      feedbackType: val,
     });
   };
 
@@ -73,25 +74,47 @@ class ContactUs extends React.Component {
     const feedback = this.state.feedback;
 
     for (const key in feedback) {
-      if (feedback[key] === "") {
-        this.props.actions.showNotification("Fill all fields!", "error");
-
+      if (feedback[key] === '') {
+        this.props.actions.showNotification('Fill all fields!', 'error');
         return false;
       }
     }
 
     // post data to API
-    const feedbackSubmitedState = JSON.stringify(this.state);
+    const API_URL = 'https://videodoctor.pp.ua/api_v1/contact';
+    const ContactForm = {
+      subject: this.state.feedbackType,
+      ...this.state.feedback,
+    };
+
+    post(API_URL, { ContactForm })
+      .then((result) => {
+        console.log(result);
+        if (result.data.error) {
+          const errs = result.data.validate;
+          for (const key in errs) {
+            if (errs.hasOwnProperty(key)) {
+              const element = errs[key];
+              this.props.actions.showNotification(element, 'error');
+            }
+          }
+          return;
+        }
+        this.props.actions.showNotification('Sent!', 'success');
+      })
+      .catch((err) => {
+        console.log(err);
+        this.props.actions.showNotification('Error!', 'error');
+      });
 
     // show alert
-    this.props.actions.showNotification("Sent!", "success");
   };
 
   render() {
     return (
       <div className="main-page__section main-page__section_contact-us ContactUs">
         <div className="contact-us__contacts">
-          {contacts.map(item => (
+          {contacts.map((item) => (
             <ContactsBlock
               key={item.heading}
               heading={item.heading}
@@ -105,7 +128,7 @@ class ContactUs extends React.Component {
           options={selectOptions}
           passVal={this.handleSelectChange}
         />
-        <form action="" className="tech-support">
+        <form action="" id="contact-us-form" className="tech-support">
           <InputBlock
             heading="* Email"
             type="email"
@@ -124,15 +147,15 @@ class ContactUs extends React.Component {
           />
           <InputBlock
             heading="* Message"
-            name="msg"
+            name="body"
             type="text"
             appearing="input-block_gray-bg"
             placeholder=""
             onChange={this.handleInputChange}
           />
           <Btn
-            text={"Отправить"}
-            appearing={"btn_small btn_blue"}
+            text={'Отправить'}
+            appearing={'btn_small btn_blue'}
             action={this.handleSubmit}
           />
         </form>
@@ -145,10 +168,10 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        showNotification
+        showNotification,
       },
       dispatch
-    )
+    ),
   };
 }
 

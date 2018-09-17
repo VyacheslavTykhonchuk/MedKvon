@@ -694,13 +694,23 @@ main {
   display: flex;
   padding: 22px;
   box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 8px; }
+  border-radius: 8px;
+  position: relative; }
+  .card .card__show-more {
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    color: #2d3b52;
+    font-weight: 300;
+    margin: 0;
+    top: 4px; }
   .card + * {
     margin-top: 1em; }
   .card__left + * {
     margin-left: 1em; }
   .card__right {
-    width: 100%; }
+    width: 100%;
+    position: relative; }
   .card__avatar-holder {
     width: 50px;
     height: 50px;
@@ -802,10 +812,21 @@ main {
   padding: 22px;
   box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
   border-radius: 8px; }
+  .history-card .card__show-more {
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    color: #2d3b52;
+    font-weight: 300;
+    margin: 0;
+    top: 0px; }
   .history-card + * {
     margin-top: 1em; }
   .history-card__left + * {
     margin-left: 1em; }
+  .history-card__right {
+    position: relative;
+    width: 100%; }
   .history-card__avatar-holder {
     width: 50px;
     height: 50px;
@@ -1116,6 +1137,9 @@ main {
     .create-ticket__step-ticket .switches-block .switch-block:nth-child(n+4) {
       margin-top: 1.5rem; }
 
+.no-pointer-events {
+  pointer-events: none; }
+
 .ticket-card {
   display: flex;
   flex-direction: column;
@@ -1148,7 +1172,8 @@ main {
     color: #2E3C54;
     line-height: 16px;
     font-weight: 600;
-    margin: 0; }
+    margin: 0;
+    text-transform: capitalize; }
   .ticket-card__subtitle {
     font-weight: 400;
     font-size: 10px;
@@ -1202,7 +1227,7 @@ main {
 
 .grid-table__row {
   display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-template-columns: 20vw 16vw 13vw 1fr;
   grid-gap: 1rem;
   border-bottom: 1px dashed #9B9B9B;
   padding-bottom: 8px;
@@ -1219,6 +1244,34 @@ main {
   letter-spacing: 0; }
   .grid-table__cell_head {
     font-size: 10px; }
+
+.wallet-form {
+  background: white;
+  box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  border: none;
+  padding: 18px 12px;
+  flex-direction: column;
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1); }
+  .wallet-form_closed {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(0); }
+  .wallet-form .heading {
+    margin: 0 0 1em 0;
+    padding: 0 0 .5em 0;
+    border-bottom: 1px solid #d4d4d4; }
+  .wallet-form .input-block + * {
+    margin-top: 10px; }
+  .wallet-form .btn_small.btn_blue {
+    width: 40vw;
+    align-self: center; }
+  .wallet-form + * {
+    margin-top: 1em; }
 
 .switch-block {
   display: flex;

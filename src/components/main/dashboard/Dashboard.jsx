@@ -57,6 +57,8 @@ class Dashboard extends React.Component {
             {this.state.dashboardCards.map((item, index) => (
               <Card
                 key={item.id}
+                id={item.id}
+                avatar={item.avatar}
                 doctor={item.doctor}
                 desc={item.desc}
                 cost={item.price}

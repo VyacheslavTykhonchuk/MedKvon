@@ -10,7 +10,7 @@ import Preloader from '../preloader/Preloader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showNotification } from '../../actions/notificationActions';
-import axios from 'axios';
+import { post, get } from 'axios';
 
 let links = [
   {
@@ -24,43 +24,56 @@ class Account extends React.Component {
     this.state = {
       type: '',
       user: {
-        birthDate: '',
+        birthday: '',
         country: '',
         email: '',
-        firstName: '',
-        lang: '',
-        lastName: '',
+        username: '',
+        lang_id: '',
+        lastname: '',
         phone: '',
-        userInfo: '',
+        about: '',
       },
       passwords: {
         oldPass: '',
         newPass: '',
       },
+      avatar: '',
+      photoFile: '',
       loading: true,
     };
     this.API_LINK = `https://videodoctor.pp.ua/api_v1/settings`;
-    axios.get(this.API_LINK).then((res) => {
+
+    get(this.API_LINK).then((res) => {
       const apiData = res.data.model;
       this.setState({
         type: apiData.type,
         user: {
-          birthDate: apiData.birthday,
+          birthday: apiData.birthday,
           country: apiData.country,
           email: apiData.email,
-          firstName: apiData.username,
-          lang: apiData.lang_id,
-          lastName: apiData.lastname,
+          username: apiData.username,
+          lang_id: apiData.lang_id,
+          lastname: apiData.lastname,
           phone: apiData.phone,
-          userInfo: apiData.about,
-          userAvatar: apiData.photo,
+          about: apiData.about,
         },
+        avatar: apiData.avatar,
         loading: false,
       });
     });
   }
 
+  fileUpload = (file) => {
+    const formData = new FormData();
+    formData.set('photoFile', file);
+  };
+
   handleInputChange = (val, name) => {
+    if (name === 'avatar') {
+      this.setState({
+        photoFile: val,
+      });
+    }
     //  copy state
     const updatedUser = { ...this.state.user };
     //  modify copied state
@@ -70,7 +83,9 @@ class Account extends React.Component {
       user: updatedUser,
     });
   };
-
+  componentDidUpdate() {
+    console.log(this.state);
+  }
   handleChangePass = (val, name) => {
     //  copy state
     const passwords = { ...this.state.passwords };
@@ -84,18 +99,27 @@ class Account extends React.Component {
 
   handleSubmit = (dispatch) => {
     // post data to API
-    const formData = this.state.user;
 
-    axios
-      .post(this.API_LINK, formData)
+    // const userForm = this.state.user;
+    const userForm = document.querySelector('#userForm');
+    const formData = new FormData(userForm);
+
+    // console.log(photoFile);
+    // formData.append('photoFile', photoFile);
+    console.log(formData);
+
+    post(this.API_LINK, formData)
       .then((res) => {
+        console.log('_____res_________________________');
         console.log(res);
+        this.props.actions.showNotification('Saved!', 'success');
       })
       .catch((e) => {
         console.log(e);
+        this.props.actions.showNotification('Error!', 'error');
       });
+
     // show alert
-    this.props.actions.showNotification('Saved!', 'success');
   };
 
   handleChangePassSubmit = () => {
@@ -128,31 +152,31 @@ class Account extends React.Component {
           <Preloader />
         ) : (
           <div>
-            <form action="">
+            <form action="" id="userForm">
               <section className="account-card card">
                 <div className="account-card__personal-info">
                   <UploadPhoto
-                    userAvatar={user.userAvatar}
-                    name="userAvatar"
+                    userAvatar={this.state.avatar}
+                    name="photoFile"
                     onChange={this.handleInputChange}
                   />
                   <div className="account-card__inputs-wrap">
                     <InputBlock
                       heading="Имя"
-                      value={user.firstName}
+                      value={user.username}
                       type="text"
                       appearing=""
                       placeholder=""
-                      name="firstName"
+                      name="username"
                       onChange={this.handleInputChange}
                     />
                     <InputBlock
                       heading="Фамилия"
-                      value={user.lastName}
+                      value={user.lastname}
                       type="text"
                       appearing=""
                       placeholder=""
-                      name="lastName"
+                      name="lastname"
                       onChange={this.handleInputChange}
                     />
                   </div>
@@ -180,11 +204,11 @@ class Account extends React.Component {
                   />
                   <InputBlock
                     heading="Дата"
-                    value={user.birthDate}
+                    value={user.birthday}
                     type="text"
                     appearing=""
                     placeholder=""
-                    name="birthDate"
+                    name="birthday"
                     onChange={this.handleInputChange}
                   />
                 </div>
@@ -200,22 +224,22 @@ class Account extends React.Component {
                   />
                   <InputBlock
                     heading="Язык"
-                    value={user.lang}
+                    value={user.lang_id}
                     type="text"
                     appearing=""
                     placeholder=""
-                    name="lang"
+                    name="lang_id"
                     onChange={this.handleInputChange}
                   />
                 </div>
                 <div className="account-card__inputs-wrap">
                   <InputBlock
                     heading="О себе"
-                    value={user.userInfo}
+                    value={user.about}
                     type="text"
                     appearing="input-block__dashed-border"
                     placeholder=""
-                    name="userInfo"
+                    name="about"
                     onChange={this.handleInputChange}
                   />
                 </div>

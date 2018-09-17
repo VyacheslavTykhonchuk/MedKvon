@@ -65,7 +65,7 @@
 .grid-table {
     &__row {
         display: grid;
-        grid-template-columns: 2fr repeat(3, 1fr);
+        grid-template-columns: 20vw 16vw 13vw 1fr;
         grid-gap: 1rem;
         border-bottom: 1px dashed #9B9B9B;
         padding-bottom: 8px;
@@ -87,5 +87,44 @@
         &_head {
             font-size: 10px;
         }
+    }
+}
+
+.wallet-form {
+    background: white;
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    border: none;
+    padding: 18px 12px;
+    flex-direction: column;
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1);
+
+    &_closed {
+        height: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    .heading {
+        margin: 0 0 1em 0;
+        padding: 0 0 .5em 0;
+        border-bottom: 1px solid hsl(0, 0%, 83%);
+    }
+
+    .input-block + * {
+        margin-top: 10px;
+    }
+
+    .btn_small.btn_blue {
+        width: 40vw;
+        align-self: center;
+    }
+
+    & + * {
+        margin-top: 1em;
     }
 }

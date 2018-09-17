@@ -11,52 +11,61 @@ import { showNotification } from '../../../actions/notificationActions';
 class StepTicket extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: null,
-      price: null,
-      category: this.props.category || 18,
-      doctors_ids_str: this.props.doctorsIDs || '41',
-      formdata: {
-        written_opinion: '',
-        firstname: '',
-        lastname: '',
-        patronymic: '',
-        birthday: '',
-        activity: '',
-        phone: '',
-        email: '',
-        timefrom: '',
-        timeto: '',
-        timezone: '',
-        diagnostics: '',
-        recommendations: '',
-        second_opinion: '',
-        allergic_reactions: '',
-        allergic_comment: '',
-        heart_diseases: '',
-        stomach_diseases: '',
-        lung_diseases: '',
-        neurological_diseases: '',
-        kidney_diseases: '',
-        joints_diseases: '',
-        diabetes_diseases: '',
-        thyroid_diseases: '',
-        blood_diseases: '',
-        eye_diseases: '',
-        other_diseases: '',
-        other_diseases_comment: '',
-        smoking: '',
-        smoking_comment: '',
-        alcohol: '',
-        alcohol_comment: '',
-        physical_exercises: '',
-        height: '',
-        weight: '',
-        bmi: '',
-        hospitalization_hospital_1: '',
-        medicaments_name_1: '',
-      },
-    };
+    if (this.props.formPreview !== undefined) {
+      const data = this.props.formPreview;
+      this.state = {
+        title: data.title,
+        price: data.price,
+        formdata: data.formdata,
+      };
+    } else {
+      this.state = {
+        title: null,
+        price: null,
+        category: this.props.category || 18,
+        doctors_ids_str: this.props.doctorsIDs || '41',
+        formdata: {
+          written_opinion: '',
+          firstname: '',
+          lastname: '',
+          patronymic: '',
+          birthday: '',
+          activity: '',
+          phone: '',
+          email: '',
+          timefrom: '',
+          timeto: '',
+          timezone: '',
+          diagnostics: '',
+          recommendations: '',
+          second_opinion: '',
+          allergic_reactions: '',
+          allergic_comment: '',
+          heart_diseases: '',
+          stomach_diseases: '',
+          lung_diseases: '',
+          neurological_diseases: '',
+          kidney_diseases: '',
+          joints_diseases: '',
+          diabetes_diseases: '',
+          thyroid_diseases: '',
+          blood_diseases: '',
+          eye_diseases: '',
+          other_diseases: '',
+          other_diseases_comment: '',
+          smoking: '',
+          smoking_comment: '',
+          alcohol: '',
+          alcohol_comment: '',
+          physical_exercises: '',
+          height: '',
+          weight: '',
+          bmi: '',
+          hospitalization_hospital_1: '',
+          medicaments_name_1: '',
+        },
+      };
+    }
   }
 
   handleInputChange = (val, name) => {
@@ -110,7 +119,7 @@ class StepTicket extends React.Component {
 
   render() {
     return (
-      <div className="create-ticket__step-ticket ticket-form">
+      <div className={this.props.formPreview ? "create-ticket__step-ticket ticket-form no-pointer-events": "create-ticket__step-ticket ticket-form"}>
         <div className="hint">Анкета пациента</div>
         <section className="account-card card">
           <div className="account-card__personal-info">
@@ -120,15 +129,17 @@ class StepTicket extends React.Component {
                 type="text"
                 onChange={this.handleInputChange}
                 name="title"
+                value={this.state.title}
               />
               <InputBlock
                 heading="*Price of consultation"
                 type="number"
                 onChange={this.handleInputChange}
                 name="price"
+                value={this.state.price}
               />
               <Switch
-                isActive={false}
+                isActive={true}
                 text="Written opinion:"
                 onClick={() => this.onSwitchClick('written_opinion')}
               />
@@ -137,30 +148,35 @@ class StepTicket extends React.Component {
                 type="text"
                 onChange={this.handleInputChange}
                 name="firstname"
+                value={this.state.formdata.firstname}
               />
               <InputBlock
                 heading="Last Name"
                 type="text"
                 onChange={this.handleInputChange}
                 name="lastname"
+                value={this.state.formdata.lastname}
               />
               <InputBlock
                 heading="Patronymic"
                 type="text"
                 onChange={this.handleInputChange}
                 name="patronymic"
+                value={this.state.formdata.patronymic}
               />
               <InputBlock
                 heading="Birthday Date"
                 type="date"
                 onChange={this.handleInputChange}
                 name="birthday"
+                value={this.state.formdata.patronymic}
               />
               <InputBlock
                 heading="Kind of activity"
                 type="text"
                 onChange={this.handleInputChange}
                 name="activity"
+                value={this.state.formdata.activity}
               />
 
               <InputBlock
@@ -168,12 +184,14 @@ class StepTicket extends React.Component {
                 type="text"
                 onChange={this.handleInputChange}
                 name="phone"
+                value={this.state.formdata.phone}
               />
               <InputBlock
                 heading="Email"
                 type="text"
                 onChange={this.handleInputChange}
                 name="email"
+                value={this.state.formdata.email}
               />
             </div>
           </div>
@@ -184,12 +202,14 @@ class StepTicket extends React.Component {
               type="num"
               onChange={this.handleInputChange}
               name="timefrom"
+              value={this.state.formdata.timefrom}
             />
             <InputBlock
               heading="To"
               type="num"
               onChange={this.handleInputChange}
               name="timeto"
+              value={this.state.formdata.timeto}
             />
           </div>
           <div className="heading"> Purpose of the consultation:</div>
@@ -220,6 +240,7 @@ class StepTicket extends React.Component {
               heading="Укажите на что…"
               onChange={this.handleInputChange}
               name="allergic_comment"
+              value={this.state.formdata.allergic_comment}
             />
           </div>
           <div className="heading">
@@ -250,6 +271,7 @@ class StepTicket extends React.Component {
               heading="How many times a day?"
               onChange={this.handleInputChange}
               name="smoking_comment"
+              value={this.state.formdata.smoking_comment}
             />
           </div>
           <div className="heading">Aлкоголь</div>
@@ -268,6 +290,7 @@ class StepTicket extends React.Component {
               heading="How many times a month?"
               onChange={this.handleInputChange}
               name="alcohol_comment"
+              value={this.state.formdata.alcohol_comment}
             />
           </div>
           <div className="heading">Физические упражнения</div>
@@ -289,6 +312,7 @@ class StepTicket extends React.Component {
               placeholder=""
               onChange={this.handleInputChange}
               name="weight"
+              value={this.state.formdata.weight}
             />
             <InputBlock
               heading="Укажите ваш рост"
@@ -298,6 +322,7 @@ class StepTicket extends React.Component {
               placeholder=""
               onChange={this.handleInputChange}
               name="height"
+              value={this.state.formdata.height}
             />
           </div>
           <div className="heading">
@@ -311,6 +336,7 @@ class StepTicket extends React.Component {
               heading="Укажите на что…"
               onChange={this.handleInputChange}
               name="hospitalization_hospital_1"
+              value={this.state.formdata.hospitalization_hospital_1}
             />
           </div>
           <div className="heading">List of used medicaments</div>
@@ -322,6 +348,7 @@ class StepTicket extends React.Component {
               heading="Укажите на что…"
               onChange={this.handleInputChange}
               name="medicaments_name_1"
+              value={this.state.formdata.medicaments_name_1}
             />
           </div>
 
@@ -387,6 +414,7 @@ const mapStateToProps = (state) => ({
   sportSwitches: state.switches.sportSwitches,
   category: state.formData.docSpecId,
   doctors_ids_str: state.formData.doctorsIdsStr,
+  formPreview: state.formData.formPreviewData,
 });
 
 const StepTickets = connect(

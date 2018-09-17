@@ -7,29 +7,14 @@ class UploadPhoto extends React.Component {
     this.state = {
       file: this.props.userAvatar || defaultUser,
     };
-    console.log(this.props.userAvatar);
   }
 
   handleChange = (event) => {
     const imageFile = event.target.files[0];
-    this.setState({
-      file: URL.createObjectURL(imageFile),
-    });
 
     if (this.props.onChange) {
-      this.getBase64(imageFile).then((data) => {
-        this.props.onChange(data, this.props.name);
-      });
+      this.props.onChange(imageFile, this.props.name);
     }
-  };
-
-  getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
   };
   render() {
     return (
@@ -39,6 +24,7 @@ class UploadPhoto extends React.Component {
           type="file"
           onChange={this.handleChange}
           name={this.props.name}
+          accept="image/*"
         />
         <img
           src={this.state.file}

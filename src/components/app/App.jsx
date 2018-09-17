@@ -10,6 +10,12 @@ import InfoPages from '../info-pages/InfoPages';
 import CreateTicket from '../create-ticket/CreateTicket';
 import Wallet from '../wallet/Wallet';
 import Notifications from '../notifications/Notifications';
+// import { setUserType } from '../../actions/userActions';
+// import { connect } from 'react-redux';
+
+// const mapDispatchToProps = {
+//   setUserType,
+// };
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +23,8 @@ class App extends React.Component {
     axios.defaults.headers.common['api-key'] = 'zTqtA8gLpRE7TRnd';
     if (localStorage.getItem('user-token')) {
       const userToken = localStorage.getItem('user-token');
+      const userType = localStorage.getItem('user-type');
+      // this.props.setUserType(userType);
       axios.defaults.headers.common['user-token'] = userToken;
     }
   }

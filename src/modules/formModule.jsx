@@ -9,6 +9,8 @@ export const CHOOSE_DOCTOR_SPECIALIZATION = 'CHOOSE_DOCTOR_SPECIALIZATION';
 export const RECEIVE_DOCTORS = 'RECEIVE_DOCTORS';
 export const SET_SPECIALIZATION_ID = 'SET_SPECIALIZATION_ID';
 export const SET_DOCTORS_IDS_STR = 'SET_DOCTORS_IDS_STR';
+export const PREVIEW_TICKET = 'PREVIEW_TICKET';
+
 // ------------------------------------
 // Action Creators
 // ------------------------------------
@@ -68,6 +70,13 @@ export const setDoctorsIdsStr = (str) => {
   };
 };
 
+export const previewTicketFrom = (data) => {
+  return {
+    type: PREVIEW_TICKET,
+    payload: data,
+  };
+};
+
 // ------------------------------------
 // Reducers
 // ------------------------------------
@@ -103,6 +112,11 @@ export default function formData(state = {}, action) {
       return Object.assign({}, state, {
         ...state,
         doctorsIdsStr: action.payload,
+      });
+    case PREVIEW_TICKET:
+      return Object.assign({}, state, {
+        ...state,
+        formPreviewData: action.payload,
       });
     default:
       console.debug('user reducer :: hit default', action.type);

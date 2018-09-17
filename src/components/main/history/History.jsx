@@ -7,11 +7,11 @@ import Preloader from '../../preloader/Preloader';
 class HistoryTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { historyCards: [],loading:true };
+    this.state = { historyCards: [], loading: true };
 
     axios.get(`https://videodoctor.pp.ua/api_v1/history`).then((res) => {
       const historyCards = res.data;
-      this.setState({ historyCards: historyCards.data,loading:false });
+      this.setState({ historyCards: historyCards.data, loading: false });
     });
   }
 
@@ -24,7 +24,10 @@ class HistoryTab extends React.Component {
           <div className="cards-list">
             {this.state.historyCards.map((item, index) => (
               <HistoryCard
+              avatar={item.avatar}
+
                 key={item.id}
+                id={item.id}
                 doctor={item.doctor}
                 desc={item.desc}
                 cost={item.price}

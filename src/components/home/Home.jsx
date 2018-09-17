@@ -55,7 +55,7 @@ class Home extends React.Component {
     this.patient = React.createRef();
     this.translator = React.createRef();
   }
-  
+
   showRegPopup = (e) => {
     e.stopPropagation();
     this.setState({
@@ -115,11 +115,13 @@ class Home extends React.Component {
           );
         } else {
           const userToken = data['user-token'];
+          const userType = data['type'];
           axios.defaults.headers.common['user-token'] = userToken;
           this.props.actions.setUserToken(userToken);
 
           // LStorage
           localStorage.setItem('user-token', userToken);
+          localStorage.setItem('user-type', userType);
 
           // show alert
           this.props.actions.showNotification('Welcome!', 'success');
@@ -157,39 +159,38 @@ class Home extends React.Component {
         }
       });
   };
-  radioBtns = type => {
+  radioBtns = (type) => {
     //  copy state
     const regForm = { ...this.state.reg };
     //  modify copied state
-    regForm["type"] = type;
+    regForm['type'] = type;
     // set modified state
     this.setState({
-      reg: regForm
+      reg: regForm,
     });
 
     switch (type) {
       case 10:
-        this.doctor.current.classList.remove("radio-block_active");
-        this.patient.current.classList.remove("radio-block_active");
-        this.translator.current.classList.remove("radio-block_active");
-        this.patient.current.classList.add("radio-block_active");
+        this.doctor.current.classList.remove('radio-block_active');
+        this.patient.current.classList.remove('radio-block_active');
+        this.translator.current.classList.remove('radio-block_active');
+        this.patient.current.classList.add('radio-block_active');
         break;
       case 20:
-        this.doctor.current.classList.remove("radio-block_active");
-        this.patient.current.classList.remove("radio-block_active");
-        this.translator.current.classList.remove("radio-block_active");
-        this.doctor.current.classList.add("radio-block_active");
+        this.doctor.current.classList.remove('radio-block_active');
+        this.patient.current.classList.remove('radio-block_active');
+        this.translator.current.classList.remove('radio-block_active');
+        this.doctor.current.classList.add('radio-block_active');
         break;
       case 30:
-        this.doctor.current.classList.remove("radio-block_active");
-        this.patient.current.classList.remove("radio-block_active");
-        this.translator.current.classList.remove("radio-block_active");
-        this.translator.current.classList.add("radio-block_active");
+        this.doctor.current.classList.remove('radio-block_active');
+        this.patient.current.classList.remove('radio-block_active');
+        this.translator.current.classList.remove('radio-block_active');
+        this.translator.current.classList.add('radio-block_active');
         break;
       default:
         break;
     }
- 
   };
 
   render() {

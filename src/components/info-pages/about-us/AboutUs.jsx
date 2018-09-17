@@ -1,21 +1,41 @@
-import React from "react";
-import Article from "../../article/Article";
-const articles = [
-  {
-    heading: `Lorem ipsum dolor sit amet, tation laboramus assueveri ttation`,
-    content: `Lorem ipsum dolor sit amet, tation laboramus assueverit an sed, vis dolore disputationi et. Qui ex quando prompta, lobortis rationibus at per. Quo ad choro graeco disputando. Oblique sententiae definiebas pro an. Est id novum veritus temporibus. Accusamus concludaturque sed id, est at denique vulputate. Et solum accumsan quaerendum vim, ad debet tation eumLorem ipsum dolor sit amet, tation laboramus assueverit an sed, vis dolore disputationi et. Qui ex quando prompta, lobortis rationibus at per. Quo ad choro graeco disputando. Oblique sententiae definiebas pro an. Est id novum veritus temporibus. Accusamus concludaturque sed id, est at denique vulputate. Et solum accumsan quaerendum vim, ad debet tation eum.Lorem ipsum dolor sit amet, tation laboramus assueverit an sed, vis dolore disputationi et. Qui ex quando prompta, lobortis rationibus at per. Quo ad choro graeco disputando. Oblique sententiae definiebas pro an. Est id novum veritus temporibus. Accusamus concludaturque sed id, est at denique vulputate. Et solum accumsan quaerendum vim, ad debet tation eum.Lorem ipsum dolor sit amet, tation laboramus assueverit an sed, vis dolore disputationi et. Qui ex quando prompta, lobortis rationibus at per.rompta, lobortis rationibus at per.`
+import React, { PureComponent } from 'react';
+import Article from '../../article/Article';
+import { get } from 'axios';
+import Preloader from '../../preloader/Preloader';
+
+class AboutUs extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+
+    const API_Url = 'https://videodoctor.pp.ua/api_v1/about';
+
+    get(API_Url).then((res) => {
+      this.setState({
+        title: res.data.title,
+        text: res.data.text,
+        loading: false,
+      });
+    });
   }
-];
-const AboutUs = props => (
-  <div className="main-page__section main-page__section_about-us AboutUs">
-    {articles.map(item => (
-      <Article
-        key={item.heading}
-        heading={item.heading}
-        content={item.content}
-      />
-    ))}
-  </div>
-);
+
+  render() {
+    return (
+      <div className="main-page__section main-page__section_about-us AboutUs">
+        {this.state.loading ? (
+          <Preloader />
+        ) : (
+          <Article
+            key={this.state.title}
+            heading={this.state.title}
+            content={this.state.text}
+          />
+        )}
+      </div>
+    );
+  }
+}
 
 export default AboutUs;

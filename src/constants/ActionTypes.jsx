@@ -1,3 +1,4 @@
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
 export const SHOW_PROPOSALS = 'SHOW_PROPOSALS';
+export const SET_USER_TYPE = 'SET_USER_TYPE';
