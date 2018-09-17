@@ -1,6 +1,4 @@
 import React from 'react';
-import doctorImg from './../../assets/img/doctor.svg';
-import logo from './../../assets/img/logo.png';
 import Btn from '../buttons/Btn';
 import InputBlock from '../input-block/InputBlock';
 import { connect } from 'react-redux';
