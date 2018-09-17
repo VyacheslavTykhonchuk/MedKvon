@@ -116,6 +116,9 @@ class Home extends React.Component {
             obj[Object.keys(obj)[0]],
             'error'
           );
+          this.setState({
+            loading: false,
+          });
         } else {
           const userToken = data['user-token'];
           const userType = data['type'];
@@ -129,6 +132,9 @@ class Home extends React.Component {
           // show alert
           this.props.actions.showNotification('Welcome!', 'success');
           this.props.actions.changePage('/main');
+          this.setState({
+            loading: false,
+          });
         }
       });
   };
