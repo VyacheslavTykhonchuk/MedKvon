@@ -84,7 +84,7 @@ class Account extends React.Component {
       user: updatedUser,
     });
   };
- 
+
   handleChangePass = (val, name) => {
     //  copy state
     const passwords = { ...this.state.passwords };
@@ -99,12 +99,8 @@ class Account extends React.Component {
   handleSubmit = (dispatch) => {
     // post data to API
 
-    // const userForm = this.state.user;
     const userForm = document.querySelector('#userForm');
     const formData = new FormData(userForm);
-
-    // console.log(photoFile);
-    // formData.append('photoFile', photoFile);
 
     post(this.API_LINK, formData)
       .then((res) => {
@@ -114,8 +110,6 @@ class Account extends React.Component {
         console.log(e);
         this.props.actions.showNotification('Error!', 'error');
       });
-
-    // show alert
   };
   logout = () => {
     this.props.actions.push('/');
@@ -129,27 +123,13 @@ class Account extends React.Component {
         'error'
       );
       return false;
-    }
-    // else if (
-    //   this.state.passwords.pass1.length < 8 ||
-    //   this.state.passwords.pass2.length < 8
-    // ) {
-    //   this.props.actions.showNotification(
-    //     'Passwords must be at least 8 characters in length.',
-    //     'error'
-    //   );
-    //   return false;
-    // }
-    else {
+    } else {
       // show alert
       this.props.actions.showNotification('Changed!', 'success');
       const ChangepasswordForm = this.state.passwords;
-      console.log({ ChangepasswordForm });
 
       post(this.API_LINK, { ChangepasswordForm })
         .then((res) => {
-          console.log('_____res_________________________');
-          console.log(res);
           this.props.actions.showNotification('Saved!', 'success');
         })
         .catch((e) => {

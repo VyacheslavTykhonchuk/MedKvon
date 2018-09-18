@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import Card from '../../card/Card';
 import Preloader from '../../preloader/Preloader';
-import { connect } from 'react-redux';
+import { setVideoData } from '../../../modules/videoModule';
 
 const mapStateToProps = (state) => ({
   userType: state.user.userType,
@@ -19,7 +21,11 @@ class ActiveTickets extends React.Component {
       this.setState({ activeTickets: activeTickets.data, loading: false });
     });
   }
-
+  leftBtnFunc = (videoURL) => {
+    console.log(videoURL);
+    this.props.push('/main/active-tickets/conference');
+    this.props.setVideoData({ url: videoURL });
+  };
   render() {
     return (
       <div className="main-page__section main-page__section_active-tickets ActiveTickets">
@@ -37,7 +43,7 @@ class ActiveTickets extends React.Component {
                 cost={item.new_price}
                 requestCount={item.request_count}
                 leftBtnText="Start communication"
-                leftBtnAction={this.leftBtnFunc}
+                leftBtnAction={() => this.leftBtnFunc(item.url)}
                 rightBtnText={this.props.userType === 10 ? 'END' : null}
                 rightBtnAction={this.rightBtnFunc}
               />
@@ -51,5 +57,5 @@ class ActiveTickets extends React.Component {
 
 export default connect(
   mapStateToProps,
-  null
+  { push, setVideoData }
 )(ActiveTickets);

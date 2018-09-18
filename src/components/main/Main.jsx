@@ -6,6 +6,7 @@ import Proposals from './proposals/Proposals';
 import ActiveTickets from './active-tickets/ActiveTickets';
 import HistoryTab from './history/History';
 import Conference from './conference/Conference';
+import Video from './video/Video';
 
 import MainNav from '../navigation/MainNav';
 import FooterNav from '../footer-nav/FooterNav';
@@ -38,8 +39,12 @@ class Main extends React.Component {
               path="/main/active-tickets/conference"
               component={Conference}
             />
-            <Route path="/main/active-tickets" component={ActiveTickets} />
+            <Route exact path="/main/active-tickets" component={ActiveTickets} />
             <Route path="/main/history" component={HistoryTab} />
+            <Route
+              path="/main/active-tickets/conference/video-call"
+              component={Video}
+            />
           </Switch>
         </section>
         <FooterNav />
