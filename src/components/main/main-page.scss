@@ -117,8 +117,21 @@
         bottom: 1rem;
 
         &:active {
-            transform: translate(-50%, -50%) scale(0.9);
+            transform: translate(0, -50%) scale(0.9);
         }
+    }
+
+    #debug {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-shadow: 1px 1px 0px #000000;
+        z-index: 999;
+        max-height: 90vh;
+        overflow: scroll;
+        max-width: 900vw;
     }
 
     #startcall {

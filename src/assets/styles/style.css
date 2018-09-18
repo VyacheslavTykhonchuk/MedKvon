@@ -471,7 +471,19 @@ main {
   position: absolute;
   bottom: 1rem; }
   #VideoComponent #startcall:active, #VideoComponent #terminate:active {
-    transform: translate(-50%, -50%) scale(0.9); }
+    transform: translate(0, -50%) scale(0.9); }
+
+#VideoComponent #debug {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 1px 1px 0px #000000;
+  z-index: 999;
+  max-height: 90vh;
+  overflow: scroll;
+  max-width: 900vw; }
 
 #VideoComponent #startcall {
   background: green;
