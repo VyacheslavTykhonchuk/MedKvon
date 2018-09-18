@@ -1,7 +1,13 @@
 {
-  "main.css": "static/css/main.c17080f1.css",
-  "main.css.map": "static/css/main.c17080f1.css.map",
-  "main.js": "static/js/main.ab654131.js",
-  "main.js.map": "static/js/main.ab654131.js.map",
-  "static/media/logo.svg": "static/media/logo.5d5d9eef.svg"
+  "main.css": "static/css/main.4dd6f156.css",
+  "main.css.map": "static/css/main.4dd6f156.css.map",
+  "main.js": "static/js/main.5b8be220.js",
+  "main.js.map": "static/js/main.5b8be220.js.map",
+  "static/media/FuturaPTBold.otf": "static/media/FuturaPTBold.f3483f64.otf",
+  "static/media/FuturaPTBook.otf": "static/media/FuturaPTBook.99541f31.otf",
+  "static/media/FuturaPTDemi.otf": "static/media/FuturaPTDemi.5b6575cc.otf",
+  "static/media/FuturaPTLight.otf": "static/media/FuturaPTLight.a15258a7.otf",
+  "static/media/FuturaPTMedium.otf": "static/media/FuturaPTMedium.bd99f124.otf",
+  "static/media/doctor.svg": "static/media/doctor.385bd35a.svg",
+  "static/media/user.svg": "static/media/user.0987b874.svg"
 }
