@@ -11,11 +11,14 @@ class UploadPhoto extends React.Component {
 
   handleChange = (event) => {
     const imageFile = event.target.files[0];
-
     if (this.props.onChange) {
       this.props.onChange(imageFile, this.props.name);
     }
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0]),
+    });
   };
+
   render() {
     return (
       <div className="image-loader">
@@ -28,6 +31,7 @@ class UploadPhoto extends React.Component {
         />
         <img
           src={this.state.file}
+          default-src={this.props.userAvatar}
           alt=""
           className="account-card__avatar image-loader__img"
         />

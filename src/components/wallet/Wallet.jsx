@@ -49,7 +49,6 @@ class Account extends Component {
     get(this.API_URL)
       .then((res) => {
         this.table = res.data.balans;
-        console.log(res.data);
         this.setState({
           loading: false,
           userBallance: res.data.user_balanse,
@@ -302,13 +301,8 @@ class Account extends Component {
                   </div>
                 </div>
                 {this.table.map((item) => {
-                  console.log(
-                    '______________________________________________________'
-                  );
-
-                  console.log(this.table);
                   return (
-                    <div key={item.created_at} className="grid-table__row">
+                    <div key={item.date} className="grid-table__row">
                       <div className="grid-table__cell">
                         {this.timeConverter(item.date)}
                       </div>

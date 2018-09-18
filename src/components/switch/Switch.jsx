@@ -17,8 +17,8 @@ class Switch extends React.PureComponent {
       <div
         className={
           this.state.active
-            ? 'switch-block switch-block_active'
-            : 'switch-block'
+            ? `${this.props.name} switch-block switch-block_active`
+            : `${this.props.name} switch-block`
         }
         onClick={() => {
           this.props.onClick();

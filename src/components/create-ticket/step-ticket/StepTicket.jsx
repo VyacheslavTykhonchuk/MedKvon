@@ -7,11 +7,15 @@ import InputBlock from '../../input-block/InputBlock';
 import Btn from '../../buttons/Btn';
 import Switch from '../../switch/Switch';
 import { showNotification } from '../../../actions/notificationActions';
+import { previewTicketFrom } from '../../../modules/formModule';
 
 class StepTicket extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.formPreview !== undefined) {
+    if (
+      this.props.formPreview !== undefined &&
+      this.props.formPreview !== null
+    ) {
       const data = this.props.formPreview;
       this.state = {
         title: data.title,
@@ -116,7 +120,9 @@ class StepTicket extends React.Component {
         console.log(e);
       });
   };
-
+  componentWillUnmount() {
+    this.props.previewTicketFrom(null);
+  }
   render() {
     return (
       <div
@@ -408,6 +414,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changePage: (page) => {
       dispatch(push(page));
+    },
+    previewTicketFrom: (data) => {
+      dispatch(previewTicketFrom(data));
     },
   };
 };

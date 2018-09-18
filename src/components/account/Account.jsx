@@ -84,9 +84,7 @@ class Account extends React.Component {
       user: updatedUser,
     });
   };
-  componentDidUpdate() {
-    console.log(this.state);
-  }
+ 
   handleChangePass = (val, name) => {
     //  copy state
     const passwords = { ...this.state.passwords };
