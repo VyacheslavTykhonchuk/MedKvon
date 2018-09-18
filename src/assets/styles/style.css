@@ -471,7 +471,7 @@ main {
   position: absolute;
   bottom: 1rem; }
   #VideoComponent #startcall:active, #VideoComponent #terminate:active {
-    transform: translate(0, -50%) scale(0.9); }
+    transform: translate(-50%, -50%) scale(0.9); }
 
 #VideoComponent #debug {
   position: absolute;
