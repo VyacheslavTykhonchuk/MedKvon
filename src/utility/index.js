@@ -1,5 +1,6 @@
 (function(window){
-/* jshint node: true */
+/* eslint-disable */
+
 'use strict';
 
 const reSpace = /\s/;

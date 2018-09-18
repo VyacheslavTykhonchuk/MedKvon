@@ -1,13 +1,15 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'axios';
 import { showNotification } from '../../../actions/notificationActions';
 import { push } from 'connected-react-router';
-// import '../../../utility/user-doctor.js';
+
 import { WebRtcPeer } from 'kurento-utils';
 import 'webrtc-adapter';
 import '../../../utility/index.js';
-/* eslint-disable */
+
 const mapDispatchToProps = {
   showNotification,
   push,
@@ -42,13 +44,13 @@ const VIDEO_CALL = (VIDEO_DATA) => {
   });
 
   document.getElementById('startcall').addEventListener('click', function(el) {
-    console.log(1);
     register($video_user);
     register($video_user2);
   });
 
   ws.onopen = function() {
-    // register();
+    register($video_user);
+    register($video_user2);
   };
 
   // проверка входящих каждых несколько секунд
@@ -403,6 +405,9 @@ class Video extends Component {
   call = () => {
     console.log(`click`);
   };
+  hang = () => {
+    this.props.push('/main/active-tickets/conference');
+  };
   render() {
     get(`https://videodoctor.pp.ua${this.props.videoURL}`)
       .then((result) => {
@@ -412,8 +417,9 @@ class Video extends Component {
       .catch((err) => {
         console.log(err);
       });
+
     return (
-      <div className="VideoComponent my_video_block">
+      <div id="VideoComponent" className="my_video_block">
         <div
           id="translator_video_block"
           className="skype-main__video_translator videoroom_hidden"
@@ -453,7 +459,29 @@ class Video extends Component {
             width="10px"
             height="10px"
           />
-          <div id="terminate">terminate</div>
+          <div id="terminate" onClick={this.hang}>
+            <svg
+              width="41"
+              height="18"
+              viewBox="0 0 41 18"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="app" fill="none" fillRule="evenodd">
+                <g
+                  id="Сonference2"
+                  transform="translate(-82 -667)"
+                  fill="#FFF"
+                  fillRule="nonzero"
+                >
+                  <path
+                    d="M115.166605,684.507595 C115.184878,683.754884 114.661129,683.137815 113.961717,683.039259 C112.496126,682.846299 111.057106,682.488448 109.668911,681.971339 C109.151359,681.777131 108.567912,681.901346 108.180384,682.283863 L106.381743,684.079369 C105.930932,684.529395 105.234469,684.623253 104.680256,684.308668 C100.913,682.170279 97.7937689,679.056482 95.6516482,675.295789 C95.3365138,674.742542 95.4305354,674.047292 95.8813469,673.597266 L97.6743994,671.807369 C98.0631713,671.414907 98.1876032,670.832476 97.9918595,670.312636 C97.4750444,668.93005 97.1165696,667.493536 96.9250518,666.043496 C96.8255607,665.340822 96.2196619,664.820657 95.4948613,664.82771 L91.2474383,664.827709 C90.8498923,664.828083 90.4708078,664.995235 90.2027865,665.288335 C89.9347652,665.581435 89.802488,665.973492 89.8360963,666.346681 C90.2774808,670.495864 91.6917365,674.482911 93.9709934,677.995248 C96.0339078,681.236018 98.7863106,683.983626 102.043755,686.050007 C105.535909,688.310711 109.510585,689.722182 113.622901,690.168473 C114.020064,690.204304 114.413955,690.071326 114.707806,689.802207 C115.001657,689.533089 115.168235,689.152771 115.166605,688.74895 L115.166605,684.507595 Z M104.37886,682.079976 L106.080348,681.850677 C105.769115,681.674013 105.462894,681.489805 105.161925,681.298289 L104.37886,682.079976 Z M117.999097,688.743211 C118.003953,689.93746 117.504219,691.078413 116.622666,691.885769 C115.741112,692.693124 114.55944,693.092059 113.34244,692.982032 C108.764182,692.485433 104.366443,690.923726 100.513604,688.429454 C96.9162126,686.147504 93.8662527,683.102858 91.587025,679.522165 C89.0725829,675.647518 87.5077944,671.236091 87.017258,666.623217 C86.90992,665.437488 87.3067513,664.261318 88.1108153,663.382019 C88.9148793,662.502719 90.0521327,662.001262 91.2461046,662.00014 L95.480923,662.000208 C97.6135101,661.979256 99.4312063,663.539751 99.7314586,665.660772 C99.8968222,666.912388 100.203494,668.141313 100.644428,669.320915 C101.22807,670.870865 100.854774,672.618157 99.6828703,673.801153 L98.6672864,674.814968 C100.332595,677.422904 102.549436,679.635883 105.161925,681.298289 L106.18312,680.278891 C107.362561,679.114607 109.112903,678.741962 110.662363,679.323391 C111.847218,679.764752 113.078288,680.07089 114.344743,680.237689 C116.474563,680.537631 118.042803,682.378701 117.999109,684.523397 L117.999097,688.743211 Z"
+                    id="Shape"
+                    transform="rotate(135 102.5 677.5)"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
           <div id="startcall" onClick={this.call}>
             startcall
           </div>

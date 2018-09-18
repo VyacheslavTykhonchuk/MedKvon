@@ -6,7 +6,7 @@ import rootReducer from './modules';
 
 // const URL = process.env.PUBLIC_URL || '/';
 const BaseName =
-  document.location.pathname.split('index.html')[0] + 'index.html';
+  document.location.pathname.split('medKvon')[0] + 'medKvon';
 export const history = createHistory({ basename: BaseName });
 
 // const initialState = {};

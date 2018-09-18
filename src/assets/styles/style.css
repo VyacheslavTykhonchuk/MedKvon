@@ -442,6 +442,46 @@ main {
       position: absolute;
       left: 22px; }
 
+#VideoComponent #videome {
+  width: 150px;
+  height: 215px;
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  background: white;
+  border-radius: 15px; }
+
+#VideoComponent #videodoctor {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: gray; }
+
+#VideoComponent #startcall, #VideoComponent #terminate {
+  width: max-content;
+  height: 32px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  position: absolute;
+  bottom: 1rem; }
+  #VideoComponent #startcall:active, #VideoComponent #terminate:active {
+    transform: translate(-50%, -50%) scale(0.9); }
+
+#VideoComponent #startcall {
+  background: green;
+  left: 2rem;
+  display: none; }
+
+#VideoComponent #terminate {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); }
+
 .footer-nav {
   display: flex;
   align-items: center;

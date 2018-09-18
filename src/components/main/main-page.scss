@@ -83,3 +83,52 @@
         }
     }
 }
+
+#VideoComponent {
+    #videome {
+        width: 150px;
+        height: 215px;
+        position: absolute;
+        left: 2rem;
+        top: 2rem;
+        background: white;
+        border-radius: 15px;
+    }
+
+    #videodoctor {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: hsl(0, 0%, 50%);
+    }
+
+    #startcall, #terminate {
+        width: max-content;
+        height: 32px;
+        border-radius: 5px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: right;
+        position: absolute;
+        bottom: 1rem;
+
+        &:active {
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+    }
+
+    #startcall {
+        background: green;
+        left: 2rem;
+        display: none;
+    }
+
+    #terminate {
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

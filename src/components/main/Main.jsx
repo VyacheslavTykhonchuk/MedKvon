@@ -27,6 +27,7 @@ let links = [
 ];
 class Main extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div className="main-page">
         <MainNav links={links} />
@@ -39,7 +40,11 @@ class Main extends React.Component {
               path="/main/active-tickets/conference"
               component={Conference}
             />
-            <Route exact path="/main/active-tickets" component={ActiveTickets} />
+            <Route
+              exact
+              path="/main/active-tickets"
+              component={ActiveTickets}
+            />
             <Route path="/main/history" component={HistoryTab} />
             <Route
               path="/main/active-tickets/conference/video-call"
@@ -47,7 +52,10 @@ class Main extends React.Component {
             />
           </Switch>
         </section>
-        <FooterNav />
+        {this.props.location.pathname ===
+        '/main/active-tickets/conference/video-call' ? null : (
+          <FooterNav />
+        )}
       </div>
     );
   }
