@@ -50,6 +50,7 @@ class Main extends React.Component {
               path="/main/active-tickets/conference/video-call"
               component={Video}
             />
+           
           </Switch>
         </section>
         {this.props.location.pathname ===
