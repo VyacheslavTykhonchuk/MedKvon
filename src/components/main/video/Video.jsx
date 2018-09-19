@@ -14,6 +14,7 @@ const mapDispatchToProps = {
   showNotification,
   push,
 };
+
 const mapStateToProps = (state) => ({
   videoURL: state.videoCall.url,
 });
@@ -427,7 +428,7 @@ class Video extends Component {
 
     return (
       <div id="VideoComponent" className="my_video_block">
-        <div id="debug">TEST TEXT</div>
+        {/* <div id="debug">TEST TEXT</div> */}
         <div
           id="translator_video_block"
           className="skype-main__video_translator videoroom_hidden"

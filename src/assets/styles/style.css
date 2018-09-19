@@ -507,17 +507,91 @@ main {
     display: flex;
     align-items: center; }
   .ChatComponent header {
-    padding-left: 50px; }
+    padding-left: 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0; }
   .ChatComponent .close-chat {
     display: flex;
     align-items: center; }
   .ChatComponent .chat-container {
     background: #fff;
-    height: 100vh; }
+    height: 100vh;
+    padding: 90px 18px 90px 40px;
+    overflow: scroll; }
   .ChatComponent .user-input {
-    justify-content: space-between; }
+    padding: 0 24px;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0; }
     .ChatComponent .user-input input {
-      width: 100%; }
+      width: 100%;
+      margin-right: 1rem;
+      height: 100%;
+      background: #fafafa;
+      border: none;
+      font-weight: 300;
+      color: #AEB8C0; }
+    .ChatComponent .user-input button {
+      display: flex;
+      align-items: center;
+      font-weight: 300;
+      color: #AEB8C0;
+      border: none;
+      background: #fafafa;
+      padding: 8px;
+      border-radius: 8px; }
+      .ChatComponent .user-input button:active {
+        background: #ededed; }
+        .ChatComponent .user-input button:active svg {
+          transform: scale(0.95); }
+      .ChatComponent .user-input button svg {
+        opacity: 0.5; }
+      .ChatComponent .user-input button * + * {
+        margin-left: .5em; }
+
+.message-block {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end; }
+  .message-block + * {
+    margin-top: 28px; }
+  .message-block.receiver .message-block__avatar {
+    width: 28px;
+    height: 28px; }
+  .message-block.receiver .message-block__message {
+    background-image: linear-gradient(-167deg, #0044ff 0%, #0088ff 100%);
+    color: #FFFFFF;
+    margin-right: 8px; }
+  .message-block.receiver .message-block__time {
+    margin-right: 16px; }
+  .message-block.sender {
+    flex-direction: row-reverse; }
+    .message-block.sender .message-block__message {
+      background: white;
+      color: #AEB8C0;
+      margin-left: 8px; }
+    .message-block.sender .message-block__time {
+      margin-left: 16px; }
+  .message-block__avatar {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden; }
+  .message-block__message {
+    box-shadow: 0 2px 4px 0 rgba(210, 210, 210, 0.5);
+    font-weight: 300;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 20px; }
+  .message-block__time {
+    font-size: 16px;
+    font-weight: 300;
+    color: #AEB8C0; }
 
 .footer-nav {
   display: flex;

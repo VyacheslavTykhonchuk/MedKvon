@@ -1,27 +1,88 @@
 import React, { Component } from 'react';
+import { Message } from './Message/Message';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { get, post } from 'axios';
+import Preloader from '../../preloader/Preloader';
 
-export default class Chat extends Component {
+const mapStateToProps = (state) => ({
+  userURL: state.videoCall.url,
+});
+const mapDispatchToProps = {
+  push,
+};
+
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [
-        {
-          name: 'Receiver',
-          type: 'receiver',
-          message: 'Hello there!',
-          time: '11:00',
-        },
-        {
-          name: 'Sender',
-          type: 'sender',
-          message: 'Hello to you!',
-          time: '11:01',
-        },
-      ],
+      messages: [],
+      loading: true,
     };
+    this.msgContainer = React.createRef();
+    this.fetchMessages();
   }
+  fetchMessages = () => {
+    get(`https://videodoctor.pp.ua${this.props.userURL}`)
+      .then((result) => {
+        const { ...DATA } = result.data;
+        this.setState({
+          loading: false,
+        });
+        return { room_id: DATA.room_id, order_id: DATA.order_id };
+      })
+      .then((res) => {
+        post('https://videodoctor.pp.ua/api_v1/room/messages', res)
+          .then((result) => {
+            const msgArr = result.data.data;
+            this.setState({
+              messages: msgArr,
+            });
+            const lastMessageId = msgArr[msgArr.length - 1].id;
+            const objForCheckNewMsgs = { ...res, last_id: lastMessageId };
+            this.scrollToBottom();
+            return objForCheckNewMsgs;
+          })
+          .then((result) => {
+            this.checkNewMessages(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  checkNewMessages = (res) => {
+    const { ...data } = res;
+    console.log(data);
+    setInterval(() => {
+      post('https://videodoctor.pp.ua/api_v1/room/messages', res)
+        .then((result) => {
+          const newMsgArr = result.data.data;
+          const oldMsgArr = this.state.messages;
+          this.setState({
+            messages: mergeArrs(newMsgArr, oldMsgArr),
+          });
+          this.scrollToBottom();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 5000);
+    function mergeArrs(newArr, oldArr) {
+      const mergeArr = [...newArr, ...oldArr];
+      return mergeArr;
+    }
+  };
+
+  scrollToBottom = () => {
+    this.msgContainer.current.scrollTop = this.msgContainer.current.scrollHeight;
+  };
   closeChat = () => {
-    console.log('Close Chat!');
+    this.props.push('/main/active-tickets/conference');
   };
   render() {
     return (
@@ -50,19 +111,43 @@ export default class Chat extends Component {
             </svg>
           </div>
         </header>
-        <section className="chat-container">
-          <div className="message-block">
-            <time className="message-block__time">11:44</time>
-            <article className="message-block__message">Message text</article>
-            <img alt="userAvatar" className="message-block__avatar" />
-          </div>
-        </section>
-
+        {this.state.loading ? (
+          <Preloader />
+        ) : (
+          <section ref={this.msgContainer} className="chat-container">
+            {this.state.messages.map((msgData) => (
+              <Message
+                key={msgData.time + msgData.message + Math.random()}
+                avatar={msgData.avatar}
+                type={msgData.type}
+                message={msgData.message}
+                time={msgData.time}
+                id={msgData.id}
+                file={msgData.file}
+              />
+            ))}
+          </section>
+        )}
         <div className="user-input">
           <input type="text" placeholder="Type your messages …" />
-          <button>Send</button>
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              id="Capa_1"
+              viewBox="0 0 52 52"
+            >
+              <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28H28v11c0,1.104-0.896,2-2,2 s-2-0.896-2-2V28H13.5c-1.104,0-2-0.896-2-2s0.896-2,2-2H24V14c0-1.104,0.896-2,2-2s2,0.896,2,2v10h10.5c1.104,0,2,0.896,2,2 S39.604,28,38.5,28z" />
+            </svg>
+            <span>Send</span>
+          </button>
         </div>
       </div>
     );
   }
 }
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chat);
