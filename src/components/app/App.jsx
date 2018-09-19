@@ -25,16 +25,16 @@ class App extends React.Component {
 
     if (window.cordova) {
       this.checkAndroidPermissions(() => {
-        alert("That's all");
-      })
+        // alert("That's all");
+      });
     } else {
-      alert("Ты чо делаешь?!");
+      // alert("Ты чо делаешь?!");
     }
   }
 
   /* #HERE# */
   checkAndroidPermissions(callback) {
-    if (window.device.platform !== "Android") {
+    if (window.device.platform !== 'Android') {
       callback();
       return;
     }
@@ -44,7 +44,7 @@ class App extends React.Component {
     var arr = [
       permissions.CAMERA,
       permissions.RECORD_AUDIO,
-      permissions.MODIFY_AUDIO_SETTINGS
+      permissions.MODIFY_AUDIO_SETTINGS,
     ];
 
     permissions.hasPermission(
@@ -62,15 +62,15 @@ class App extends React.Component {
               callback();
               return;
             }
-            alert("Please manually enable camera and microphone permissions.");
+            alert('Please manually enable camera and microphone permissions.');
           },
           function() {
-            alert("Please manually enable camera and microphone permissions.");
+            alert('Please manually enable camera and microphone permissions.');
           }
         );
       },
       function() {
-        alert("Please manually enable camera and microphone permissions.");
+        alert('Please manually enable camera and microphone permissions.');
       }
     );
   }
