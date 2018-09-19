@@ -125,11 +125,9 @@ class StepTicket extends React.Component {
   }
   componentDidMount() {
     const switches = document.querySelectorAll('.switch-block');
-
     switches.forEach((item) => {
       const switchName = item.classList[0];
       const fetchedData = this.state.formdata;
-
       for (const key in fetchedData) {
         if (fetchedData.hasOwnProperty(key)) {
           const el = fetchedData[key];
