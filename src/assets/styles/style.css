@@ -494,6 +494,31 @@ main {
   left: 50%;
   transform: translate(-50%, -50%) scale(1); }
 
+.ChatComponent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw; }
+  .ChatComponent .user-input, .ChatComponent header {
+    height: 75px;
+    width: 100%;
+    background: #FAFAFA;
+    display: flex;
+    align-items: center; }
+  .ChatComponent header {
+    padding-left: 50px; }
+  .ChatComponent .close-chat {
+    display: flex;
+    align-items: center; }
+  .ChatComponent .chat-container {
+    background: #fff;
+    height: 100vh; }
+  .ChatComponent .user-input {
+    justify-content: space-between; }
+    .ChatComponent .user-input input {
+      width: 100%; }
+
 .footer-nav {
   display: flex;
   align-items: center;

@@ -10,6 +10,7 @@ import InfoPages from '../info-pages/InfoPages';
 import CreateTicket from '../create-ticket/CreateTicket';
 import Wallet from '../wallet/Wallet';
 import Notifications from '../notifications/Notifications';
+import Chat from '../main/chat/Chat';
 
 class App extends React.Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class App extends React.Component {
         <Route path="/info-pages" component={InfoPages} />
         <Route path="/create-ticket" component={CreateTicket} />
         <Route path="/wallet" component={Wallet} />
+        <Route path="/chat" component={Chat} />
         <Notifications />
       </main>
     );

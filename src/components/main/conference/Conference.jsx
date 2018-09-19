@@ -14,6 +14,9 @@ class Conference extends Component {
   startVideo = () => {
     this.props.push('/main/active-tickets/conference/video-call');
   };
+  startChat = () => {
+    this.props.push('/chat');
+  };
   render() {
     return (
       <div className="conference-block">
@@ -60,7 +63,7 @@ class Conference extends Component {
                 </g>
               </svg>
             </div>
-            <div className="circle circle_right">
+            <div onClick={this.startChat} className="circle circle_right">
               <svg
                 width="20"
                 height="20"
