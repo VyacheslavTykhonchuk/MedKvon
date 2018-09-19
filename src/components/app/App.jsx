@@ -20,6 +20,59 @@ class App extends React.Component {
       const userToken = localStorage.getItem('user-token');
       axios.defaults.headers.common['user-token'] = userToken;
     }
+
+    /* #HERE# */
+
+    if (window.cordova) {
+      this.checkAndroidPermissions(() => {
+        alert("That's all");
+      })
+    } else {
+      alert("Ты чо делаешь?!");
+    }
+  }
+
+  /* #HERE# */
+  checkAndroidPermissions(callback) {
+    if (window.device.platform !== "Android") {
+      callback();
+      return;
+    }
+
+    var permissions = window.cordova.plugins.permissions;
+
+    var arr = [
+      permissions.CAMERA,
+      permissions.RECORD_AUDIO,
+      permissions.MODIFY_AUDIO_SETTINGS
+    ];
+
+    permissions.hasPermission(
+      arr,
+      function(status) {
+        if (status.hasPermission) {
+          callback();
+          return;
+        }
+
+        permissions.requestPermissions(
+          arr,
+          function(status) {
+            if (status.hasPermission) {
+              callback();
+              return;
+            }
+            alert("Please manually enable camera and microphone permissions.");
+          },
+          function() {
+            alert("Please manually enable camera and microphone permissions.");
+          }
+        );
+      },
+      function() {
+        alert("Please manually enable camera and microphone permissions.");
+      }
+    );
   }
 
   render() {
