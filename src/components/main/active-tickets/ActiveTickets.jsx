@@ -46,6 +46,7 @@ class ActiveTickets extends React.Component {
                 leftBtnAction={() => this.leftBtnFunc(item.url)}
                 rightBtnText={this.props.userType === 10 ? 'END' : null}
                 rightBtnAction={this.rightBtnFunc}
+                page="active-tickets"
               />
             ))}
           </div>

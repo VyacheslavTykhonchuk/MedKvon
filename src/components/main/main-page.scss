@@ -245,13 +245,14 @@
             }
 
             &__message {
-                background-image: linear-gradient(-167deg, hsl(224, 100%, 50%) 0%, hsl(208, 100%, 50%) 100%);
+                background: #0B9AF5;
                 color: #FFFFFF;
                 margin-right: 8px;
             }
 
             &__time {
-                margin-right: 16px;
+                margin-right: 12px;
+                text-align: right;
             }
         }
     }
@@ -267,7 +268,7 @@
             }
 
             &__time {
-                margin-left: 16px;
+                margin-left: 12px;
             }
         }
     }
@@ -286,10 +287,13 @@
         font-size: 16px;
         border-radius: 20px;
         padding: 20px;
+        max-width: 85vw;
+        white-space: pre-wrap;
+        word-break: break-word;
     }
 
     &__time {
-        font-size: 16px;
+        font-size: 12px;
         font-weight: $book;
         color: #AEB8C0;
     }

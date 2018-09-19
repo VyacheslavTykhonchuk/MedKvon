@@ -123,6 +123,27 @@ class StepTicket extends React.Component {
   componentWillUnmount() {
     this.props.previewTicketFrom(null);
   }
+  componentDidMount() {
+    const switches = document.querySelectorAll('.switch-block');
+
+    switches.forEach((item) => {
+      const switchName = item.classList[0];
+      const fetchedData = this.state.formdata;
+
+      for (const key in fetchedData) {
+        if (fetchedData.hasOwnProperty(key)) {
+          const el = fetchedData[key];
+          if (
+            el === 'on' &&
+            switchName === key &&
+            key !== 'physical_exercises'
+          ) {
+            item.classList.add('switch-block_active');
+          }
+        }
+      }
+    });
+  }
   render() {
     return (
       <div
@@ -153,6 +174,7 @@ class StepTicket extends React.Component {
               <Switch
                 isActive={true}
                 text="Written opinion:"
+                name="written_opinion"
                 onClick={() => this.onSwitchClick('written_opinion')}
               />
               <InputBlock

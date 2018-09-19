@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { get, post } from 'axios';
 import Preloader from '../../preloader/Preloader';
-
+import { mergeArrays } from '../../../utility/mergeArrs';
 const mapStateToProps = (state) => ({
   userURL: state.videoCall.url,
 });
@@ -17,6 +17,7 @@ class Chat extends Component {
     super(props);
     this.state = {
       messages: [],
+      userMessage: '',
       loading: true,
     };
     this.msgContainer = React.createRef();
@@ -37,16 +38,18 @@ class Chat extends Component {
         post('https://videodoctor.pp.ua/api_v1/room/messages', res)
           .then((result) => {
             const msgArr = result.data.data;
-            this.setState({
-              messages: msgArr,
-            });
             const lastMessageId = msgArr[msgArr.length - 1].id;
             const objForCheckNewMsgs = { ...res, last_id: lastMessageId };
+            this.setState({
+              messages: msgArr,
+              objForCheckNewMsgs: { ...objForCheckNewMsgs },
+            });
             this.scrollToBottom();
-            return objForCheckNewMsgs;
           })
           .then((result) => {
-            this.checkNewMessages(result);
+            setInterval(() => {
+              this.checkNewMessages(this.state.objForCheckNewMsgs);
+            }, 3000);
           })
           .catch((err) => {
             console.log(err);
@@ -57,26 +60,20 @@ class Chat extends Component {
       });
   };
   checkNewMessages = (res) => {
-    const { ...data } = res;
-    console.log(data);
-    setInterval(() => {
-      post('https://videodoctor.pp.ua/api_v1/room/messages', res)
-        .then((result) => {
-          const newMsgArr = result.data.data;
-          const oldMsgArr = this.state.messages;
+    post('https://videodoctor.pp.ua/api_v1/room/messages', res)
+      .then((result) => {
+        const newMsgArr = result.data.data;
+        const oldMsgArr = this.state.messages;
+        if (newMsgArr.length > 0) {
           this.setState({
-            messages: mergeArrs(newMsgArr, oldMsgArr),
+            messages: mergeArrays(oldMsgArr, newMsgArr),
           });
           this.scrollToBottom();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, 5000);
-    function mergeArrs(newArr, oldArr) {
-      const mergeArr = [...newArr, ...oldArr];
-      return mergeArr;
-    }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   scrollToBottom = () => {
     this.msgContainer.current.scrollTop = this.msgContainer.current.scrollHeight;
@@ -84,13 +81,36 @@ class Chat extends Component {
   closeChat = () => {
     this.props.push('/main/active-tickets/conference');
   };
+  handleChange = (event) => {
+    this.setState({ userMessage: event.target.value });
+  };
   sendMessage = () => {
     const data = {
       message: this.state.userMessage,
       room_id: this.state.room_id,
       order_id: this.state.order_id,
+      file: '',
+      fileFile: '',
     };
-    console.log(data);
+    post('https://videodoctor.pp.ua/api_v1/room/addmessage', data)
+      .then((result) => {
+        if (result.data.success) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .then((res) => {
+        if (res) {
+          this.checkNewMessages(this.state.objForCheckNewMsgs);
+          this.setState({
+            userMessage: '',
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   render() {
     return (
@@ -129,7 +149,7 @@ class Chat extends Component {
                 avatar={msgData.avatar}
                 type={msgData.type}
                 message={msgData.message}
-                time={msgData.time}
+                time={msgData.time.slice(-5)}
                 id={msgData.id}
                 file={msgData.file}
               />
@@ -140,7 +160,8 @@ class Chat extends Component {
           <input
             type="text"
             placeholder="Type your messages …"
-            // onChange={}
+            value={this.state.userMessage}
+            onChange={this.handleChange}
           />
           <button>
             <svg

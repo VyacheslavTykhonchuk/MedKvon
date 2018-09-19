@@ -114,7 +114,8 @@ class Card extends React.Component {
   };
 
   action = () => {
-    if (this.props.userType === 20) {
+    console.log(this.props);
+    if (this.props.userType === 20 && this.props.page !== 'active-tickets') {
       if (this.state.activated !== null) {
         this.cancelTicket(this.props.id);
       } else {

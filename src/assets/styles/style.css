@@ -563,11 +563,12 @@ main {
     width: 28px;
     height: 28px; }
   .message-block.receiver .message-block__message {
-    background-image: linear-gradient(-167deg, #0044ff 0%, #0088ff 100%);
+    background: #0B9AF5;
     color: #FFFFFF;
     margin-right: 8px; }
   .message-block.receiver .message-block__time {
-    margin-right: 16px; }
+    margin-right: 12px;
+    text-align: right; }
   .message-block.sender {
     flex-direction: row-reverse; }
     .message-block.sender .message-block__message {
@@ -575,7 +576,7 @@ main {
       color: #AEB8C0;
       margin-left: 8px; }
     .message-block.sender .message-block__time {
-      margin-left: 16px; }
+      margin-left: 12px; }
   .message-block__avatar {
     min-width: 28px;
     width: 28px;
@@ -587,9 +588,12 @@ main {
     font-weight: 300;
     font-size: 16px;
     border-radius: 20px;
-    padding: 20px; }
+    padding: 20px;
+    max-width: 85vw;
+    white-space: pre-wrap;
+    word-break: break-word; }
   .message-block__time {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 300;
     color: #AEB8C0; }
 
