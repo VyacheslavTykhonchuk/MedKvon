@@ -11,9 +11,9 @@
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <platform name="android">
-        <preference name="Orientation" value="default" />
-        <preference name="KeepRunning" value="true" />
-        <preference name="AndroidLaunchMode" value="singleTop" />
+        <allow-intent href="market:*" />
+        <preference name="android-minSdkVersion" value="19" />
+        <preference name="android-targetSdkVersion" value="19" />
     </platform>
     <platform name="ios">
         <preference name="Orientation" value="all" />
