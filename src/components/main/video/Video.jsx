@@ -6,9 +6,10 @@ import { get } from 'axios';
 import { showNotification } from '../../../actions/notificationActions';
 import { push } from 'connected-react-router';
 
-import { WebRtcPeer } from 'kurento-utils';
+// import { WebRtcPeer } from 'kurento-utils';
 import 'webrtc-adapter';
 import '../../../utility/index.js';
+import kurentoUtils from '../../../utility/kurento-utils.js';
 
 const mapDispatchToProps = {
   showNotification,
@@ -18,6 +19,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   videoURL: state.videoCall.url,
 });
+
 const VIDEO_CALL = (VIDEO_DATA) => {
   let $order_id_g = VIDEO_DATA.$order_id_g,
     $room_id_g = VIDEO_DATA.$room_id_g,
@@ -25,6 +27,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
     $video_translater = VIDEO_DATA.$video_translater,
     $video_user = VIDEO_DATA.$video_user,
     $video_user2 = VIDEO_DATA.$video_user2;
+
   var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
   var videoInput = [];
   var videoOutput = [];
@@ -56,7 +59,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
 
   // проверка входящих каждых несколько секунд
   function checkCall(message) {
-    console.log('message',message)
+    console.log('message', message);
     if (message.name == $video_user) {
       intervals[$video_doctor] = setInterval(function() {
         call(message.name, $video_doctor);
@@ -77,8 +80,6 @@ const VIDEO_CALL = (VIDEO_DATA) => {
   ws.onmessage = function(message) {
     var parsedMessage = JSON.parse(message.data);
     console.info('Received message: ' + message.data);
-
-   
 
     switch (parsedMessage.id) {
       case 'registerResponse':
@@ -193,7 +194,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
       id: 'register',
       name: name_user,
     };
-    
+
     sendMessage(message);
   }
 
@@ -223,28 +224,29 @@ const VIDEO_CALL = (VIDEO_DATA) => {
           onicecandidate: onIceCandidate,
         };
       }
-      console.log('options',options)
-      webRtcPeer[from] = WebRtcPeer.WebRtcPeerSendrecv(options, function(
-        error
-      ) {
-        if (error) {
-          // console.error(error);
-        }
-
-        this.generateOffer(function(error, offerSdp) {
-          // console.log(offerSdp);
+      console.log('options', options);
+      webRtcPeer[from] = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+        options,
+        function(error) {
           if (error) {
             // console.error(error);
           }
-          var message = {
-            id: 'call',
-            from: from,
-            to: to,
-            sdpOffer: offerSdp,
-          };
-          sendMessage(message);
-        });
-      });
+
+          this.generateOffer(function(error, offerSdp) {
+            // console.log(offerSdp);
+            if (error) {
+              // console.error(error);
+            }
+            var message = {
+              id: 'call',
+              from: from,
+              to: to,
+              sdpOffer: offerSdp,
+            };
+            sendMessage(message);
+          });
+        }
+      );
       clearInterval(intervals[message.to]);
     }
 
@@ -351,21 +353,22 @@ const VIDEO_CALL = (VIDEO_DATA) => {
         localVideo: videoInput[$video_user],
         onicecandidate: onIceCandidate,
       };
-      webRtcPeer['local'] = WebRtcPeer.WebRtcPeerSendrecv(options, function(
-        error
-      ) {
-        this.generateOffer(function(error, offerSdp) {
-          if (error) {
-            // console.error(error);
-          }
-          var message = {
-            id: 'call',
-            from: $video_user,
-            sdpOffer: offerSdp,
-          };
-          sendMessage(message);
-        });
-      });
+      webRtcPeer['local'] = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+        options,
+        function(error) {
+          this.generateOffer(function(error, offerSdp) {
+            if (error) {
+              // console.error(error);
+            }
+            var message = {
+              id: 'call',
+              from: $video_user,
+              sdpOffer: offerSdp,
+            };
+            sendMessage(message);
+          });
+        }
+      );
       initcam = true;
     }
   }
@@ -476,7 +479,6 @@ class Video extends Component {
     this.props.push('/main/active-tickets/conference');
   };
   render() {
-
     return (
       <div id="VideoComponent" className="my_video_block">
         {/* <div id="debug">TEST TEXT</div> */}
