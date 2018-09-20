@@ -56,6 +56,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
 
   // проверка входящих каждых несколько секунд
   function checkCall(message) {
+    console.log('message',message)
     if (message.name == $video_user) {
       intervals[$video_doctor] = setInterval(function() {
         call(message.name, $video_doctor);
@@ -89,9 +90,9 @@ const VIDEO_CALL = (VIDEO_DATA) => {
       case 'callResponse':
         callResponse(parsedMessage);
         break;
-      // case 'incomingCall':
-      //   incomingCall(parsedMessage);
-      //   break;
+      case 'incomingCall':
+        incomingCall(parsedMessage);
+        break;
       case 'startCommunication':
         startCommunication(parsedMessage);
         break;
@@ -184,17 +185,15 @@ const VIDEO_CALL = (VIDEO_DATA) => {
     document
       .getElementById('my_video_block')
       .classList.remove('videoroom_hidden');
-    var name = name_user;
-    if (name == '') {
+    if (name_user == '') {
       window.alert('You must insert your user name');
       return;
     }
     var message = {
       id: 'register',
-      name: name,
+      name: name_user,
     };
-    console.log(register);
-
+    
     sendMessage(message);
   }
 
@@ -207,22 +206,24 @@ const VIDEO_CALL = (VIDEO_DATA) => {
     sendMessage(message);
 
     if (finduserStatus[to]) {
+      let options;
       if (to == $video_translater) {
         document
           .getElementById('translator_video_block')
           .classList.remove('videoroom_hidden');
-        var options = {
+        options = {
           localVideo: videoInput[from],
           remoteVideo: videoOutput[to],
           onicecandidate: onIceCandidate2,
         };
       } else {
-        var options = {
+        options = {
           localVideo: videoInput[from],
           remoteVideo: videoOutput[to],
           onicecandidate: onIceCandidate,
         };
       }
+      console.log('options',options)
       webRtcPeer[from] = WebRtcPeer.WebRtcPeerSendrecv(options, function(
         error
       ) {
@@ -415,6 +416,17 @@ class Video extends Component {
     }
   }
 
+  componentDidMount() {
+    get(`https://videodoctor.pp.ua${this.props.videoURL}`)
+      .then((result) => {
+        const { ...VIDEO_DATA } = result.data.connect_info;
+        VIDEO_CALL(VIDEO_DATA);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   /* #HERE# */
   checkAndroidPermissions(callback) {
     if (window.device.platform !== 'Android') {
@@ -464,14 +476,6 @@ class Video extends Component {
     this.props.push('/main/active-tickets/conference');
   };
   render() {
-    get(`https://videodoctor.pp.ua${this.props.videoURL}`)
-      .then((result) => {
-        const { ...VIDEO_DATA } = result.data.connect_info;
-        VIDEO_CALL(VIDEO_DATA);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
     return (
       <div id="VideoComponent" className="my_video_block">
