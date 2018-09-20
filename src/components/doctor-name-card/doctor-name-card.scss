@@ -4,8 +4,8 @@
     .card__info-wrap {
         justify-content: space-between;
     }
-    
 }
+
 .checkbox {
     width: 32px;
     height: 32px;
@@ -13,22 +13,24 @@
     position: relative;
     border: 2px solid hsla(214, 100%, 50%, 0.5);
     border-radius: 3px;
+    color: white;
 
     &.checked {
         background: hsla(214, 100%, 50%, 1);
         border-color: hsla(214, 100%, 50%, 0.5);
+        color: white;
+
+        .checkbox_check {
+            transform: translate(-50%, -50%) scale(1);
+        }
     }
 
     &_check {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: inline;
+        color: #fff !important;
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        color: white;
+        transform: translate(-50%, -50%) scale(0);
     }
 }

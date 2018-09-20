@@ -657,7 +657,8 @@ main {
     transform: scalex(0);
     opacity: 0; }
   .home-page.popup-opened_reg .btn_big.btn_blue {
-    transform: translate3d(0, 25vw, 0);
+    position: absolute;
+    bottom: 1rem;
     background: white;
     color: #cccccc;
     box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.2); }
@@ -1535,18 +1536,18 @@ main {
   float: right;
   position: relative;
   border: 2px solid rgba(0, 111, 255, 0.5);
-  border-radius: 3px; }
+  border-radius: 3px;
+  color: white; }
   .checkbox.checked {
     background: #006fff;
-    border-color: rgba(0, 111, 255, 0.5); }
+    border-color: rgba(0, 111, 255, 0.5);
+    color: white; }
+    .checkbox.checked .checkbox_check {
+      transform: translate(-50%, -50%) scale(1); }
   .checkbox_check {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline;
+    color: #fff !important;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    color: white; }
+    transform: translate(-50%, -50%) scale(0); }

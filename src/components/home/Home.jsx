@@ -54,6 +54,7 @@ class Home extends React.Component {
     this.doctor = React.createRef();
     this.patient = React.createRef();
     this.translator = React.createRef();
+    localStorage.clear();
   }
 
   showRegPopup = (e) => {
