@@ -77,8 +77,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
     var parsedMessage = JSON.parse(message.data);
     console.info('Received message: ' + message.data);
 
-    let text = document.getElementById('debug').innerHTML;
-    document.getElementById('debug').innerHTML = `${text} ${message.data}`;
+   
 
     switch (parsedMessage.id) {
       case 'registerResponse':
@@ -399,10 +398,6 @@ const VIDEO_CALL = (VIDEO_DATA) => {
   function sendMessage(message) {
     var jsonMessage = JSON.stringify(message);
     console.log('Senging message: ' + jsonMessage);
-    let text = document.getElementById('debug').innerHTML;
-    document.getElementById(
-      'debug'
-    ).innerHTML = `${text} jsonMessage :${jsonMessage}`;
     ws.send(jsonMessage);
   }
 };
