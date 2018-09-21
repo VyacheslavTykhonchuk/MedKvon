@@ -422,6 +422,10 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
   var intervals = {};
   var initcam = false;
 
+  videoInput[$video_doctor] = document.getElementById('videome');
+  videoOutput[$video_user] = document.getElementById('videouser');
+  videoOutput[$video_translater] = document.getElementById('videotranslater');
+
   const NO_CALL = 0;
   var callState = null;
 
