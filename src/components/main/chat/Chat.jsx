@@ -26,6 +26,7 @@ class Chat extends Component {
   fetchMessages = () => {
     get(`https://videodoctor.pp.ua${this.props.userURL}`)
       .then((result) => {
+        console.log()
         const { ...DATA } = result.data;
         this.setState({
           loading: false,
