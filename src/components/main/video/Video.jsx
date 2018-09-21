@@ -6,18 +6,22 @@ import { get } from 'axios';
 import { showNotification } from '../../../actions/notificationActions';
 import { push } from 'connected-react-router';
 
-// import { WebRtcPeer } from 'kurento-utils';
-// import 'webrtc-adapter';
-import '../../../utility/adapter.js';
-import '../../../utility/kurento-utils.js';
-
 var $video_user = '83_sq9DyelNoN';
 var $video_doctor = '41_qHdBlYUB';
 var $video_doctor2 = '41_qHdBlYUB_translater';
 var $video_translater = 'XPvyFL9sTj_fordoctor';
-var $order_id_g = '60';
-var $room_id_g = '22';
 
+import '../../../utility/adapter.js';
+import kurentoUtils from '../../../utility/kurento-utils.js';
+
+const mapDispatchToProps = {
+  showNotification,
+  push,
+};
+
+const mapStateToProps = (state) => ({
+  videoURL: state.videoCall.url,
+});
 
 var app2 = {
   mainApp: function() {
@@ -40,15 +44,10 @@ var app2 = {
     document.getElementById("terminate").addEventListener("click", function() {
       stop();
     });
-    document
-      .getElementById("startcall")
-      .addEventListener("click", function(el) {
-        register($video_doctor);
-        register($video_doctor2);
-      });
 
     ws.onopen = function() {
-      // register();
+      register($video_doctor);
+      register($video_doctor2);
     };
 
     // проверка входящих каждых несколько секунд
@@ -387,21 +386,10 @@ var app2 = {
   }
 };
 
-const mapDispatchToProps = {
-  showNotification,
-  push,
-};
-
-const mapStateToProps = (state) => ({
-  videoURL: state.videoCall.url,
-});
-
 class Video extends Component {
   componentDidMount() {
     if (window.cordova) {
-      this.checkAndroidPermissions(() => {
-        app2.mainApp();
-      });
+      app2.mainApp();
     }
   }
 
