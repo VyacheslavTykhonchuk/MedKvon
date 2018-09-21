@@ -49,7 +49,7 @@ const mainApp = (data) => {
 
   // проверка входящих каждых несколько секунд
   function checkCall(message) {
-    if (message.name == $video_user) {
+    if (message.name == $video_user2) {
       intervals[$video_translater] = setInterval(function() {
         call(message.name, $video_translater);
       }, 5000);
@@ -206,7 +206,7 @@ const mainApp = (data) => {
 
   function stop(name) {
     if (name) {
-      if (name == $video_user) {
+      if (name == $video_user2) {
         document
           .getElementById("translator_video_block")
           .classList.add("videoroom_hidden");
@@ -223,10 +223,10 @@ const mainApp = (data) => {
           webRtcPeer[$video_user] = null;
         }
       }
-      if (name == $video_user) {
-        if (webRtcPeer[$video_user]) {
-          webRtcPeer[$video_user].dispose();
-          webRtcPeer[$video_user] = null;
+      if (name == $video_user2) {
+        if (webRtcPeer[$video_user2]) {
+          webRtcPeer[$video_user2].dispose();
+          webRtcPeer[$video_user2] = null;
         }
         clearInterval(intervals[$video_translater]);
         finduserStatus[$video_translater] = null;
@@ -325,7 +325,7 @@ const mainApp = (data) => {
     var message = {
       id: "onIceCandidate",
       candidate: candidate,
-      from: $video_user
+      from: $video_user2
     };
     sendMessage(message);
   }
