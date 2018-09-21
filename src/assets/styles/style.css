@@ -453,7 +453,7 @@ main {
   background: white;
   border-radius: 15px; }
 
-#VideoComponent #videodoctor {
+#VideoComponent #videodoctor, #VideoComponent #videouser {
   width: 100vw;
   height: 100vh;
   position: absolute;
