@@ -10,6 +10,7 @@ import Video from './video/Video';
 
 import MainNav from '../navigation/MainNav';
 import FooterNav from '../footer-nav/FooterNav';
+import TranslatorsList from './translators/TranslatorsList';
 
 let links = [
   {
@@ -27,7 +28,6 @@ let links = [
 ];
 class Main extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <div className="main-page">
         <MainNav links={links} />
@@ -50,7 +50,10 @@ class Main extends React.Component {
               path="/main/active-tickets/conference/video-call"
               component={Video}
             />
-           
+            <Route
+              path="/main/active-tickets/conference/translators"
+              component={TranslatorsList}
+            />
           </Switch>
         </section>
         {this.props.location.pathname ===

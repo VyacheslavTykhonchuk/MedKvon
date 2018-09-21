@@ -9,7 +9,12 @@ let links = [
     name: 'Conference',
     link: '/main/active-tickets/conference/',
   },
+  {
+    name: 'Translator',
+    link: '/main/active-tickets/conference/translators',
+  },
 ];
+
 class Conference extends Component {
   startVideo = () => {
     this.props.push('/main/active-tickets/conference/video-call');
