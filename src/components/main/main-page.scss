@@ -21,6 +21,7 @@
         bottom: 32px;
         left: 50%;
         transform: translate(-50%, 0);
+        text-align: center;
     }
 
     &__avatar {
@@ -33,6 +34,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         overflow: hidden;
+        object-fit: cover;
 
         img {
             width: 100%;

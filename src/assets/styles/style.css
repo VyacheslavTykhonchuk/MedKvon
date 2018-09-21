@@ -394,7 +394,8 @@ main {
   position: absolute;
   bottom: 32px;
   left: 50%;
-  transform: translate(-50%, 0); }
+  transform: translate(-50%, 0);
+  text-align: center; }
 
 .conference-block__avatar {
   width: 165px;
@@ -405,7 +406,8 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden; }
+  overflow: hidden;
+  object-fit: cover; }
   .conference-block__avatar img {
     width: 100%;
     height: 100%; }
