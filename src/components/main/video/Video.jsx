@@ -427,7 +427,7 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
 
   window.onload = function() {
     videoInput[$video_doctor] = document.getElementById('videome');
-    videoOutput[$video_user] = document.getElementById('videouser');
+    videoOutput[$video_user] = document.getElementById('videodoctor');
     videoOutput[$video_translater] = document.getElementById('videotranslater');
 
     document.getElementById('terminate').addEventListener('click', function() {
