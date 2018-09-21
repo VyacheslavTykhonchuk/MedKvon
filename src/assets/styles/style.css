@@ -1353,6 +1353,8 @@ main {
 
 .no-pointer-events {
   pointer-events: none; }
+  .no-pointer-events .btn.btn_small.btn_blue {
+    display: none; }
 
 .ticket-card {
   display: flex;

@@ -52,4 +52,8 @@
 
 .no-pointer-events {
     pointer-events: none;
+
+    .btn.btn_small.btn_blue {
+        display: none;
+    }
 }
