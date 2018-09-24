@@ -806,7 +806,8 @@ const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
     register($video_translater);
     register($video_translater2);
   });
-
+  register($video_translater);
+  register($video_translater2);
   ws.onopen = function() {
     register($video_translater);
     register($video_translater2);
