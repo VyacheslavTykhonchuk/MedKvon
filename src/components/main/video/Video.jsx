@@ -22,6 +22,8 @@ const mapStateToProps = (state) => ({
 });
 
 const VIDEO_CALL = (VIDEO_DATA) => {
+  console.log(VIDEO_DATA);
+
   let $order_id_g = VIDEO_DATA.$order_id_g,
     $room_id_g = VIDEO_DATA.$room_id_g,
     $video_doctor = VIDEO_DATA.$video_doctor,
@@ -407,6 +409,8 @@ const VIDEO_CALL = (VIDEO_DATA) => {
   }
 };
 const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
+  console.log(VIDEO_DATA);
+
   const $video_user = VIDEO_DATA.$video_user;
   const $video_doctor = VIDEO_DATA.$video_doctor;
   const $video_doctor2 = VIDEO_DATA.$video_doctor2;
@@ -773,6 +777,7 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
   }
 };
 const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
+  console.log(VIDEO_DATA);
   const $video_user = VIDEO_DATA.$video_user;
   const $video_doctor = VIDEO_DATA.$video_doctor;
   const $video_translater = VIDEO_DATA.$video_translater;
@@ -781,7 +786,6 @@ const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
   const $room_id_g = VIDEO_DATA.$room_id_g;
 
   var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
-
   var videoInput = [];
   var videoOutput = [];
   var webRtcPeer = [];
@@ -1176,7 +1180,6 @@ class Video extends Component {
             autoPlay
             width="100%"
             height="100%"
-            poster="/design/img/video-camera-outline.svg"
           />
         </div>
         <video
@@ -1196,7 +1199,6 @@ class Video extends Component {
             autoPlay
             width="100%"
             height="100%"
-            poster="<?= Yii::$app->user->identity->avatar ?>"
           />
           <video
             id="videome2"
