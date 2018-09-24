@@ -429,21 +429,17 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
   const NO_CALL = 0;
   var callState = null;
 
-  window.onload = function() {
-    videoInput[$video_doctor] = document.getElementById('videome');
-    videoOutput[$video_user] = document.getElementById('videouser');
-    videoOutput[$video_translater] = document.getElementById('videotranslater');
+  videoInput[$video_doctor] = document.getElementById('videome');
+  videoOutput[$video_user] = document.getElementById('videouser');
+  videoOutput[$video_translater] = document.getElementById('videotranslater');
 
-    document.getElementById('terminate').addEventListener('click', function() {
-      stop();
-    });
-    document
-      .getElementById('startcall')
-      .addEventListener('click', function(el) {
-        register($video_doctor);
-        register($video_doctor2);
-      });
-  };
+  document.getElementById('terminate').addEventListener('click', function() {
+    stop();
+  });
+  document.getElementById('startcall').addEventListener('click', function(el) {
+    register($video_doctor);
+    register($video_doctor2);
+  });
 
   ws.onopen = function() {
     register($video_doctor);
@@ -647,7 +643,7 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
 
       console.log(webRtcPeer);
 
-      for (key in webRtcPeer) {
+      for (let key in webRtcPeer) {
         if (webRtcPeer[key]) {
           webRtcPeer[key].dispose();
           webRtcPeer[key] = null;
@@ -660,10 +656,10 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
         };
         sendMessage(message);
       }
-      for (key in intervals) {
+      for (let key in intervals) {
         clearInterval(intervals[key]);
       }
-      for (key in finduserStatus) {
+      for (let key in finduserStatus) {
         finduserStatus[key] = null;
       }
       initcam = false;
