@@ -453,6 +453,15 @@ main {
   border-radius: 15px;
   z-index: 999; }
 
+#VideoComponent .translator-doctor {
+  width: 150px;
+  height: auto;
+  position: absolute;
+  bottom: 5rem;
+  background: white;
+  border-radius: 15px;
+  z-index: 999; }
+
 #VideoComponent #videotranslater {
   right: 1rem; }
 
@@ -489,6 +498,19 @@ main {
 #VideoComponent #terminate {
   left: 50%;
   transform: translate(-50%, -50%) scale(1); }
+
+#VideoComponent .translator-doctor {
+  width: 150px !important;
+  height: auto;
+  position: absolute;
+  right: 1rem;
+  height: auto !important;
+  bottom: 5rem;
+  background: white;
+  border-radius: 15px;
+  z-index: 999;
+  left: initial !important;
+  top: initial !important; }
 
 .ChatComponent {
   display: flex;

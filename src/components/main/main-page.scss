@@ -97,6 +97,16 @@
         z-index: 999;
     }
 
+    .translator-doctor {
+        width: 150px;
+        height: auto;
+        position: absolute;
+        bottom: 5rem;
+        background: hsl(0, 0%, 100%);
+        border-radius: 15px;
+        z-index: 999;
+    }
+
     #videotranslater {
         right: 1rem;
     }
@@ -140,6 +150,20 @@
     #terminate {
         left: 50%;
         transform: translate(-50%, -50%) scale(1);
+    }
+
+    .translator-doctor {
+        width: 150px !important;
+        height: auto;
+        position: absolute;
+        right: 1rem;
+        height: auto !important;
+        bottom: 5rem;
+        background: hsl(0, 0%, 100%);
+        border-radius: 15px;
+        z-index: 999;
+        left: initial !important;
+        top: initial !important;
     }
 }
 

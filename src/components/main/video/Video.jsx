@@ -1172,10 +1172,11 @@ class Video extends Component {
         {/* <div id="debug">TEST TEXT</div> */}
         <div
           id="translator_video_block"
-          className="skype-main__video_translator videoroom_hidden"
+          className="skype-main__video_translator"
         >
           <video
-            id="videotranslater"
+            id={this.props.userType === 30 ? 'videodoctor' : 'videotranslater'}
+            className={this.props.userType === 30 ? 'translator-doctor' : null}
             playsInline
             autoPlay
             width="100%"
