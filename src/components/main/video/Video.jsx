@@ -1090,6 +1090,7 @@ const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
     ws.send(jsonMessage);
   }
 };
+
 class Video extends Component {
   constructor(props) {
     super(props);
@@ -1170,7 +1171,6 @@ class Video extends Component {
   render() {
     return (
       <div id="VideoComponent" className="my_video_block">
-        {/* <div id="debug">TEST TEXT</div> */}
         <div
           id="translator_video_block"
           className="skype-main__video_translator"
