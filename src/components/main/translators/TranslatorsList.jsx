@@ -22,7 +22,7 @@ class TranslatorsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      translaters: [],
+      translaters: [{}],
       loading: true,
     };
     this.update();

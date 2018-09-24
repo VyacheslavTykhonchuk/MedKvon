@@ -776,7 +776,319 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
     }
   }
 };
+const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
+  const $video_user = VIDEO_DATA.$video_user;
+  const $video_doctor = VIDEO_DATA.$video_doctor;
+  const $video_translater = VIDEO_DATA.$video_translater;
+  const $video_translater2 = VIDEO_DATA.$video_translater2;
+  const $order_id_g = VIDEO_DATA.$order_id_g;
+  const $room_id_g = VIDEO_DATA.$room_id_g;
 
+  var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
+
+  var videoInput = [];
+  var videoOutput = [];
+  var webRtcPeer = [];
+  var refreshCall = null;
+  var initcam = false;
+
+  const NO_CALL = 0;
+  var callState = null;
+
+  videoInput[$video_translater] = document.getElementById('videome');
+  videoOutput[$video_user] = document.getElementById('videouser');
+  videoOutput[$video_doctor] = document.getElementById('videodoctor');
+
+  document.getElementById('terminate').addEventListener('click', function() {
+    stop();
+  });
+  document.getElementById('startcall').addEventListener('click', function(el) {
+    register($video_translater);
+    register($video_translater2);
+  });
+
+  ws.onopen = function() {
+    register($video_translater);
+    register($video_translater2);
+  };
+
+  // проверка входящих каждых несколько секунд
+  function checkCall(message) {
+    if (message.name == $video_user) {
+      intervals[$video_doctor] = setInterval(function() {
+        call(message.name, $video_doctor);
+      }, 5000);
+    }
+    if (message.name == $video_user2) {
+      intervals[$video_translater] = setInterval(function() {
+        call(message.name, $video_translater);
+      }, 5000);
+    }
+  }
+
+  window.onbeforeunload = function() {
+    ws.close();
+  };
+
+  ws.onmessage = function(message) {
+    var parsedMessage = JSON.parse(message.data);
+    console.info('Received message: ' + message.data);
+
+    switch (parsedMessage.id) {
+      case 'registerResponse':
+        resgisterResponse(parsedMessage);
+        break;
+      case 'finduser':
+        finduser(parsedMessage);
+        break;
+      case 'callResponse':
+        callResponse(parsedMessage);
+        break;
+      case 'incomingCall':
+        incomingCall(parsedMessage);
+        break;
+      case 'startCommunication':
+        startCommunication(parsedMessage);
+        break;
+      case 'stopCommunication':
+        console.info('Communication ended by remote peer');
+        if (parsedMessage.name) {
+          stop(parsedMessage.name);
+        } else {
+          stop();
+        }
+        // checkCall();
+        // stop(true);
+        break;
+      case 'iceCandidate':
+        // alert(parsedMessage.from);
+        webRtcPeer[parsedMessage.from].addIceCandidate(parsedMessage.candidate);
+        break;
+      default:
+        console.error('Unrecognized message', parsedMessage);
+    }
+  };
+
+  function resgisterResponse(message) {
+    if (message.response == 'accepted') {
+      // checkCall(message);
+
+      if (message.name == $video_translater) {
+        initcamfunc();
+      }
+    } else {
+      var errorMessage = message.message
+        ? message.message
+        : 'Unknown reason for register rejection.';
+      console.log(errorMessage);
+      alert('Error registering user or chat room opened in another window');
+    }
+  }
+
+  function callResponse(message) {
+    if (message.response != 'accepted') {
+      console.info('Call not accepted by peer. Closing call');
+      var errorMessage = message.message
+        ? message.message
+        : 'Unknown reason for call rejection.';
+      console.log(errorMessage);
+      // stop(true);
+    } else {
+      clearInterval(intervals[message.to]);
+      webRtcPeer[message.from].processAnswer(message.sdpAnswer);
+    }
+  }
+
+  function finduser(message) {
+    if (message.status) {
+      finduserStatus[message.to] = true;
+      return finduserStatus[message.to];
+    } else {
+      finduserStatus[message.to] = false;
+      return finduserStatus[message.to];
+    }
+  }
+
+  function startCommunication(message) {
+    webRtcPeer[message.from].processAnswer(message.sdpAnswer);
+  }
+
+  function register(name_user) {
+    document.getElementById('terminate').classList.remove('videoroom_hidden');
+    document.getElementById('startcall').classList.add('videoroom_hidden');
+    document
+      .getElementById('my_video_block')
+      .classList.remove('videoroom_hidden');
+    var name = name_user;
+    if (name == '') {
+      window.alert('You must insert your user name');
+      return;
+    }
+    var message = {
+      id: 'register',
+      name: name,
+    };
+    sendMessage(message);
+  }
+
+  function incomingCall(message) {
+    // alert(JSON.stringify(message));
+
+    if (message.from == $video_doctor) {
+      var options = {
+        localVideo: videoInput[message.to],
+        remoteVideo: videoOutput[message.from],
+        onicecandidate: onIceCandidate2,
+      };
+    } else {
+      var options = {
+        localVideo: videoInput[message.to],
+        remoteVideo: videoOutput[message.from],
+        onicecandidate: onIceCandidate,
+      };
+    }
+
+    webRtcPeer[message.from] = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+      options,
+      function(error) {
+        if (error) {
+          // console.error(error);
+        }
+
+        this.generateOffer(function(error, offerSdp) {
+          if (error) {
+            // console.error(error);
+          }
+          var response = {
+            id: 'incomingCallResponse',
+            from: message.from,
+            to: message.to,
+            callResponse: 'accept',
+            sdpOffer: offerSdp,
+          };
+          sendMessage(response);
+        });
+      }
+    );
+  }
+
+  function stop(name) {
+    if (name) {
+      // if (name == $video_doctor2) {
+      //     document.getElementById('translator_video_block').classList.add("videoroom_hidden");
+      // }
+
+      if (webRtcPeer[name]) {
+        webRtcPeer[name].dispose();
+        webRtcPeer[name] = null;
+      }
+
+      if (name == $video_translater) {
+        if (webRtcPeer[$video_user]) {
+          webRtcPeer[$video_user].dispose();
+          webRtcPeer[$video_user] = null;
+        }
+      }
+      if (name == $video_translater2) {
+        if (webRtcPeer[$video_doctor]) {
+          webRtcPeer[$video_doctor].dispose();
+          webRtcPeer[$video_doctor] = null;
+        }
+      }
+      initcam = false;
+      initcamfunc();
+    } else {
+      document.getElementById('startcall').classList.remove('videoroom_hidden');
+      document.getElementById('terminate').classList.add('videoroom_hidden');
+      document
+        .getElementById('my_video_block')
+        .classList.add('videoroom_hidden');
+      // document.getElementById('translator_video_block').classList.add("videoroom_hidden");
+
+      // console.log(webRtcPeer);
+
+      for (let key in webRtcPeer) {
+        if (webRtcPeer[key]) {
+          webRtcPeer[key].dispose();
+          webRtcPeer[key] = null;
+        }
+      }
+
+      if (!message) {
+        var message = {
+          id: 'stop',
+        };
+        sendMessage(message);
+      }
+      // for (key in intervals) {
+      //     clearInterval(intervals[key]);
+      // }
+      // for (key in finduserStatus) {
+      //     finduserStatus[key] = null;
+      // }
+      initcam = false;
+      initcamfunc();
+    }
+  }
+
+  function initcamfunc() {
+    if (initcam == false) {
+      var options = {
+        localVideo: videoInput[$video_translater],
+        onicecandidate: onIceCandidate,
+      };
+      webRtcPeer['local'] = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+        options,
+        function(error) {
+          this.generateOffer(function(error, offerSdp) {
+            if (error) {
+              // console.error(error);
+            }
+            var message = {
+              id: 'call',
+              from: $video_translater,
+              sdpOffer: offerSdp,
+            };
+            sendMessage(message);
+          });
+        }
+      );
+      initcam = true;
+    }
+  }
+
+  function onIceCandidate(candidate) {
+    // console.log(candidate);
+    // return;
+    // console.log('Local candidate' + JSON.stringify(candidate));
+
+    var message = {
+      id: 'onIceCandidate',
+      candidate: candidate,
+      from: $video_translater,
+    };
+    sendMessage(message);
+  }
+
+  function onIceCandidate2(candidate) {
+    // console.log(candidate);
+    // return;
+    // console.log('Local candidate' + JSON.stringify(candidate));
+
+    var message = {
+      id: 'onIceCandidate',
+      candidate: candidate,
+      from: $video_translater2,
+    };
+    sendMessage(message);
+  }
+
+  function sendMessage(message) {
+    var jsonMessage = JSON.stringify(message);
+    console.log('Senging message: ' + jsonMessage);
+    ws.send(jsonMessage);
+  }
+};
 class Video extends Component {
   constructor(props) {
     super(props);
@@ -793,10 +1105,12 @@ class Video extends Component {
     get(`https://videodoctor.pp.ua${this.props.videoURL}`)
       .then((result) => {
         const { ...VIDEO_DATA } = result.data.connect_info;
-        if (this.props.userType == 10) {
+        if (this.props.userType === 10) {
           VIDEO_CALL(VIDEO_DATA);
-        } else {
+        } else if (this.props.userType === 20) {
           VIDEO_CALL_DOCTOR(VIDEO_DATA);
+        } else {
+          VIDEO_CALL_TRANSLATOR(VIDEO_DATA);
         }
       })
       .catch((err) => {

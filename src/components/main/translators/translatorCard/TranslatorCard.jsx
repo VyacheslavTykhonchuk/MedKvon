@@ -2,11 +2,7 @@ import React from 'react';
 import Btn from '../../../buttons/Btn';
 
 export const TranslatorCard = (props) => (
-  <div
-    className={
-      props.active === 1 ? 'translator translator_active' : 'translator'
-    }
-  >
+  <div className="translator">
     <div className="translator__avatar">
       <img src={props.avatar} alt="" />
     </div>
@@ -16,7 +12,7 @@ export const TranslatorCard = (props) => (
     </div>
     <div className="translator__price">
       <div className="small-text">Price</div>
-      <div className="big-text big-text_blue">{props.price}</div>
+      <div className="big-text big-text_blue">${props.price}</div>
     </div>
     <Btn
       action={props.action}
@@ -27,7 +23,7 @@ export const TranslatorCard = (props) => (
           : 'btn_small btn_blue'
       }
     />
-    {props.active === 0 ? (
+    {props.active === 1 ? (
       <div className="translator-hint">Translator connected!</div>
     ) : null}
   </div>

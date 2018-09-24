@@ -87,14 +87,22 @@
 }
 
 #VideoComponent {
-    #videome {
+    #videome, #videotranslater {
         width: 150px;
-        height: 215px;
+        height: auto;
         position: absolute;
-        left: 2rem;
-        top: 2rem;
-        background: white;
+        bottom: 5rem;
+        background: hsl(0, 0%, 100%);
         border-radius: 15px;
+        z-index: 999;
+    }
+
+    #videotranslater {
+        right: 1rem;
+    }
+
+    #videome {
+        left: 1rem;
     }
 
     #videodoctor, #videouser {
@@ -121,19 +129,6 @@
         &:active {
             transform: translate(-50%, -50%) scale(0.9);
         }
-    }
-
-    #debug {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        text-shadow: 1px 1px 0px #000000;
-        z-index: 999;
-        max-height: 90vh;
-        overflow: scroll;
-        max-width: 900vw;
     }
 
     #startcall {
@@ -307,16 +302,42 @@
     width: 100%;
 }
 
+.videoroom_hidden {
+    visibility: hidden;
+}
+
 .translator {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     padding: 1rem 0;
 
+    &__price {
+        .big-text {
+            text-align: center;
+        }
+
+        & + * {
+            margin-left: 1rem;
+        }
+    }
+
+    &__name {
+        width: 100%;
+
+        & + * {
+            margin-left: 1rem;
+        }
+    }
+
     &__avatar {
         width: 35px;
+        min-width: 35px;
         height: 35px;
+
+        & + * {
+            margin-left: 1rem;
+        }
 
         img {
             width: 100%;
@@ -331,9 +352,16 @@
     }
 
     .btn {
-        width: 80px;
+        width: 75px;
+        min-width: 75px;
         height: 22px;
         font-size: 8px;
+    }
+
+    .big-text {
+        & + * {
+            margin-left: 1rem;
+        }
     }
 }
 
@@ -368,5 +396,4 @@
 
 .translator-sent {
     background: #FF0202 !important;
-    
 }
