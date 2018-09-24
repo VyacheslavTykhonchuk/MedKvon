@@ -776,6 +776,7 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
     }
   }
 };
+
 class Video extends Component {
   constructor(props) {
     super(props);
