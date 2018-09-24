@@ -10,6 +10,8 @@ import { push } from 'connected-react-router';
 const target = document.querySelector('#root');
 if (!localStorage.getItem('user-token')) {
   store.dispatch(push('/'));
+} else {
+  store.dispatch(push('/main'));
 }
 
 const startApp = () => {
