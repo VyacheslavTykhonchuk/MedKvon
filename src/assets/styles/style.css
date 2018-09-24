@@ -640,6 +640,10 @@ main {
   .big-text_blue {
     color: #0244FF; }
 
+.translators-list.card {
+  height: auto !important;
+  min-height: 50vh; }
+
 .footer-nav {
   display: flex;
   align-items: center;

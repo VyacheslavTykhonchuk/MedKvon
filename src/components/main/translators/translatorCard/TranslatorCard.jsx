@@ -16,8 +16,12 @@ export const TranslatorCard = (props) => (
     </div>
     <Btn
       action={props.action}
-      text='Send request'
-      appearing={'btn_small btn_blue'}
+      text={props.sent === 1 ? 'Cancel' : 'Send request'}
+      appearing={
+        props.sent === 1
+          ? 'btn_small  card__btns_disabled'
+          : 'btn_small btn_blue'
+      }
     />
   </div>
 );

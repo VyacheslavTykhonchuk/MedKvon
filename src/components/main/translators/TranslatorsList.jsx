@@ -25,8 +25,24 @@ class TranslatorsList extends Component {
       translaters: [],
       loading: true,
     };
-    const GET_TRANSLATORS_API =
-      'https://videodoctor.pp.ua/api_v1/room/findtranslaters?order_id=37';
+    this.update();
+  }
+  getApiCall = (API) => {
+    get(API)
+      .then((res) => {
+        console.log(res);
+      })
+      .then((res) => {
+        this.update();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  update = () => {
+    const GET_TRANSLATORS_API = `https://videodoctor.pp.ua/api_v1/room/findtranslaters?order_id=${
+      this.props.orderId
+    }`;
     get(GET_TRANSLATORS_API)
       .then((res) => {
         this.setState({
@@ -37,18 +53,23 @@ class TranslatorsList extends Component {
       .catch((err) => {
         console.log(err);
       });
-  }
-  action = () => {
-    this.props.push('/main/active-tickets/conference/');
-    const sdfdf = {
-      active: '',
-      avatar: 'https://videodoctor.pp.ua/uploads/users/avatar_15b_e16.png',
-      blocked: '',
-      id: 109,
-      name: 'translater translater',
-      price: 9,
-    };
   };
+  action = (id, userId, isSent) => {
+    if (isSent === 1) {
+      const DEL_TRANSLATOR = `https://videodoctor.pp.ua/api_v1/room/deletetranslater?order_id=${
+        this.props.orderId
+      }&id=${id}`;
+      this.getApiCall(DEL_TRANSLATOR);
+    } else {
+      const SET_TRANSLATOR = `https://videodoctor.pp.ua/api_v1/room/addtranslater?order_id=${
+        this.props.orderId
+      }&id=${userId}`;
+      this.getApiCall(SET_TRANSLATOR);
+    }
+  };
+  componentDidUpdate() {
+    console.log(this.state);
+  }
   render() {
     return (
       <div className="conference-block">
@@ -61,13 +82,17 @@ class TranslatorsList extends Component {
               {this.state.translaters.map((item) => (
                 <TranslatorCard
                   key={item.id}
+                  userId={item.user_id}
                   avatar={item.avatar}
                   active={item.active}
                   id={item.id}
                   blocked={item.blocked}
                   name={item.name}
                   price={item.price}
-                  action={this.action}
+                  sent={item.sent_request}
+                  action={() =>
+                    this.action(item.id, item.user_id, item.sent_request)
+                  }
                 />
               ))}
             </div>
@@ -77,8 +102,12 @@ class TranslatorsList extends Component {
     );
   }
 }
+const MSTP = (state) => ({
+  orderId: state.videoCall.videoData.$order_id_g,
+  roomId: state.videoCall.videoData.$room_id_g,
+});
 
 export default connect(
-  null,
+  MSTP,
   { push }
 )(TranslatorsList);

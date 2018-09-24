@@ -7,17 +7,8 @@ import MainNav from '../../navigation/MainNav';
 
 const mapStateToProps = (state) => ({
   videoURL: state.videoCall.url,
+  userType: state.user.userType,
 });
-let links = [
-  {
-    name: 'Conference',
-    link: '/main/active-tickets/conference/',
-  },
-  {
-    name: 'Translator',
-    link: '/main/active-tickets/conference/translators',
-  },
-];
 
 class Conference extends Component {
   constructor(props) {
@@ -45,6 +36,26 @@ class Conference extends Component {
     this.props.push('/chat');
   };
   render() {
+    let links;
+    if (this.props.userType === 10) {
+      links = [
+        {
+          name: 'Conference',
+          link: '/main/active-tickets/conference/',
+        },
+        {
+          name: 'Translator',
+          link: '/main/active-tickets/conference/translators',
+        },
+      ];
+    } else {
+      links = [
+        {
+          name: 'Conference',
+          link: '/main/active-tickets/conference/',
+        },
+      ];
+    }
     return (
       <div className="conference-block">
         <MainNav links={links} />
