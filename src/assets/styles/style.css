@@ -644,6 +644,13 @@ main {
   height: auto !important;
   min-height: 50vh; }
 
+.translator_active {
+  border-radius: 10px;
+  border: 2px solid #0188FF; }
+
+.translator-sent {
+  background: #FF0202 !important; }
+
 .footer-nav {
   display: flex;
   align-items: center;
@@ -1360,6 +1367,18 @@ main {
   pointer-events: none; }
   .no-pointer-events .btn.btn_small.btn_blue {
     display: none; }
+
+.translator-hint {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-image: linear-gradient(120deg, #0044ff 0%, #0088ff 100%);
+  width: 90%;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+  border-radius: 10px; }
 
 .ticket-card {
   display: flex;

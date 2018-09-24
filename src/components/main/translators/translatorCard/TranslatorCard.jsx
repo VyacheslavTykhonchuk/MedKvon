@@ -2,7 +2,11 @@ import React from 'react';
 import Btn from '../../../buttons/Btn';
 
 export const TranslatorCard = (props) => (
-  <div className="translator">
+  <div
+    className={
+      props.active === 1 ? 'translator translator_active' : 'translator'
+    }
+  >
     <div className="translator__avatar">
       <img src={props.avatar} alt="" />
     </div>
@@ -19,9 +23,12 @@ export const TranslatorCard = (props) => (
       text={props.sent === 1 ? 'Cancel' : 'Send request'}
       appearing={
         props.sent === 1
-          ? 'btn_small  card__btns_disabled'
+          ? 'btn_small btn_blue translator-sent'
           : 'btn_small btn_blue'
       }
     />
+    {props.active === 0 ? (
+      <div className="translator-hint">Translator connected!</div>
+    ) : null}
   </div>
 );
