@@ -17,10 +17,10 @@ cd platforms/android/build/outputs/apk
 keytool -genkey -v -keystore App.keystore -alias App -keyalg RSA -keysize 2048 -validity 10000
 
 # Fourth Step (sign the APK)
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore App.keystore android-armv7-release-unsigned.apk App
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore App.keystore android-release-unsigned.apk App
 
 # Fifth & Last Step (generate deployable APK)
-zipalign -v 4 android-armv7-release-unsigned.apk App.apk
+zipalign -v 4 android-release-unsigned.apk App.apk
 
 # Deployable APK is: App.apk
 # Now you can publish "App.apk" to Google Android Console
