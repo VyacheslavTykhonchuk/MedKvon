@@ -633,9 +633,10 @@ main {
 
 .big-text {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
   color: #4A4A4A;
-  letter-spacing: 0; }
+  letter-spacing: 0;
+  margin-top: 5px; }
   .big-text_blue {
     color: #0244FF; }
 

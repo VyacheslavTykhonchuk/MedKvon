@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios, { get } from 'axios';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -22,9 +22,17 @@ class ActiveTickets extends React.Component {
     });
   }
   leftBtnFunc = (videoURL) => {
-    console.log(videoURL);
     this.props.push('/main/active-tickets/conference');
     this.props.setVideoData({ url: videoURL });
+    get(`https://videodoctor.pp.ua${videoURL}`)
+      .then((result) => {
+        const { ...VIDEO_DATA } = result.data.connect_info;
+        console.log(VIDEO_DATA);
+        this.props.setVideoData({ videoData: VIDEO_DATA });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   render() {
     return (
