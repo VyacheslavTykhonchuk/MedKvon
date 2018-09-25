@@ -21,20 +21,6 @@ let links = [
   },
 ];
 
-const langs = [
-  {
-    val: `English`,
-    id: 1,
-  },
-  {
-    val: `Ukrainian`,
-    id: 2,
-  },
-  {
-    val: `Russian`,
-    id: 3,
-  },
-];
 class Account extends React.Component {
   constructor(props) {
     super(props);
