@@ -74,7 +74,8 @@
         transition: all 0.4s;
         border-radius: 4px;
         visibility: hidden;
-
+        max-height: 176px;
+        overflow: scroll;
         // border-bottom: 5px solid hsl(0, 0%, 95%);
         box-shadow: 1px 5px 10px lightgray;
 

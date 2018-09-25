@@ -62,6 +62,12 @@ class Account extends React.Component {
 
     get(this.API_LINK).then((res) => {
       const apiData = res.data.model;
+      const apiLangsArr = Object.values(res.data.langs);
+      const apiLangs = apiLangsArr.map((item, id) => ({
+        val: item,
+        id: id + 1,
+      }));
+
       this.setState({
         type: apiData.type,
         user: {
@@ -74,10 +80,14 @@ class Account extends React.Component {
           phone: apiData.phone,
           about: apiData.about,
         },
+        langs: apiLangs,
         avatar: apiData.avatar,
         loading: false,
       });
     });
+  }
+  componentDidUpdate() {
+    console.log(this.state);
   }
   handleSelectChange = (lang, id) => {
     //  copy state
@@ -92,7 +102,7 @@ class Account extends React.Component {
   selectedLang = () => {
     const selectedLangId = this.state.user.lang_id;
     let selectedLangStr;
-    langs.forEach((item) => {
+    this.state.langs.forEach((item) => {
       if (item.id === selectedLangId) selectedLangStr = item.val;
     });
     return selectedLangStr;
@@ -257,8 +267,8 @@ class Account extends React.Component {
                   />
                   <CustomSelect
                     selected={this.selectedLang()}
-                    options={langs}
-                    appereance='custom-select_small'
+                    options={this.state.langs}
+                    appereance="custom-select_small"
                     passVal={this.handleSelectChange}
                   />
                 </div>

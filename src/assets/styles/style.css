@@ -1182,6 +1182,8 @@ main {
     transition: all 0.4s;
     border-radius: 4px;
     visibility: hidden;
+    max-height: 176px;
+    overflow: scroll;
     box-shadow: 1px 5px 10px lightgray; }
     .custom-select__options_opened {
       transform: translate(0, 105%);
