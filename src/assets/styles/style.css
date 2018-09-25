@@ -1140,6 +1140,12 @@ main {
   z-index: 10; }
   .custom-select + * {
     margin-top: 1.3em; }
+  .custom-select_small {
+    height: 27px; }
+    .custom-select_small .custom-select__header {
+      height: 100%; }
+    .custom-select_small .custom-select__selected {
+      font-size: 12px; }
   .custom-select__header {
     display: flex;
     align-items: center; }

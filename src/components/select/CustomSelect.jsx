@@ -1,29 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 class CustomSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: this.props.selected,
       options: this.props.options,
-      isOpened: false
+      isOpened: false,
     };
     this.showOptions = this.showOptions.bind(this);
     this.selectOption = this.selectOption.bind(this);
   }
   showOptions() {
     this.setState({
-      isOpened: !this.state.isOpened
+      isOpened: !this.state.isOpened,
     });
   }
 
-  selectOption(selectedOption) {
+  selectOption(selectedOption, id) {
     this.setState({
       isOpened: !this.state.isOpened,
-      selected: selectedOption
+      selected: selectedOption,
     });
     if (this.props.passVal) {
-      this.props.passVal(selectedOption);
+      this.props.passVal(selectedOption, id);
     }
   }
 
@@ -32,8 +32,8 @@ class CustomSelect extends React.Component {
       <div
         className={
           this.props.appereance
-            ? "custom-select " + this.props.appereance
-            : "custom-select"
+            ? 'custom-select ' + this.props.appereance
+            : 'custom-select'
         }
       >
         <header className="custom-select__header" onClick={this.showOptions}>
@@ -66,18 +66,18 @@ class CustomSelect extends React.Component {
         <section
           className={
             this.state.isOpened
-              ? "custom-select__options custom-select__options_opened"
-              : "custom-select__options"
+              ? 'custom-select__options custom-select__options_opened'
+              : 'custom-select__options'
           }
         >
-          {this.state.options.map(item => (
+          {this.state.options.map((item) => (
             <div
               key={item.val}
-              onClick={() => this.selectOption(item.val)}
+              onClick={() => this.selectOption(item.val, item.id)}
               className={
                 this.state.selected === item.val || item.disabled
-                  ? "custom-select__option custom-select__option_disabled"
-                  : "custom-select__option"
+                  ? 'custom-select__option custom-select__option_disabled'
+                  : 'custom-select__option'
               }
             >
               {item.val}
@@ -92,7 +92,7 @@ class CustomSelect extends React.Component {
 CustomSelect.propTypes = {
   selected: PropTypes.string,
   options: PropTypes.array,
-  appereance: PropTypes.string
+  appereance: PropTypes.string,
 };
 
 export default CustomSelect;

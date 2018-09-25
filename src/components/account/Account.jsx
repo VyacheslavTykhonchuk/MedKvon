@@ -12,11 +12,27 @@ import { bindActionCreators } from 'redux';
 import { showNotification } from '../../actions/notificationActions';
 import { post, get } from 'axios';
 import { push } from 'connected-react-router';
+import CustomSelect from '../select/CustomSelect';
 
 let links = [
   {
     name: 'Account',
     link: '/account',
+  },
+];
+
+const langs = [
+  {
+    val: `English`,
+    id: 1,
+  },
+  {
+    val: `Ukrainian`,
+    id: 2,
+  },
+  {
+    val: `Russian`,
+    id: 3,
   },
 ];
 class Account extends React.Component {
@@ -63,13 +79,33 @@ class Account extends React.Component {
       });
     });
   }
-
+  handleSelectChange = (lang, id) => {
+    //  copy state
+    const { ...updatedUser } = this.state.user;
+    //  modify copied state
+    updatedUser.lang_id = id;
+    // set modified state
+    this.setState({
+      user: updatedUser,
+    });
+  };
+  selectedLang = () => {
+    const selectedLangId = this.state.user.lang_id;
+    let selectedLangStr;
+    langs.forEach((item) => {
+      if (item.id === selectedLangId) selectedLangStr = item.val;
+    });
+    return selectedLangStr;
+  };
   fileUpload = (file) => {
     const formData = new FormData();
     formData.set('photoFile', file);
   };
 
   handleInputChange = (val, name) => {
+    console.log(this.selectedLang());
+
+    console.log(val, name);
     if (name === 'avatar') {
       this.setState({
         photoFile: val,
@@ -101,6 +137,7 @@ class Account extends React.Component {
 
     const userForm = document.querySelector('#userForm');
     const formData = new FormData(userForm);
+    formData.append('lang_id', this.state.user.lang_id);
 
     post(this.API_LINK, formData)
       .then((res) => {
@@ -218,14 +255,11 @@ class Account extends React.Component {
                     name="country"
                     onChange={this.handleInputChange}
                   />
-                  <InputBlock
-                    heading="Language"
-                    value={user.lang_id}
-                    type="text"
-                    appearing=""
-                    placeholder=""
-                    name="lang_id"
-                    onChange={this.handleInputChange}
+                  <CustomSelect
+                    selected={this.selectedLang()}
+                    options={langs}
+                    appereance='custom-select_small'
+                    passVal={this.handleSelectChange}
                   />
                 </div>
                 <div className="account-card__inputs-wrap">
