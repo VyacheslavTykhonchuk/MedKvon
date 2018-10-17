@@ -24,7 +24,7 @@ class Chat extends Component {
     this.fetchMessages();
   }
   fetchMessages = () => {
-    get(`https://videodoctor.pp.ua${this.props.userURL}`)
+    get(`https://kvonda.com${this.props.userURL}`)
       .then((result) => {
         console.log();
         const { ...DATA } = result.data;
@@ -36,7 +36,7 @@ class Chat extends Component {
         return { room_id: DATA.room_id, order_id: DATA.order_id };
       })
       .then((res) => {
-        post('https://videodoctor.pp.ua/api_v1/room/messages', res)
+        post('https://kvonda.com/api_v1/room/messages', res)
           .then((result) => {
             const msgArr = result.data.data;
             const lastMessageId = msgArr[msgArr.length - 1].id;
@@ -61,7 +61,7 @@ class Chat extends Component {
       });
   };
   checkNewMessages = (res) => {
-    post('https://videodoctor.pp.ua/api_v1/room/messages', res)
+    post('https://kvonda.com/api_v1/room/messages', res)
       .then((result) => {
         const newMsgArr = result.data.data;
         const oldMsgArr = this.state.messages;
@@ -93,7 +93,7 @@ class Chat extends Component {
       file: '',
       fileFile: '',
     };
-    post('https://videodoctor.pp.ua/api_v1/room/addmessage', data)
+    post('https://kvonda.com/api_v1/room/addmessage', data)
       .then((result) => {
         if (result.data.success) {
           return true;

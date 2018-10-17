@@ -44,7 +44,7 @@ class Account extends React.Component {
       photoFile: '',
       loading: true,
     };
-    this.API_LINK = `https://videodoctor.pp.ua/api_v1/settings`;
+    this.API_LINK = `https://kvonda.com/api_v1/settings`;
 
     get(this.API_LINK).then((res) => {
       const apiData = res.data.model;

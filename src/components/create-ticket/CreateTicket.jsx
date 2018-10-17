@@ -32,7 +32,7 @@ class CreateTicket extends React.Component {
       loading: true,
     };
     axios
-      .get('https://videodoctor.pp.ua/api_v1/order/createorder')
+      .get('https://kvonda.com/api_v1/order/createorder')
       .then((res) => {
         this.props.requestDocsList(res.data.position);
         this.setState({

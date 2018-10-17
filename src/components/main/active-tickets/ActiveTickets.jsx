@@ -16,7 +16,7 @@ class ActiveTickets extends React.Component {
     super(props);
     this.state = { activeTickets: [], loading: true };
 
-    axios.get(`https://videodoctor.pp.ua/api_v1/activetickets`).then((res) => {
+    axios.get(`https://kvonda.com/api_v1/activetickets`).then((res) => {
       const activeTickets = res.data;
       this.setState({ activeTickets: activeTickets.data, loading: false });
     });
@@ -24,7 +24,7 @@ class ActiveTickets extends React.Component {
   leftBtnFunc = (videoURL) => {
     this.props.push('/main/active-tickets/conference');
     this.props.setVideoData({ url: videoURL });
-    get(`https://videodoctor.pp.ua${videoURL}`)
+    get(`https://kvonda.com${videoURL}`)
       .then((result) => {
         const { ...VIDEO_DATA } = result.data.connect_info;
         console.log(VIDEO_DATA);

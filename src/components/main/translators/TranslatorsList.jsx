@@ -40,7 +40,7 @@ class TranslatorsList extends Component {
       });
   };
   update = () => {
-    const GET_TRANSLATORS_API = `https://videodoctor.pp.ua/api_v1/room/findtranslaters?order_id=${
+    const GET_TRANSLATORS_API = `https://kvonda.com/api_v1/room/findtranslaters?order_id=${
       this.props.orderId
     }`;
     get(GET_TRANSLATORS_API)
@@ -56,12 +56,12 @@ class TranslatorsList extends Component {
   };
   action = (id, userId, isSent) => {
     if (isSent === 1) {
-      const DEL_TRANSLATOR = `https://videodoctor.pp.ua/api_v1/room/deletetranslater?order_id=${
+      const DEL_TRANSLATOR = `https://kvonda.com/api_v1/room/deletetranslater?order_id=${
         this.props.orderId
       }&id=${id}`;
       this.getApiCall(DEL_TRANSLATOR);
     } else {
-      const SET_TRANSLATOR = `https://videodoctor.pp.ua/api_v1/room/addtranslater?order_id=${
+      const SET_TRANSLATOR = `https://kvonda.com/api_v1/room/addtranslater?order_id=${
         this.props.orderId
       }&id=${userId}`;
       this.getApiCall(SET_TRANSLATOR);

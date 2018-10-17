@@ -16,7 +16,7 @@ class Conference extends Component {
     this.state = {
       loading: true,
     };
-    get(`https://videodoctor.pp.ua${this.props.videoURL}`)
+    get(`https://kvonda.com${this.props.videoURL}`)
       .then((result) => {
         const { doctor_avatar, doctor_name } = result.data;
         this.setState({

@@ -8,7 +8,7 @@ let $order_id_g = 60,
   $video_translater = 'XPvyFL9sTj',
   $video_user = '83_sq9DyelNoN',
   $video_user2 = '83_sq9DyelNoN_translater';
-var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
+var ws = new WebSocket('wss://' + 'kvonda.com' + ':8443/one2one');
 console.log(WebRtcPeer);
 var videoInput = [];
 var videoOutput = [];

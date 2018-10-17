@@ -107,7 +107,7 @@ class Home extends React.Component {
     });
     const login = this.state.login;
     axios
-      .post(`https://videodoctor.pp.ua/api_v1/login`, { login })
+      .post(`https://kvonda.com/api_v1/login`, { login })
       .then((res) => {
         const data = res.data;
         if (data.error) {
@@ -145,7 +145,7 @@ class Home extends React.Component {
     const reg = this.state.reg;
 
     axios
-      .post(`https://videodoctor.pp.ua/api_v1/signup`, { reg })
+      .post(`https://kvonda.com/api_v1/signup`, { reg })
       .then((res) => {
         const data = res.data;
         if (data.error) {

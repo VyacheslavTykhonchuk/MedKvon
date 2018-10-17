@@ -10,7 +10,7 @@ class AboutUs extends PureComponent {
       loading: true,
     };
 
-    const API_Url = 'https://videodoctor.pp.ua/api_v1/about';
+    const API_Url = 'https://kvonda.com/api_v1/about';
 
     get(API_Url).then((res) => {
       this.setState({

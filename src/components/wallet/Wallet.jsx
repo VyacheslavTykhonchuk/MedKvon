@@ -45,7 +45,7 @@ class Account extends Component {
       },
       loading: true,
     };
-    this.API_URL = `https://videodoctor.pp.ua/api_v1/wallet`;
+    this.API_URL = `https://kvonda.com/api_v1/wallet`;
     get(this.API_URL)
       .then((res) => {
         this.table = res.data.balans;

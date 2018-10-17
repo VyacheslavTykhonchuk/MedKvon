@@ -31,7 +31,7 @@ const VIDEO_CALL = (VIDEO_DATA) => {
     $video_user = VIDEO_DATA.$video_user,
     $video_user2 = VIDEO_DATA.$video_user2;
 
-  var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
+  var ws = new WebSocket('wss://' + 'kvonda.com' + ':8443/one2one');
   var videoInput = [];
   var videoOutput = [];
   var webRtcPeer = [];
@@ -417,7 +417,7 @@ const VIDEO_CALL_DOCTOR = (VIDEO_DATA) => {
   const $video_translater = VIDEO_DATA.$video_translater;
   const $order_id_g = VIDEO_DATA.$order_id_g;
 
-  var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
+  var ws = new WebSocket('wss://' + 'kvonda.com' + ':8443/one2one');
   var videoInput = [];
   var videoOutput = [];
   var webRtcPeer = [];
@@ -785,7 +785,7 @@ const VIDEO_CALL_TRANSLATOR = (VIDEO_DATA) => {
   const $order_id_g = VIDEO_DATA.$order_id_g;
   const $room_id_g = VIDEO_DATA.$room_id_g;
 
-  var ws = new WebSocket('wss://' + 'videodoctor.pp.ua' + ':8443/one2one');
+  var ws = new WebSocket('wss://' + 'kvonda.com' + ':8443/one2one');
   var videoInput = [];
   var videoOutput = [];
   var webRtcPeer = [];
@@ -1102,7 +1102,7 @@ class Video extends Component {
   }
 
   componentDidMount() {
-    get(`https://videodoctor.pp.ua${this.props.videoURL}`)
+    get(`https://kvonda.com${this.props.videoURL}`)
       .then((result) => {
         const { ...VIDEO_DATA } = result.data.connect_info;
         if (this.props.userType === 10) {

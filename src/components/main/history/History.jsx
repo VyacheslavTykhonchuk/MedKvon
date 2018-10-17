@@ -9,7 +9,7 @@ class HistoryTab extends React.Component {
     super(props);
     this.state = { historyCards: [], loading: true };
 
-    axios.get(`https://videodoctor.pp.ua/api_v1/history`).then((res) => {
+    axios.get(`https://kvonda.com/api_v1/history`).then((res) => {
       const historyCards = res.data;
       this.setState({ historyCards: historyCards.data, loading: false });
     });

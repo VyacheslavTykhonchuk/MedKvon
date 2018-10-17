@@ -39,7 +39,7 @@ export const chooseDocSpec = (data) => {
 export const fetchPosts = (id) => {
   return (dispatch) => {
     return axios
-      .post(`https://videodoctor.pp.ua/api_v1/order/getdoctorslist`, {
+      .post(`https://kvonda.com/api_v1/order/getdoctorslist`, {
         category_id: id,
       })
       .then((response) => {

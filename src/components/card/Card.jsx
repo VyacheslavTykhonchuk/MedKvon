@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 });
 
 const showMore = (id) => {
-  return get(`https://videodoctor.pp.ua/api_v1/order/${id}`)
+  return get(`https://kvonda.com/api_v1/order/${id}`)
     .then((result) => {
       const API_DATA = result.data.model;
       const formPreview = {
@@ -44,13 +44,13 @@ class Card extends React.Component {
       new_price: null,
     };
     if (this.props.userType === 20) {
-      this.API_URL = 'https://videodoctor.pp.ua/api_v1/order/acceptorder';
+      this.API_URL = 'https://kvonda.com/api_v1/order/acceptorder';
       this.API_URL_DELETE =
-        'https://videodoctor.pp.ua/api_v1/order/cancelorder';
+        'https://kvonda.com/api_v1/order/cancelorder';
     } else if (this.props.userType === 30) {
-      this.API_URL = 'https://videodoctor.pp.ua/api_v1/order/accepttranslate';
+      this.API_URL = 'https://kvonda.com/api_v1/order/accepttranslate';
       this.API_URL_DELETE =
-        'https://videodoctor.pp.ua/api_v1/order/deletetranslate';
+        'https://kvonda.com/api_v1/order/deletetranslate';
     }
   }
   acceptTicket = (id) => {

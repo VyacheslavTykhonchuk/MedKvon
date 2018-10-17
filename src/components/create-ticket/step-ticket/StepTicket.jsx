@@ -103,7 +103,7 @@ class StepTicket extends React.Component {
     }
     // post data to API
     const formData = this.state,
-      api = `https://videodoctor.pp.ua/api_v1/order/createorder`;
+      api = `https://kvonda.com/api_v1/order/createorder`;
     axios
       .post(api, formData)
       .then((res) => {

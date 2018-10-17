@@ -81,7 +81,7 @@ class ContactUs extends React.Component {
     }
 
     // post data to API
-    const API_URL = 'https://videodoctor.pp.ua/api_v1/contact';
+    const API_URL = 'https://kvonda.com/api_v1/contact';
     const ContactForm = {
       subject: this.state.feedbackType,
       ...this.state.feedback,

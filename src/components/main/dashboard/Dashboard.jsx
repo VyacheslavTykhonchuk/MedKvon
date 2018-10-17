@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
       loading: true,
     };
 
-    axios.get(`https://videodoctor.pp.ua/api_v1/dashboard`).then((res) => {
+    axios.get(`https://kvonda.com/api_v1/dashboard`).then((res) => {
       const dashboardCards = res.data;
       this.setState({ dashboardCards: dashboardCards.data, loading: false });
     });
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
 
   rightBtnAction = (id) => {
     axios
-      .get(`https://videodoctor.pp.ua/api_v1/order/deleteorder/${id}`)
+      .get(`https://kvonda.com/api_v1/order/deleteorder/${id}`)
       .then((res) => {
         const newCards = this.state.dashboardCards.filter(
           (item) => item.id !== id
